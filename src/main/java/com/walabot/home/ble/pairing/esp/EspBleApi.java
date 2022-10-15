@@ -57,7 +57,7 @@ public class EspBleApi implements EspApi {
 
         public void connect(ConnectionCallback cb) {
             _connectionCallback.set(cb);
-            _whBle.getScanner().startScan(1000000, new BleDiscoveryCallback() {
+            _whBle.getScanner().startScan(10000, new BleDiscoveryCallback() {
                 private BleDevice foundDevice;
 
                 @Override

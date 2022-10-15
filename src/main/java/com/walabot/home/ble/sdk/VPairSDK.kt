@@ -1,7 +1,6 @@
 package com.walabot.home.ble.sdk
 
 import android.content.Context
-import com.walabot.home.ble.Message
 import com.walabot.home.ble.Result
 import com.walabot.home.ble.WHBle
 import com.walabot.home.ble.pairing.Gen2CloudOptions
