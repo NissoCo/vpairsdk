@@ -1,0 +1,15 @@
+<resources>
+    <string name="type_bathroom">Bathroom</string>
+    <string name="type_bedroom">Bedroom</string>
+    <string name="type_family_room">Family Room</string>
+    <string name="type_hall">Hall</string>
+    <string name="type_kitchen">Kitchen</string>
+    <string name="type_dining_room">Dining Room</string>
+    <string name="type_living_room">Living Room</string>
+    <string name="other">Other</string>
+    <string name="meter_suffix">M</string>
+    <string name="ft_suffix">FT</string>
+    <string name="meter">Meter</string>
+    <string name="feet">Feet</string>
+    <string name="inches">Inches</string>
+</resources>
