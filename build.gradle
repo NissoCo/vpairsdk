@@ -43,3 +43,17 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
     implementation 'com.google.code.gson:gson:2.8.5'
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.nissoCo'
+                artifactId = 'vpairsdk'
+                version = '1.0'
+            }
+        }
+    }
+}
