@@ -8,14 +8,18 @@ import com.walabot.home.ble.pairing.esp.ProtocolMediator
 enum class EspPairingEvent {
     Connecting,
     Connected,
-    SendCloudDetails,
-    Pair,
+    SendingCloudDetails,
+    SentCloudDetails,
+    Pairing,
+    Paired,
     StagePairWithCloud,
     NotifyPairingComplete,
     CheckOTA,
     PerformOTA,
-    Reboot,
-    RebootToFactory,
+    Rebooting,
+    Rebooted,
+    RebootingToFactory,
+    RebootedToFactory,
     WifiScan
 }
 

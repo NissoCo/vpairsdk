@@ -392,7 +392,7 @@ public class EspBleApi implements EspApi {
         _espBleImpl.sendMessage(Message.ToDeviceMessageType.DO_REBOOT_FACTORY, null, opResult ->
         {
             ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
-            if (r.isSuccessful()) {
+            if (r == null || r.isSuccessful()) {
                 cb.onSuccess(null);
             } else {
                 cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_SEND_CLOUD_DETAILS, opResult));

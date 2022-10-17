@@ -65,7 +65,7 @@ class ProtobufMessagesV3 : ProtocolMediator {
     }
 
     override fun parseWifiResult(data: ByteArray?): ProtocolMediator.WifiResult? {
-        if (data == null || data.size == 0) {
+        if (data == null || data.isEmpty()) {
             return null
         }
         try {
@@ -88,7 +88,7 @@ class ProtobufMessagesV3 : ProtocolMediator {
     }
 
     override fun parseResult(data: ByteArray?): ProtocolMediator.MessageResult? {
-        if (data == null || data.size == 0) {
+        if (data == null || data.isEmpty()) {
             return null
         }
         try {
