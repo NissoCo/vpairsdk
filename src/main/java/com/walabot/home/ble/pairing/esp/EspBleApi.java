@@ -88,6 +88,7 @@ public class EspBleApi implements EspApi {
         }
 
         public void disconnect() {
+            _whBle.getScanner().stopScan();
             BluetoothDevice device = _whBle.getSelectedDevice();
             if (device != null) {
                 _whBle.disconnect(device, true);
@@ -404,5 +405,6 @@ public class EspBleApi implements EspApi {
     public void stop() {
         Log.i(EspBleApi.class.getName(), "disconnect");
         _espBleImpl.disconnect();
+
     }
 }

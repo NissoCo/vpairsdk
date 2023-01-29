@@ -29,7 +29,9 @@ class WifiNetworkMonitor(var context: Context) {
     }
 
     fun stopScan() {
-        context.unregisterReceiver(receiver)
+        receiver?.let {
+            context.unregisterReceiver(it)
+        }
     }
 
     inner class WifiReceiver : BroadcastReceiver() {

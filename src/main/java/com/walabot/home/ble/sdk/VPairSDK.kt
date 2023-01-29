@@ -13,7 +13,7 @@ import com.walabot.home.ble.pairing.esp.EspBleApi.ESPBleAPIImpl
 
 data class CloudCredentials(val userId: String?, val idToken: String?, var updateCloud: Boolean = true, var cloudParams: ConfigParams? = null)
 
-class VPairSDK : WifiNetworkMonitor.Scan {
+open class VPairSDK : WifiNetworkMonitor.Scan {
     var pairingApi: EspBleApi? = null
     var listener: PairingListener? = null
     var analyticsHandler: AnalyticsHandler? = null
@@ -28,7 +28,7 @@ class VPairSDK : WifiNetworkMonitor.Scan {
     var wifiMonitor: WifiNetworkMonitor? = null
     var cloudCredentials = CloudCredentials(null, null, false, null)
 
-    fun startPairing(context: Context, cloudCredentials: CloudCredentials) {
+    open fun startPairing(context: Context, cloudCredentials: CloudCredentials) {
         wifiMonitor = WifiNetworkMonitor(context)
         wifiMonitor?.scanEvents = this
         wifiMonitor?.startScanWifi()
@@ -48,8 +48,11 @@ class VPairSDK : WifiNetworkMonitor.Scan {
         })
     }
 
-    fun stopPairing() {
+    open fun stopPairing() {
+        wifiMonitor?.stopScan()
         pairingApi?.stop()
+        listener = null
+        analyticsHandler = null
     }
 
     fun refreshWifiList() {
@@ -79,7 +82,7 @@ class VPairSDK : WifiNetworkMonitor.Scan {
 
     }
 
-    fun resumeConnection(selectedWifiDetails: EspWifiItem, password: String) {
+    open fun resumeConnection(selectedWifiDetails: EspWifiItem, password: String) {
         if (selectedWifiDetails.ssid.isEmpty()) {
             listener?.onFinish(Result(Throwable("SSID can't be empty")))
             return
@@ -171,7 +174,7 @@ class VPairSDK : WifiNetworkMonitor.Scan {
         })
     }
 
-    private fun rebootToFactory() {
+    open fun rebootToFactory() {
         listener?.onEvent(EspPairingEvent.RebootingToFactory, connectedDevice)
         pairingApi?.rebootToFactory(object : EspApi.EspAPICallback<Void?> {
             override fun onSuccess(obj: Void?) {
