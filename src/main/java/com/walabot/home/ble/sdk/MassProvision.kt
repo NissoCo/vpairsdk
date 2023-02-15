@@ -22,10 +22,10 @@ class MassProvision: VPairSDK() {
             this.context = context
         }
         pairingApi = EspBleApi(WHBle(context))
-        listener?.onEvent(EspPairingEvent.Connecting, connectedDevice)
+        listener?.onEvent(EspPairingEvent.Connecting)
         pairingApi?.connect(object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
             override fun onSuccess(obj: WalabotDeviceDesc?) {
-                listener?.onEvent(EspPairingEvent.Connected, connectedDevice)
+                listener?.onEvent(EspPairingEvent.Connected)
                 currentWifi?.let {
                     resumeConnection(pickedWifiCredentials!!, pickedWifiPassword!!)
                 } ?: kotlin.run {
@@ -59,11 +59,11 @@ class MassProvision: VPairSDK() {
         super.resumeConnection(selectedWifiDetails, password)
     }
 
-    override fun rebootToFactory() {
-        listener?.onEvent(EspPairingEvent.RebootingToFactory, connectedDevice)
+    override fun rebootToFactory(deviceId: String) {
+        listener?.onEvent(EspPairingEvent.RebootingToFactory, deviceId)
         pairingApi?.rebootToFactory(object : EspApi.EspAPICallback<Void?> {
             override fun onSuccess(obj: Void?) {
-                listener?.onEvent(EspPairingEvent.RebootedToFactory, connectedDevice)
+                listener?.onEvent(EspPairingEvent.RebootedToFactory, deviceId)
                 context?.let {
                     pairingApi?.stop()
                     startPairing(it, cloudCredentials)

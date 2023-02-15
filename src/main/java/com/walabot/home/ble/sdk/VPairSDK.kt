@@ -1,8 +1,12 @@
 package com.walabot.home.ble.sdk
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.wifi.WifiInfo
+import android.os.Build
 import android.util.Log
+import androidx.core.content.ContextCompat
 import com.walabot.home.ble.Result
 import com.walabot.home.ble.WHBle
 import com.walabot.home.ble.pairing.ConfigParams
@@ -10,8 +14,16 @@ import com.walabot.home.ble.pairing.Gen2CloudOptions
 import com.walabot.home.ble.pairing.WifiNetworkMonitor
 import com.walabot.home.ble.pairing.esp.*
 import com.walabot.home.ble.pairing.esp.EspBleApi.ESPBleAPIImpl
+import java.security.Permission
 
-data class CloudCredentials(val userId: String?, val idToken: String?, var updateCloud: Boolean = true, var cloudParams: ConfigParams? = null)
+fun Context.isBleAuth(): Boolean {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
+    }
+    return true
+}
+
+data class CloudCredentials(val userId: String?, val idToken: String?, var cloudParams: ConfigParams? = null, val updateCloud: Boolean = userId?.isNotEmpty() ?: false)
 
 open class VPairSDK : WifiNetworkMonitor.Scan {
     var pairingApi: EspBleApi? = null
@@ -26,26 +38,33 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
     var connectedDevice: WalabotDeviceDesc? = null
 
     var wifiMonitor: WifiNetworkMonitor? = null
-    var cloudCredentials = CloudCredentials(null, null, false, null)
+    var cloudCredentials = CloudCredentials(null, null)
 
     open fun startPairing(context: Context, cloudCredentials: CloudCredentials) {
-        wifiMonitor = WifiNetworkMonitor(context)
-        wifiMonitor?.scanEvents = this
-        wifiMonitor?.startScanWifi()
-        pairingApi = EspBleApi(WHBle(context))
-        this.cloudCredentials = cloudCredentials
-        listener?.onEvent(EspPairingEvent.Connecting, connectedDevice)
-        pairingApi?.connect(object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
-            override fun onSuccess(obj: WalabotDeviceDesc?) {
-                listener?.onEvent(EspPairingEvent.Connected, connectedDevice)
-                connectedDevice = obj
-                refreshWifiList()
-            }
+        if (context.isBleAuth()) {
+            wifiMonitor = WifiNetworkMonitor(context)
+            wifiMonitor?.scanEvents = this
+            wifiMonitor?.startScanWifi()
+            pairingApi = EspBleApi(WHBle(context))
+            this.cloudCredentials = cloudCredentials
+            listener?.onEvent(EspPairingEvent.Connecting)
+            pairingApi?.connect(object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
+                override fun onSuccess(obj: WalabotDeviceDesc?) {
+                    listener?.onEvent(EspPairingEvent.Connected)
+                    connectedDevice = obj
+                    refreshWifiList()
+                }
 
-            override fun onFailure(throwable: Throwable?) {
-                listener?.onFinish(Result(throwable))
+                override fun onFailure(throwable: Throwable?) {
+                    listener?.onFinish(Result(throwable))
+                }
+            })
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                listener?.onMissingPermission(Manifest.permission.BLUETOOTH_SCAN)
             }
-        })
+            listener?.onMissingPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
     }
 
     open fun stopPairing() {
@@ -58,7 +77,7 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
     fun refreshWifiList() {
         connectedDevice?.let { walabotDeviceDesc ->
             if (walabotDeviceDesc.protocolVersion == 3) {
-                listener?.onEvent(EspPairingEvent.WifiScan, connectedDevice)
+                listener?.onEvent(EspPairingEvent.WifiScan)
                 pairingApi?.sendWiFiScanRequest(object :
                     EspApi.EspAPICallback<ProtocolMediator.WifiScanResult?> {
                     override fun onSuccess(obj: ProtocolMediator.WifiScanResult?) {
@@ -91,13 +110,13 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
             listener?.onFinish(Result(Throwable("Device not connected")))
             return
         }
-        listener?.onEvent(EspPairingEvent.SendingCloudDetails, connectedDevice)
+        listener?.onEvent(EspPairingEvent.SendingCloudDetails)
         pairingApi?.sendWifiCredentials(
             selectedWifiDetails.ssid.convert(),
             selectedWifiDetails.bssid.convert(),
             password.convert(), object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
             override fun onSuccess(obj: WalabotDeviceDesc?) {
-                listener?.onEvent(EspPairingEvent.SentCloudDetails, connectedDevice)
+                listener?.onEvent(EspPairingEvent.SentCloudDetails)
                 updateCloud(obj)
             }
 
@@ -115,7 +134,7 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
                 if (cloudCredentials.updateCloud) {
                     pair(deviceDes?.host)
                 } else {
-                    reboot()
+                    reboot(deviceDes?.name ?: "")
                 }
             }
 
@@ -126,14 +145,14 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
     }
 
     private fun pair(host: String?) {
-        listener?.onEvent(EspPairingEvent.Pairing, connectedDevice)
+        listener?.onEvent(EspPairingEvent.Pairing)
         pairingApi?.pair(host, cloudCredentials.userId, object : EspApi.EspAPICallback<EspPairingResponse?> {
             override fun onSuccess(obj: EspPairingResponse?) {
-                listener?.onEvent(EspPairingEvent.Paired, connectedDevice)
+                listener?.onEvent(EspPairingEvent.Paired)
                 if (cloudCredentials.updateCloud) {
-                    performParingWithCloud()
+                    performParingWithCloud(host, obj?.code)
                 } else {
-                    notifyPairingComplete(host, obj?.code!!)
+                    notifyPairingComplete(host, obj?.code!!, null)
                 }
             }
 
@@ -143,15 +162,25 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
         })
     }
 
-    private fun performParingWithCloud() {
-
+    private fun performParingWithCloud(host: String?, code: String?) {
+        listener?.onEvent(EspPairingEvent.StagePairWithCloud)
+        code?.let { it1 ->
+            Connection().pairing(code, cloudCredentials.idToken!!) {
+                if (it.isSuccess) {
+                    listener?.onEvent(EspPairingEvent.NotifyPairingComplete)
+                    notifyPairingComplete(host, it1, it.getOrNull()?.get("deviceId") as String?)
+                } else {
+                    listener?.onFinish(Result(Throwable("Failed to pair with the cloud")))
+                }
+            }
+        }
     }
 
-    private fun notifyPairingComplete(host: String?, code: String) {
+    private fun notifyPairingComplete(host: String?, code: String, deviceId: String?) {
         pairingApi?.notifyPairingComplete(host, cloudCredentials.userId, code, object : EspApi.EspAPICallback<Void?> {
             override fun onSuccess(obj: Void?) {
-                listener?.onEvent(EspPairingEvent.NotifyPairingComplete, connectedDevice)
-                reboot()
+                listener?.onEvent(EspPairingEvent.NotifyPairingComplete)
+                reboot(deviceId ?: "")
             }
 
             override fun onFailure(throwable: Throwable?) {
@@ -160,12 +189,12 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
         })
     }
 
-    private fun reboot() {
-        listener?.onEvent(EspPairingEvent.Rebooting, connectedDevice)
+    private fun reboot(deviceId: String) {
+        listener?.onEvent(EspPairingEvent.Rebooting, deviceId)
         pairingApi?.reboot(object : EspApi.EspAPICallback<Void?> {
             override fun onSuccess(obj: Void?) {
-                listener?.onEvent(EspPairingEvent.Rebooted, connectedDevice)
-                rebootToFactory()
+                listener?.onEvent(EspPairingEvent.Rebooted, deviceId)
+                rebootToFactory(deviceId)
             }
 
             override fun onFailure(throwable: Throwable?) {
@@ -174,11 +203,11 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
         })
     }
 
-    open fun rebootToFactory() {
-        listener?.onEvent(EspPairingEvent.RebootingToFactory, connectedDevice)
+    open fun rebootToFactory(deviceId: String) {
+        listener?.onEvent(EspPairingEvent.RebootingToFactory, deviceId)
         pairingApi?.rebootToFactory(object : EspApi.EspAPICallback<Void?> {
             override fun onSuccess(obj: Void?) {
-                listener?.onEvent(EspPairingEvent.RebootedToFactory, connectedDevice)
+                listener?.onEvent(EspPairingEvent.RebootedToFactory, deviceId)
                 listener?.onFinish(Result(connectedDevice))
                 pairingApi?.stop()
             }
