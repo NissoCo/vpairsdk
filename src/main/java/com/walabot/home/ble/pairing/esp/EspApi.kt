@@ -1,17 +1,16 @@
 package com.walabot.home.ble.pairing.esp
 
 import com.google.protobuf.ByteString
-import com.walabot.home.ble.Message.ToDeviceMessageType
 import com.google.protobuf.GeneratedMessageV3
-import com.walabot.home.ble.Message.ToDeviceMessage
-import com.walabot.home.ble.Message.ToAppMessage
 import com.google.protobuf.InvalidProtocolBufferException
 import com.google.protobuf.Parser
+import com.walabot.home.ble.Message.*
 import com.walabot.home.ble.pairing.Gen2CloudOptions
 
 interface EspApi {
     //	void connect(byte[] apSsid, byte[] apBssid, byte[] apPassword, EspAPICallback<WalabotDeviceDesc> cb);
     val isConnected: Boolean
+    val isBleEnabled: Boolean
     val deviceDescriptor: WalabotDeviceDesc?
     fun connect(cb: EspAPICallback<WalabotDeviceDesc?>?)
     fun sendWiFiScanRequest(cb: EspAPICallback<ProtocolMediator.WifiScanResult?>?)

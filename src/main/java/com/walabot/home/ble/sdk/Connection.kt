@@ -54,7 +54,9 @@ class Connection {
                     val prettyJson = gson.toJson(JsonParser.parseString(response))
                     val map = Gson().fromJson<Map<String, Any>>(prettyJson, Map::class.java)
                     Log.d("Pretty Printed JSON :", prettyJson)
-                    callback(Result.success(map))
+                    withContext(Dispatchers.IO) {
+                        callback(Result.success(map))
+                    }
                 }
             } else {
                 Log.e("HTTPURLCONNECTION_ERROR", responseCode.toString())

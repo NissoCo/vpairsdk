@@ -67,8 +67,11 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
         }
     }
 
+    open fun isBleOn(): Boolean {
+        return pairingApi?.isBleEnabled ?: false
+    }
+
     open fun stopPairing() {
-        wifiMonitor?.stopScan()
         pairingApi?.stop()
         listener = null
         analyticsHandler = null
@@ -208,7 +211,7 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
         pairingApi?.rebootToFactory(object : EspApi.EspAPICallback<Void?> {
             override fun onSuccess(obj: Void?) {
                 listener?.onEvent(EspPairingEvent.RebootedToFactory, deviceId)
-                listener?.onFinish(Result(connectedDevice))
+                listener?.onFinish(Result(deviceId))
                 pairingApi?.stop()
             }
 

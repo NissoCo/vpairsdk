@@ -44,7 +44,7 @@ enum class EspPairingEvent(val value: Int) {
 }
 
 interface PairingListener {
-    fun onFinish(result: Result<WalabotDeviceDesc>)
+    fun onFinish(result: Result<String>)
     fun onEvent(event: EspPairingEvent, deviceId: String? = null)
     fun shouldSelect(wifiList: List<EspWifiItem>)
     fun onMissingPermission(permission: String)

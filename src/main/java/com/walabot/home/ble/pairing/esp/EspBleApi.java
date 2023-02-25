@@ -51,9 +51,14 @@ public class EspBleApi implements EspApi {
             }
         }
 
+        public boolean isBleEnabled() {
+            return _whBle.isAdapterOn();
+        }
+
         public boolean isConnected() {
             return _whBle.isConnectionReady();
         }
+
 
         public void connect(ConnectionCallback cb) {
             _connectionCallback.set(cb);
@@ -177,6 +182,11 @@ public class EspBleApi implements EspApi {
 
     public EspBleApi(WHBle whBle) {
         _espBleImpl = new ESPBleAPIImpl(whBle);
+    }
+
+    @Override
+    public boolean isBleEnabled() {
+        return _espBleImpl.isBleEnabled();
     }
 
     @Override
