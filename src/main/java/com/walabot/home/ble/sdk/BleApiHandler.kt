@@ -38,7 +38,6 @@ fun EspBleApi.sendCloudDetails(wifiDetails: EspWifiItem, password: String) {
         password.convert(), object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
             override fun onSuccess(obj: WalabotDeviceDesc?) {
                 obj?.let {
-                    callback.onResult(Result(EspPairingEvent.SentCloudDetails), null)
                     updateCloud(it)
                 }
 
@@ -55,6 +54,7 @@ private fun EspBleApi.updateCloud(deviceDesc: WalabotDeviceDesc) {
     options.params = cloudCredentials.cloudParams
     sendCloudDetails(options, object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
+            callback.onResult(Result(EspPairingEvent.SentCloudDetails), null)
             if (cloudCredentials.updateCloud) {
                 pair(deviceDesc.host ?: "")
             } else {

@@ -19,8 +19,8 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
         WalabotHomeDeviceScanner(context, UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c"))
     }
 
-    val unpairedDevices: ArrayList<BleDevice> by lazy {
-        ArrayList()
+    val unpairedDevices: MutableSet<BleDevice> by lazy {
+        mutableSetOf()
     }
 
     private val bleApis: ArrayList<EspBleApi> by lazy {
@@ -40,21 +40,20 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
                 newBleDevice: BleDevice?,
                 currentBleList: MutableCollection<BleDevice>?
             ) {
-                // The first ble device has been scanned
-                if (unpairedDevices.isEmpty() && currentBleList?.isNotEmpty() == true) {
-                    connect(currentBleList.first())
-                }
                 currentBleList?.let {
                     unpairedDevices.addAll(it)
                 }
             }
 
             override fun onBleDiscoveryError(err: Int) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onBleDiscoveryEnded() {
-                TODO("Not yet implemented")
+                // The first ble device has been scanned
+                if (unpairedDevices.isNotEmpty()) {
+                    connect(unpairedDevices.first())
+                }
             }
 
         })
@@ -91,7 +90,8 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
     }
 
     private fun startMassProvisioning() {
-        unpairedDevices.forEach {
+        val temp = unpairedDevices.toSet()
+        temp.forEach {
             connect(it)
         }
     }
@@ -105,6 +105,7 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
         if (bleApi == null) {
             currentApi = bleApis.first()
         }
+        startMassProvisioning()
         currentApi?.sendCloudDetails(selectedWifiDetails, password)
     }
 
@@ -117,6 +118,7 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
                         currentWifi?.let {
                             resumeConnection(pickedWifiCredentials!!, pickedWifiPassword!!, espBleApi)
                         } ?: kotlin.run {
+                            wifiMonitor = WifiNetworkMonitor(context)
                             wifiMonitor?.scanEvents = object : WifiNetworkMonitor.Scan {
                                 override fun onNetworkStateChange(info: WifiInfo?) {
                                     wifiMonitor?.stopScan()
@@ -134,10 +136,6 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
                 }
                 EspPairingEvent.RebootedToFactory -> {
                     bleApis.remove(espBleApi)
-                    if (espBleApi!! == bleApis.first()) {
-                        startMassProvisioning()
-                    }
-
                 }
                 else -> {
                     listener?.onEvent(result.result)
