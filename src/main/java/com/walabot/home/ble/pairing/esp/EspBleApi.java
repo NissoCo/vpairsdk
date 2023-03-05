@@ -1,8 +1,10 @@
 package com.walabot.home.ble.pairing.esp;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.protobuf.GeneratedMessageV3;
@@ -13,13 +15,22 @@ import com.walabot.home.ble.Result;
 import com.walabot.home.ble.WHBle;
 import com.walabot.home.ble.WHConnectionCallback;
 import com.walabot.home.ble.WHDataCallback;
+import com.walabot.home.ble.WalabotHomeDeviceScanner;
 import com.walabot.home.ble.pairing.Gen2CloudOptions;
+import com.walabot.home.ble.sdk.CloudCredentials;
+import com.walabot.home.ble.sdk.EspPairingEvent;
 
 import java.util.Collection;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EspBleApi implements EspApi {
+    public interface OnResult {
+        void onResult(Result<EspPairingEvent> result, EspBleApi espBleApi);
+    }
     private WalabotDeviceDesc walabotDescription;
+    public CloudCredentials cloudCredentials;
+    public OnResult callback;
 
     public static class ESPBleAPIImpl implements WHConnectionCallback, WHDataCallback {
         interface OpCallback {
@@ -31,6 +42,7 @@ public class EspBleApi implements EspApi {
         }
 
         private final WHBle _whBle;
+        private final WalabotHomeDeviceScanner _scanner;
         private final AtomicReference<OpCallback> _opCallback =
                 new AtomicReference<>();
         private final AtomicReference<ConnectionCallback> _connectionCallback =
@@ -38,8 +50,10 @@ public class EspBleApi implements EspApi {
 
         ProtocolMediator messageImpl;
 
-        public ESPBleAPIImpl(WHBle whBle) {
-            _whBle = whBle;
+        public ESPBleAPIImpl(Context context) {
+            _whBle = new WHBle(context);
+            UUID SERVICE_WALABOT_HOME = UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c");
+            _scanner = new WalabotHomeDeviceScanner(context, SERVICE_WALABOT_HOME);
         }
 
         public void sendMessage(Message.ToDeviceMessageType type, @Nullable GeneratedMessageV3 payload, OpCallback cb) {
@@ -60,40 +74,15 @@ public class EspBleApi implements EspApi {
         }
 
 
-        public void connect(ConnectionCallback cb) {
+        public void connect(BleDevice bleDevice, ConnectionCallback cb) {
             _connectionCallback.set(cb);
-            _whBle.getScanner().startScan(10000, new BleDiscoveryCallback() {
-                private BleDevice foundDevice;
-
-                @Override
-                public void onBleDiscovered(BleDevice newBleDevice, Collection<BleDevice> currentBleList) {
-                    foundDevice = newBleDevice;
-                    _whBle.getScanner().stopScan();
-                    _whBle.connectToDevice(newBleDevice.getDevice(), ESPBleAPIImpl.this,
-                            ESPBleAPIImpl.this,
-                            10000);
-                }
-
-                @Override
-                public void onBleDiscoveryError(int err) {
-                    //todo add cb.onConnectionResult ?
-                    Log.i(EspBleApi.class.getName(), "onBleDiscoveryError");
-                }
-
-                @Override
-                public void onBleDiscoveryEnded() {
-                    Log.i(EspBleApi.class.getName(), "onBleDiscoveryEnded foundDevice? " + (foundDevice != null));
-                    if (foundDevice == null) {
-                        //todo const error
-                        cb.onConnectionResult(new Result<>(new Exception("test error")));
-                        foundDevice = null;
-                    }
-                }
-            });
+            _whBle.connectToDevice(bleDevice.getDevice(), ESPBleAPIImpl.this,
+                    ESPBleAPIImpl.this,
+                    10000);
         }
 
         public void disconnect() {
-            _whBle.getScanner().stopScan();
+            _scanner.stopScan();
             BluetoothDevice device = _whBle.getSelectedDevice();
             if (device != null) {
                 _whBle.disconnect(device, true);
@@ -102,6 +91,7 @@ public class EspBleApi implements EspApi {
             _connectionCallback.set(null);
         }
 
+        //region WHConnectionCallback
         @Override
         public void onDeviceConnected(BluetoothDevice device, int version) {
             switch (version) {
@@ -138,7 +128,9 @@ public class EspBleApi implements EspApi {
         public void onMtuChanged(BluetoothDevice device, int mtu) {
 
         }
+        //endregion
 
+        //region WHDataCallback
         @Override
         public final void onReadSuccess(byte[] data) {
             OpCallback opCallback = _opCallback.getAndSet(null);
@@ -176,12 +168,15 @@ public class EspBleApi implements EspApi {
                 cb.onConnectionResult(new Result<>(device));
             }
         }
+        //endregion
     }
 
     private final ESPBleAPIImpl _espBleImpl;
 
-    public EspBleApi(WHBle whBle) {
-        _espBleImpl = new ESPBleAPIImpl(whBle);
+    public EspBleApi(Context context, CloudCredentials cloudCredentials, OnResult callback) {
+        _espBleImpl = new ESPBleAPIImpl(context);
+        this.cloudCredentials = cloudCredentials;
+        this.callback = callback;
     }
 
     @Override
@@ -200,8 +195,13 @@ public class EspBleApi implements EspApi {
     }
 
     @Override
-    public void connect(EspAPICallback<WalabotDeviceDesc> cb) {
-        _espBleImpl.connect((result) ->
+    public void connect(@Nullable EspAPICallback<WalabotDeviceDesc> cb) {
+
+    }
+
+    @Override
+    public void connect(@NonNull BleDevice bleDevice, EspAPICallback<WalabotDeviceDesc> cb) {
+        _espBleImpl.connect(bleDevice, (result) ->
         {
             if (_espBleImpl.messageImpl == null) {
                 cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));

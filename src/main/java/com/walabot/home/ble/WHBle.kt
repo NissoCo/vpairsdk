@@ -14,7 +14,7 @@ import java.util.*
  */
 class WHBle(context: Context?) : BleServiceDataCallback, BleServiceDeviceCallback {
     private val _bleService: BleService
-    val scanner: WalabotHomeDeviceScanner
+//    val scanner: WalabotHomeDeviceScanner
     var protocolVersion = 0
         private set
     var _dataInChar: BluetoothGattCharacteristic? = null
@@ -181,6 +181,6 @@ class WHBle(context: Context?) : BleServiceDataCallback, BleServiceDeviceCallbac
 
     init {
         _bleService = BleService(context!!)
-        scanner = WalabotHomeDeviceScanner(context, SERVICE_WALABOT_HOME)
+//        scanner = WalabotHomeDeviceScanner(context, SERVICE_WALABOT_HOME)
     }
 }

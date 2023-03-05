@@ -9,7 +9,7 @@ import com.walabot.home.ble.pairing.esp.EspApi
 import com.walabot.home.ble.pairing.esp.EspBleApi
 import com.walabot.home.ble.pairing.esp.WalabotDeviceDesc
 
-class MassProvision: VPairSDK() {
+class MassProvision: VPairSDK(), EspBleApi.OnResult {
 
     var pickedWifiCredentials: EspWifiItem? = null
     var pickedWifiPassword: String? = null
@@ -21,7 +21,7 @@ class MassProvision: VPairSDK() {
             this.cloudCredentials = cloudCredentials
             this.context = context
         }
-        pairingApi = EspBleApi(WHBle(context))
+        pairingApi = EspBleApi(context, cloudCredentials, this)
         listener?.onEvent(EspPairingEvent.Connecting)
         pairingApi?.connect(object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
             override fun onSuccess(obj: WalabotDeviceDesc?) {
@@ -79,5 +79,9 @@ class MassProvision: VPairSDK() {
     override fun stopPairing() {
         super.stopPairing()
         context = null
+    }
+
+    override fun onResult(result: Result<EspPairingEvent>?, espBleApi: EspBleApi?) {
+
     }
 }
