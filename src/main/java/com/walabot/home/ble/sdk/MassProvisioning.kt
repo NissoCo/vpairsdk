@@ -1,7 +1,11 @@
 package com.walabot.home.ble.sdk
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.wifi.WifiInfo
+import android.os.Build
+import androidx.core.content.ContextCompat
 import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.BleDiscoveryCallback
 import com.walabot.home.ble.Result
@@ -12,6 +16,14 @@ import com.walabot.home.ble.pairing.esp.EspBleApi
 import com.walabot.home.ble.pairing.esp.ProtocolMediator
 import com.walabot.home.ble.pairing.esp.WalabotDeviceDesc
 import java.util.*
+
+fun Context.isBleEnabled(): Boolean {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
+    }
+    return true
+}
+
 
 class MassProvisioning(val context: Context, val cloudCredentials: CloudCredentials) :
     EspBleApi.OnResult {
@@ -35,28 +47,35 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
 
 
     fun scan() {
-        scanner.startScan(10000, object : BleDiscoveryCallback{
-            override fun onBleDiscovered(
-                newBleDevice: BleDevice?,
-                currentBleList: MutableCollection<BleDevice>?
-            ) {
-                currentBleList?.let {
-                    unpairedDevices.addAll(it)
+        if (context.isBleEnabled()) {
+            scanner.startScan(10000, object : BleDiscoveryCallback {
+                override fun onBleDiscovered(
+                    newBleDevice: BleDevice?,
+                    currentBleList: MutableCollection<BleDevice>?
+                ) {
+                    currentBleList?.let {
+                        unpairedDevices.addAll(it)
+                    }
                 }
-            }
 
-            override fun onBleDiscoveryError(err: Int) {
+                override fun onBleDiscoveryError(err: Int) {
 
-            }
-
-            override fun onBleDiscoveryEnded() {
-                // The first ble device has been scanned
-                if (unpairedDevices.isNotEmpty()) {
-                    connect(unpairedDevices.first())
                 }
-            }
 
-        })
+                override fun onBleDiscoveryEnded() {
+                    // The first ble device has been scanned
+                    if (unpairedDevices.isNotEmpty()) {
+                        connect(unpairedDevices.first())
+                    }
+                }
+
+            })
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                listener?.onMissingPermission(Manifest.permission.BLUETOOTH_SCAN)
+            }
+            listener?.onMissingPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
     }
 
     fun connect(bleDevice: BleDevice) {
@@ -138,10 +157,10 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
                     bleApis.remove(espBleApi)
                 }
                 else -> {
-                    listener?.onEvent(result.result)
+                    listener?.onEvent(result.result, espBleApi?.deviceDescriptor?.mac)
                 }
             }
-            listener?.onEvent(result.result, espBleApi?.deviceDescriptor?.name)
+            listener?.onEvent(result.result, espBleApi?.deviceDescriptor?.mac)
         } else {
             bleApis.remove(espBleApi)
             listener?.onFinish(Result(result.throwable))

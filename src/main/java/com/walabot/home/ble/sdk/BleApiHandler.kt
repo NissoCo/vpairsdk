@@ -31,7 +31,7 @@ fun EspBleApi.sendCloudDetails(wifiDetails: EspWifiItem, password: String) {
         callback.onResult(Result(Throwable("Device not connected")), this)
         return
     }
-    callback.onResult(Result(EspPairingEvent.SendingCloudDetails), null)
+    callback.onResult(Result(EspPairingEvent.SendingCloudDetails), this)
     sendWifiCredentials(
         wifiDetails.ssid.convert(),
         wifiDetails.bssid.convert(),
@@ -54,7 +54,7 @@ private fun EspBleApi.updateCloud(deviceDesc: WalabotDeviceDesc) {
     options.params = cloudCredentials.cloudParams
     sendCloudDetails(options, object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
-            callback.onResult(Result(EspPairingEvent.SentCloudDetails), null)
+            callback.onResult(Result(EspPairingEvent.SentCloudDetails), this@updateCloud)
             if (cloudCredentials.updateCloud) {
                 pair(deviceDesc.host ?: "")
             } else {
@@ -72,7 +72,7 @@ private fun EspBleApi.pair(host: String) {
     callback.onResult(Result(EspPairingEvent.Pairing), null)
     pair(host, cloudCredentials.userId, object : EspApi.EspAPICallback<EspPairingResponse?> {
         override fun onSuccess(obj: EspPairingResponse?) {
-            callback.onResult(Result(EspPairingEvent.Paired), null)
+            callback.onResult(Result(EspPairingEvent.Paired), this@pair)
             if (cloudCredentials.updateCloud) {
                 performParingWithCloud(host, obj?.code)
             } else {
@@ -87,14 +87,14 @@ private fun EspBleApi.pair(host: String) {
 }
 
 private fun EspBleApi.performParingWithCloud(host: String, code: String?) {
-    callback.onResult(Result(EspPairingEvent.StagePairWithCloud), null)
+    callback.onResult(Result(EspPairingEvent.StagePairWithCloud), this)
     code?.let { it1 ->
         Connection().pairing(code, cloudCredentials.idToken!!) {
             if (it.isSuccess) {
-                callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), null)
+                callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), this)
                 notifyPairingComplete(host, it1)
             } else {
-                callback.onResult(Result(Throwable("Failed to pair with the cloud")), null)
+                callback.onResult(Result(Throwable("Failed to pair with the cloud")), this)
             }
         }
     }
@@ -103,21 +103,21 @@ private fun EspBleApi.performParingWithCloud(host: String, code: String?) {
 private fun EspBleApi.notifyPairingComplete(host: String, code: String) {
     notifyPairingComplete(host, cloudCredentials.userId, code, object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
-            callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), null)
+            callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), this@notifyPairingComplete)
             reboot()
         }
 
         override fun onFailure(throwable: Throwable?) {
-            callback.onResult(Result(throwable), null)
+            callback.onResult(Result(throwable), this@notifyPairingComplete)
         }
     })
 }
 
 private fun EspBleApi.reboot() {
-    callback.onResult(Result(EspPairingEvent.Rebooting), null)
+    callback.onResult(Result(EspPairingEvent.Rebooting), this)
     reboot(object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
-            callback.onResult(Result(EspPairingEvent.Rebooted), null)
+            callback.onResult(Result(EspPairingEvent.Rebooted), this@reboot)
             rebootToFactory()
         }
 
@@ -128,7 +128,7 @@ private fun EspBleApi.reboot() {
 }
 
 private fun EspBleApi.rebootToFactory() {
-    callback.onResult(Result(EspPairingEvent.RebootingToFactory), null)
+    callback.onResult(Result(EspPairingEvent.RebootingToFactory), this)
     rebootToFactory(object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
             callback.onResult(Result(EspPairingEvent.RebootedToFactory), this@rebootToFactory)
