@@ -25,7 +25,7 @@ fun Context.isBleAuth(): Boolean {
 
 data class CloudCredentials(val userId: String?, val idToken: String?, var cloudParams: ConfigParams? = null, val updateCloud: Boolean = userId?.isNotEmpty() ?: false)
 
-open class VPairSDK : WifiNetworkMonitor.Scan {
+open class VPairSDK(val context: Context, val cloudCredentials: CloudCredentials) : WifiNetworkMonitor.Scan {
     var pairingApi: EspBleApi? = null
     var listener: PairingListener? = null
     var analyticsHandler: AnalyticsHandler? = null
@@ -38,15 +38,17 @@ open class VPairSDK : WifiNetworkMonitor.Scan {
     var connectedDevice: WalabotDeviceDesc? = null
 
     var wifiMonitor: WifiNetworkMonitor? = null
-    var cloudCredentials = CloudCredentials(null, null)
 
-    open fun startPairing(context: Context, cloudCredentials: CloudCredentials) {
+    init {
+        pairingApi = EspBleApi(WHBle(context))
+    }
+
+    open fun startPairing() {
         if (context.isBleAuth()) {
             wifiMonitor = WifiNetworkMonitor(context)
             wifiMonitor?.scanEvents = this
             wifiMonitor?.startScanWifi()
             pairingApi = EspBleApi(WHBle(context))
-            this.cloudCredentials = cloudCredentials
             listener?.onEvent(EspPairingEvent.Connecting)
             pairingApi?.connect(object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
                 override fun onSuccess(obj: WalabotDeviceDesc?) {
