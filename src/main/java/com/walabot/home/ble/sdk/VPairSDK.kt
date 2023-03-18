@@ -25,11 +25,12 @@ fun Context.isBleAuth(): Boolean {
 
 data class CloudCredentials(val userId: String?, val idToken: String?, var cloudParams: ConfigParams? = null, val updateCloud: Boolean = userId?.isNotEmpty() ?: false)
 
-open class VPairSDK(val context: Context, val cloudCredentials: CloudCredentials) : WifiNetworkMonitor.Scan {
+open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
     var pairingApi: EspBleApi? = null
     var listener: PairingListener? = null
     var analyticsHandler: AnalyticsHandler? = null
     var currentWifi: EspWifiItem? = null
+    lateinit var cloudCredentials: CloudCredentials
     private val isDeviceConnected: Boolean
     get() {
         return pairingApi?.isConnected ?: false
