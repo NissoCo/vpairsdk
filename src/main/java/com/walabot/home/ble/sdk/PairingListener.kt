@@ -1,5 +1,6 @@
 package com.walabot.home.ble.sdk
 
+import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.Result
 import com.walabot.home.ble.pairing.esp.WalabotDeviceDesc
 import java.security.Permission
@@ -44,6 +45,7 @@ enum class EspPairingEvent(val value: Int) {
 }
 
 interface PairingListener {
+    fun onScan(scannedDevices: List<BleDevice>)
     fun onFinish(result: Result<String>)
     fun onEvent(event: EspPairingEvent, deviceId: String? = null)
     fun shouldSelect(wifiList: List<EspWifiItem>)

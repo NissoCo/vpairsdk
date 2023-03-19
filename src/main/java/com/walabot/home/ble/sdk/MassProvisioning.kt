@@ -1,6 +1,7 @@
 package com.walabot.home.ble.sdk
 
 import android.Manifest
+import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.wifi.WifiInfo
@@ -16,6 +17,7 @@ import com.walabot.home.ble.pairing.esp.EspBleApi
 import com.walabot.home.ble.pairing.esp.ProtocolMediator
 import com.walabot.home.ble.pairing.esp.WalabotDeviceDesc
 import java.util.*
+import kotlin.collections.ArrayList
 
 fun Context.isBleEnabled(): Boolean {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -24,8 +26,13 @@ fun Context.isBleEnabled(): Boolean {
     return true
 }
 
+fun Context.isBleOn(): Boolean {
+    val bleManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+    return  bleManager.adapter.isEnabled
+}
 
-class MassProvisioning(val context: Context, val cloudCredentials: CloudCredentials) :
+
+class MassProvisioning(val context: Context, var cloudCredentials: CloudCredentials? = null) :
     EspBleApi.OnResult {
     private val scanner: WalabotHomeDeviceScanner by lazy {
         WalabotHomeDeviceScanner(context, UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c"))
@@ -35,9 +42,14 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
         mutableSetOf()
     }
 
+    var pickedDevices: ArrayList<BleDevice>? = null
+
     private val bleApis: ArrayList<EspBleApi> by lazy {
         ArrayList()
     }
+
+    val isBleOn: Boolean
+    get() = context.isBleOn()
 
     private var wifiMonitor: WifiNetworkMonitor? = null
     var currentWifi: EspWifiItem? = null
@@ -64,9 +76,7 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
 
                 override fun onBleDiscoveryEnded() {
                     // The first ble device has been scanned
-                    if (unpairedDevices.isNotEmpty()) {
-                        connect(unpairedDevices.first())
-                    }
+                    listener?.onScan(unpairedDevices.toList())
                 }
 
             })
@@ -78,11 +88,18 @@ class MassProvisioning(val context: Context, val cloudCredentials: CloudCredenti
         }
     }
 
-    fun connect(bleDevice: BleDevice) {
+    fun connect(devices: List<BleDevice>) {
+        pickedDevices = ArrayList(devices)
+        pickedDevices?.let {
+            connect(it.first())
+        }
+    }
+
+    private fun connect(bleDevice: BleDevice) {
         val bleApi = EspBleApi(context, cloudCredentials, this)
         bleApis.add(bleApi)
         bleApi.connect(bleDevice)
-        unpairedDevices.remove(bleDevice)
+        pickedDevices?.remove(bleDevice)
     }
 
     fun refreshWifiList(walabotDeviceDesc: WalabotDeviceDesc) {
