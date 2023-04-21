@@ -46,9 +46,6 @@ open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
 
     open fun startPairing() {
         if (context.isBleAuth()) {
-            wifiMonitor = WifiNetworkMonitor(context)
-            wifiMonitor?.scanEvents = this
-            wifiMonitor?.startScanWifi()
             pairingApi = EspBleApi(WHBle(context))
             listener?.onEvent(EspPairingEvent.Connecting)
             pairingApi?.connect(object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
@@ -97,9 +94,12 @@ open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
                     }
                 })
             } else {
-                currentWifi?.let {
-                    listener?.shouldSelect(arrayOf(it).asList())
-                }
+                wifiMonitor = WifiNetworkMonitor(context)
+                wifiMonitor?.scanEvents = this
+                wifiMonitor?.startScanWifi()
+//                currentWifi?.let {
+//
+//                }
             }
         } ?: kotlin.run {
             listener?.onFinish(Result(Throwable("Device is not connected")))
@@ -171,7 +171,7 @@ open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
     private fun performParingWithCloud(host: String?, code: String?) {
         listener?.onEvent(EspPairingEvent.StagePairWithCloud)
         code?.let { it1 ->
-            Connection().pairing(code, cloudCredentials.idToken!!) {
+            Connection().pairing(code, cloudCredentials) {
                 if (it.isSuccess) {
                     listener?.onEvent(EspPairingEvent.NotifyPairingComplete)
                     notifyPairingComplete(host, it1, it.getOrNull()?.get("deviceId") as String?)
@@ -220,15 +220,18 @@ open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
 
             override fun onFailure(throwable: Throwable?) {
                 listener?.onFinish(Result(throwable))
+                pairingApi?.stop()
             }
         })
     }
 
     override fun onNetworkStateChange(info: WifiInfo?) {
         wifiMonitor?.stopScan()
+        wifiMonitor = null
         if (info != null) {
             val cleanName = info.ssid.replace("\"", "")
             currentWifi = EspWifiItemImpl(cleanName, info.bssid, info.rssi)
+            listener?.shouldSelect(arrayOf(currentWifi!!).asList())
         }
     }
 }

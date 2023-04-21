@@ -17,9 +17,9 @@ val version = "3"
 class Connection {
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun pairing(code: String, token: String, callback: (Result<Map<String, Any>>) -> Unit) {
+    fun pairing(code: String, credentials: CloudCredentials, callback: (Result<Map<String, Any>>) -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
-            val url = URL("${dev}pairing/$code")
+            val url = URL("${credentials.cloudParams?.cloudBaseUrl}/pairing/$code")
             val httpURLConnection = url.openConnection() as HttpURLConnection
             httpURLConnection.requestMethod = "PUT"
             httpURLConnection.setRequestProperty(
@@ -32,7 +32,7 @@ class Connection {
             ) // The format of response we want to get from the server
             httpURLConnection.setRequestProperty(
                 "Authorization",
-                "Bearer $token"
+                "Bearer ${credentials.idToken}"
             )
             httpURLConnection.setRequestProperty(
                 "Api-Version",
