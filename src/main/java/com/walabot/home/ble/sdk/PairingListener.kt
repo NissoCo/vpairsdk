@@ -43,8 +43,13 @@ enum class EspPairingEvent(val value: Int) {
     }
 }
 
+enum class SDKRetryReason() {
+    CloudConnect, WifiPass, WifiSignal
+}
+
 interface PairingListener {
     fun onFinish(result: Result<String>)
+    fun shouldRetry(reason: SDKRetryReason)
     fun onEvent(event: EspPairingEvent, deviceId: String? = null)
     fun shouldSelect(wifiList: List<EspWifiItem>)
     fun onMissingPermission(permission: String)

@@ -127,7 +127,7 @@ open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
             }
 
             override fun onFailure(throwable: Throwable?) {
-                listener?.onFinish(Result(throwable))
+                listener?.shouldRetry(SDKRetryReason.WifiPass)
             }
         })
     }
@@ -145,7 +145,7 @@ open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
             }
 
             override fun onFailure(throwable: Throwable?) {
-                listener?.onFinish(Result(throwable))
+                listener?.shouldRetry(SDKRetryReason.CloudConnect)
             }
         })
     }
@@ -163,7 +163,7 @@ open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
             }
 
             override fun onFailure(throwable: Throwable?) {
-                listener?.onFinish(Result(throwable))
+                listener?.shouldRetry(SDKRetryReason.CloudConnect)
             }
         })
     }
