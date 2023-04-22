@@ -49,7 +49,7 @@ enum class SDKRetryReason() {
 
 interface PairingListener {
     fun onFinish(result: Result<String>)
-    fun shouldRetry(reason: SDKRetryReason)
+    fun shouldRetry(reason: SDKRetryReason, item: EspWifiItem? = null)
     fun onEvent(event: EspPairingEvent, deviceId: String? = null)
     fun shouldSelect(wifiList: List<EspWifiItem>)
     fun onMissingPermission(permission: String)

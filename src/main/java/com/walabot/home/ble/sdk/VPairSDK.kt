@@ -127,7 +127,12 @@ open class VPairSDK(val context: Context) : WifiNetworkMonitor.Scan {
             }
 
             override fun onFailure(throwable: Throwable?) {
-                listener?.shouldRetry(SDKRetryReason.WifiPass)
+                val exception = throwable as EspPairingException
+                var reason = SDKRetryReason.WifiPass
+                if (exception.resultCode != 3011) {
+                    reason = SDKRetryReason.WifiSignal
+                }
+                listener?.shouldRetry(reason, selectedWifiDetails)
             }
         })
     }

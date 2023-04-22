@@ -271,11 +271,13 @@ public class EspBleApi implements EspApi {
                     } else {
                         // we got a valid status, we parsed the payload, but the IP/MAC was
                         // broken, or we got invalid status (like network is local only)
+                        dataResult.setStatusCode(wifiResult.getResult());
                         EspPairingException e = new EspPairingException(EspPairingErrorType.CONNECT_FAILED, dataResult);
                         cb.onFailure(e);
                     }
                 }
             } else {
+                dataResult.setStatusCode(3012);
                 EspPairingException e = new EspPairingException(EspPairingErrorType.CONNECT_FAILED, dataResult);
                 cb.onFailure(e);
             }
