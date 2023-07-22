@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.wifi.WifiInfo
 import android.os.Build
+import android.util.Log
 import androidx.core.content.ContextCompat
 import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.BleDiscoveryCallback
@@ -22,8 +23,9 @@ import kotlin.collections.ArrayList
 fun Context.isBleEnabled(): Boolean {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
+    } else {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
-    return true
 }
 
 fun Context.isBleOn(): Boolean {
@@ -60,7 +62,7 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
 
     fun scan() {
         if (context.isBleEnabled()) {
-            scanner.startScan(10000, object : BleDiscoveryCallback {
+            scanner.startScan(3000, object : BleDiscoveryCallback {
                 override fun onBleDiscovered(
                     newBleDevice: BleDevice?,
                     currentBleList: MutableCollection<BleDevice>?
@@ -71,12 +73,18 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
                 }
 
                 override fun onBleDiscoveryError(err: Int) {
-
+                    Log.d("scan error", err.toString())
                 }
 
                 override fun onBleDiscoveryEnded() {
                     // The first ble device has been scanned
-                    listener?.onScan(unpairedDevices.toList())
+//                    listener?.onScan(unpairedDevices.toList())
+                    val devices = unpairedDevices.toList()
+                    if (devices.isNotEmpty()) {
+                        connect(devices)
+                    } else {
+                        scan()
+                    }
                 }
 
             })
@@ -126,8 +134,8 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
     }
 
     private fun startMassProvisioning() {
-        val temp = unpairedDevices.toSet()
-        temp.forEach {
+        val temp = pickedDevices?.toSet()
+        temp?.forEach {
             connect(it)
         }
     }
@@ -141,7 +149,7 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
         if (bleApi == null) {
             currentApi = bleApis.first()
         }
-        startMassProvisioning()
+        if (bleApi == null) startMassProvisioning()
         currentApi?.sendCloudDetails(selectedWifiDetails, password)
     }
 
@@ -172,9 +180,12 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
                 }
                 EspPairingEvent.RebootedToFactory -> {
                     bleApis.remove(espBleApi)
+                    if (bleApis.isEmpty()) {
+                        scan()
+                    }
                 }
                 else -> {
-                    listener?.onEvent(result.result, espBleApi?.deviceDescriptor?.mac)
+
                 }
             }
             listener?.onEvent(result.result, espBleApi?.deviceDescriptor?.mac)
