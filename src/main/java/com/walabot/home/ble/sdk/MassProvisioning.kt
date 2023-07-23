@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.wifi.WifiInfo
 import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.BleDiscoveryCallback
@@ -36,8 +37,8 @@ fun Context.isBleOn(): Boolean {
 
 class MassProvisioning(val context: Context, var cloudCredentials: CloudCredentials? = null) :
     EspBleApi.OnResult {
-    private val scanner: WalabotHomeDeviceScanner by lazy {
-        WalabotHomeDeviceScanner(context, UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c"))
+    private val scanner: VayyarScanner by lazy {
+        VayyarScanner(context, arrayListOf(UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c")))
     }
 
     val unpairedDevices: MutableSet<BleDevice> by lazy {
@@ -60,34 +61,16 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
     var pickedWifiPassword: String? = null
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun scan() {
         if (context.isBleEnabled()) {
-            scanner.startScan(3000, object : BleDiscoveryCallback {
-                override fun onBleDiscovered(
-                    newBleDevice: BleDevice?,
-                    currentBleList: MutableCollection<BleDevice>?
-                ) {
-                    currentBleList?.let {
-                        unpairedDevices.addAll(it)
-                    }
+            scanner.startScan {
+                if (it.isSuccess) {
+                    connect(it.getOrNull()!!)
+                } else {
+                    Log.d("scan error", it.exceptionOrNull().toString())
                 }
-
-                override fun onBleDiscoveryError(err: Int) {
-                    Log.d("scan error", err.toString())
-                }
-
-                override fun onBleDiscoveryEnded() {
-                    // The first ble device has been scanned
-//                    listener?.onScan(unpairedDevices.toList())
-                    val devices = unpairedDevices.toList()
-                    if (devices.isNotEmpty()) {
-                        connect(devices)
-                    } else {
-                        scan()
-                    }
-                }
-
-            })
+            }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 listener?.onMissingPermission(Manifest.permission.BLUETOOTH_SCAN)
@@ -142,6 +125,7 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
 
     fun resumeConnection(selectedWifiDetails: EspWifiItem, password: String, bleApi: EspBleApi? = null) {
         if (pickedWifiCredentials == null) {
+            currentWifi = selectedWifiDetails
             pickedWifiCredentials = selectedWifiDetails
             pickedWifiPassword = password
         }
@@ -154,6 +138,7 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResult(result: Result<EspPairingEvent>, espBleApi: EspBleApi?) {
         if (result.isSuccessfull) {
             when (result.result) {
@@ -162,19 +147,20 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
                         currentWifi?.let {
                             resumeConnection(pickedWifiCredentials!!, pickedWifiPassword!!, espBleApi)
                         } ?: kotlin.run {
-                            wifiMonitor = WifiNetworkMonitor(context)
-                            wifiMonitor?.scanEvents = object : WifiNetworkMonitor.Scan {
-                                override fun onNetworkStateChange(info: WifiInfo?) {
-                                    wifiMonitor?.stopScan()
-                                    if (info != null) {
-                                        val cleanName = info.ssid.replace("\"", "")
-                                        currentWifi = EspWifiItemImpl(cleanName, info.bssid, info.rssi)
-                                    }
-                                    refreshWifiList(it)
-                                }
-
-                            }
-                            wifiMonitor?.startScanWifi()
+                            refreshWifiList(it)
+//                            wifiMonitor = WifiNetworkMonitor(context)
+//                            wifiMonitor?.scanEvents = object : WifiNetworkMonitor.Scan {
+//                                override fun onNetworkStateChange(info: WifiInfo?) {
+//                                    wifiMonitor?.stopScan()
+//                                    if (info != null) {
+//                                        val cleanName = info.ssid.replace("\"", "")
+//                                        currentWifi = EspWifiItemImpl(cleanName, info.bssid, info.rssi)
+//                                    }
+//                                    refreshWifiList(it)
+//                                }
+//
+//                            }
+//                            wifiMonitor?.startScanWifi()
                         }
                     }
                 }

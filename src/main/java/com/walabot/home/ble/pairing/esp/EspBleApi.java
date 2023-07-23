@@ -1,5 +1,6 @@
 package com.walabot.home.ble.pairing.esp;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
@@ -42,7 +43,6 @@ public class EspBleApi implements EspApi {
         }
 
         private final WHBle _whBle;
-        private final WalabotHomeDeviceScanner _scanner;
         private final AtomicReference<OpCallback> _opCallback =
                 new AtomicReference<>();
         private final AtomicReference<ConnectionCallback> _connectionCallback =
@@ -52,8 +52,6 @@ public class EspBleApi implements EspApi {
 
         public ESPBleAPIImpl(Context context) {
             _whBle = new WHBle(context);
-            UUID SERVICE_WALABOT_HOME = UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c");
-            _scanner = new WalabotHomeDeviceScanner(context, SERVICE_WALABOT_HOME);
         }
 
         public void sendMessage(Message.ToDeviceMessageType type, @Nullable GeneratedMessageV3 payload, OpCallback cb) {
@@ -82,7 +80,6 @@ public class EspBleApi implements EspApi {
         }
 
         public void disconnect() {
-            _scanner.stopScan();
             BluetoothDevice device = _whBle.getSelectedDevice();
             if (device != null) {
                 _whBle.disconnect(device, true);
@@ -199,6 +196,7 @@ public class EspBleApi implements EspApi {
 
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void connect(@NonNull BleDevice bleDevice, EspAPICallback<WalabotDeviceDesc> cb) {
         _espBleImpl.connect(bleDevice, (result) ->
