@@ -35,7 +35,7 @@ fun Context.isBleOn(): Boolean {
 }
 
 
-class MassProvisioning(val context: Context, var cloudCredentials: CloudCredentials? = null) :
+class MassProvisioning(val context: Context, var config: Config) :
     EspBleApi.OnResult {
     private val scanner: VayyarScanner by lazy {
         VayyarScanner(context, arrayListOf(UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c")))
@@ -87,7 +87,7 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
     }
 
     private fun connect(bleDevice: BleDevice) {
-        val bleApi = EspBleApi(context, cloudCredentials, this)
+        val bleApi = EspBleApi(context, config, this)
         bleApis.add(bleApi)
         bleApi.connect(bleDevice)
         pickedDevices?.remove(bleDevice)
@@ -148,19 +148,6 @@ class MassProvisioning(val context: Context, var cloudCredentials: CloudCredenti
                             resumeConnection(pickedWifiCredentials!!, pickedWifiPassword!!, espBleApi)
                         } ?: kotlin.run {
                             refreshWifiList(it)
-//                            wifiMonitor = WifiNetworkMonitor(context)
-//                            wifiMonitor?.scanEvents = object : WifiNetworkMonitor.Scan {
-//                                override fun onNetworkStateChange(info: WifiInfo?) {
-//                                    wifiMonitor?.stopScan()
-//                                    if (info != null) {
-//                                        val cleanName = info.ssid.replace("\"", "")
-//                                        currentWifi = EspWifiItemImpl(cleanName, info.bssid, info.rssi)
-//                                    }
-//                                    refreshWifiList(it)
-//                                }
-//
-//                            }
-//                            wifiMonitor?.startScanWifi()
                         }
                     }
                 }

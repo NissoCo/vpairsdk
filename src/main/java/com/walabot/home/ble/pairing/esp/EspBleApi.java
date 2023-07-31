@@ -19,6 +19,7 @@ import com.walabot.home.ble.WHDataCallback;
 import com.walabot.home.ble.WalabotHomeDeviceScanner;
 import com.walabot.home.ble.pairing.Gen2CloudOptions;
 import com.walabot.home.ble.sdk.CloudCredentials;
+import com.walabot.home.ble.sdk.Config;
 import com.walabot.home.ble.sdk.EspPairingEvent;
 
 import java.util.Collection;
@@ -30,7 +31,7 @@ public class EspBleApi implements EspApi {
         void onResult(Result<EspPairingEvent> result, EspBleApi espBleApi);
     }
     private WalabotDeviceDesc walabotDescription;
-    public CloudCredentials cloudCredentials;
+    public Config config;
     public OnResult callback;
 
     public static class ESPBleAPIImpl implements WHConnectionCallback, WHDataCallback {
@@ -170,9 +171,9 @@ public class EspBleApi implements EspApi {
 
     private final ESPBleAPIImpl _espBleImpl;
 
-    public EspBleApi(Context context, CloudCredentials cloudCredentials, OnResult callback) {
+    public EspBleApi(Context context, Config config, OnResult callback) {
         _espBleImpl = new ESPBleAPIImpl(context);
-        this.cloudCredentials = cloudCredentials;
+        this.config = config;
         this.callback = callback;
     }
 
