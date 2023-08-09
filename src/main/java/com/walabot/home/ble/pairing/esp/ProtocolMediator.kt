@@ -2,7 +2,7 @@ package com.walabot.home.ble.pairing.esp
 
 import com.google.protobuf.GeneratedMessageV3
 import com.walabot.home.ble.Message.AP
-import com.walabot.home.ble.pairing.Gen2CloudOptions
+import com.walabot.home.ble.sdk.Config
 
 interface ProtocolMediator {
     fun wifiCredentials(
@@ -11,7 +11,7 @@ interface ProtocolMediator {
         apPassword: ByteArray?
     ): GeneratedMessageV3?
 
-    fun cloudDetails(cloudOptions: Gen2CloudOptions?): GeneratedMessageV3?
+    fun cloudDetails(cloudOptions: Config): GeneratedMessageV3?
     fun pair(uid: String?): GeneratedMessageV3?
     fun pairingComplete(uid: String?, code: String?): GeneratedMessageV3?
     fun parseResult(data: ByteArray?): MessageResult?

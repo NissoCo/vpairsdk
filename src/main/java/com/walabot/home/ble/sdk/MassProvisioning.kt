@@ -4,20 +4,14 @@ import android.Manifest
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.pm.PackageManager
-import android.net.wifi.WifiInfo
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.walabot.home.ble.BleDevice
-import com.walabot.home.ble.BleDiscoveryCallback
 import com.walabot.home.ble.Result
-import com.walabot.home.ble.WalabotHomeDeviceScanner
 import com.walabot.home.ble.pairing.WifiNetworkMonitor
-import com.walabot.home.ble.pairing.esp.EspApi
-import com.walabot.home.ble.pairing.esp.EspBleApi
-import com.walabot.home.ble.pairing.esp.ProtocolMediator
-import com.walabot.home.ble.pairing.esp.WalabotDeviceDesc
+import com.walabot.home.ble.pairing.esp.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -55,14 +49,13 @@ class MassProvisioning(val context: Context, var config: Config) :
     get() = context.isBleOn()
 
     private var wifiMonitor: WifiNetworkMonitor? = null
-    var currentWifi: EspWifiItem? = null
-    var listener: PairingListener? = null
-    var pickedWifiCredentials: EspWifiItem? = null
-    var pickedWifiPassword: String? = null
+//    var currentWifi: EspWifiItem? = null
+    var eventsHandler: PairingEvents? = null
+    var analyticsHandler: PairingAnalytics? = null
 
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun scan() {
+    fun startMassProvision() {
         if (context.isBleEnabled()) {
             scanner.startScan {
                 if (it.isSuccess) {
@@ -73,9 +66,9 @@ class MassProvisioning(val context: Context, var config: Config) :
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                listener?.onMissingPermission(Manifest.permission.BLUETOOTH_SCAN)
+                eventsHandler?.onMissingPermission(Manifest.permission.BLUETOOTH_SCAN)
             }
-            listener?.onMissingPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            eventsHandler?.onMissingPermission(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
 
@@ -93,27 +86,26 @@ class MassProvisioning(val context: Context, var config: Config) :
         pickedDevices?.remove(bleDevice)
     }
 
-    fun refreshWifiList(walabotDeviceDesc: WalabotDeviceDesc) {
-        if (walabotDeviceDesc.protocolVersion == 3) {
-            listener?.onEvent(EspPairingEvent.WifiScan)
-            bleApis.first().sendWiFiScanRequest(object :
-                EspApi.EspAPICallback<ProtocolMediator.WifiScanResult?> {
-                override fun onSuccess(obj: ProtocolMediator.WifiScanResult?) {
-                    obj?.convert()?.let {
-                        listener?.shouldSelect(it)
-                    }
+    private fun scanWifi(bleApi: EspBleApi, onSuccess: (List<EspWifiItem>) -> Unit) {
+        bleApi.sendWiFiScanRequest(object :
+            EspApi.EspAPICallback<ProtocolMediator.WifiScanResult?> {
+            override fun onSuccess(obj: ProtocolMediator.WifiScanResult?) {
+                obj?.convert()?.let {
+                    onSuccess(it)
                 }
-
-                override fun onFailure(throwable: Throwable?) {
-                    listener?.onFinish(Result(throwable))
-                }
-            })
-        } else {
-            currentWifi?.let {
-                listener?.shouldSelect(arrayOf(it).asList())
             }
-        }
 
+            override fun onFailure(throwable: Throwable?) {
+                eventsHandler?.onFinish(Result(throwable))
+            }
+        })
+    }
+
+    private fun refreshWifiList(walabotDeviceDesc: WalabotDeviceDesc) {
+        eventsHandler?.onEvent(EspPairingEvent.WifiScan)
+        scanWifi(bleApis.first()) {
+            eventsHandler?.shouldSelect(it)
+        }
     }
 
     private fun startMassProvisioning() {
@@ -123,18 +115,20 @@ class MassProvisioning(val context: Context, var config: Config) :
         }
     }
 
-    fun resumeConnection(selectedWifiDetails: EspWifiItem, password: String, bleApi: EspBleApi? = null) {
-        if (pickedWifiCredentials == null) {
-            currentWifi = selectedWifiDetails
-            pickedWifiCredentials = selectedWifiDetails
-            pickedWifiPassword = password
+    fun resumeConnection(ssid: String, bssid: String, password: String, bleApi: EspBleApi? = null) {
+        if (config.wifi.ssid == null) {
+            if (config.wifi.ssid == null) {
+                config.wifi.ssid = ssid
+                config.wifi.bssid = bssid
+                config.wifi.pwd = password
+            }
         }
         var currentApi = bleApi
         if (bleApi == null) {
             currentApi = bleApis.first()
         }
         if (bleApi == null) startMassProvisioning()
-        currentApi?.sendCloudDetails(selectedWifiDetails, password)
+        currentApi?.sendCloudDetails(ssid, bssid, password)
     }
 
 
@@ -144,8 +138,8 @@ class MassProvisioning(val context: Context, var config: Config) :
             when (result.result) {
                 EspPairingEvent.Connected -> {
                     espBleApi?.deviceDescriptor?.let {
-                        currentWifi?.let {
-                            resumeConnection(pickedWifiCredentials!!, pickedWifiPassword!!, espBleApi)
+                        config.wifi.ssid?.let {
+                            resumeConnection(it, config.wifi.bssid ?: "", config.wifi.pwd ?: "", espBleApi)
                         } ?: kotlin.run {
                             refreshWifiList(it)
                         }
@@ -154,17 +148,28 @@ class MassProvisioning(val context: Context, var config: Config) :
                 EspPairingEvent.RebootedToFactory -> {
                     bleApis.remove(espBleApi)
                     if (bleApis.isEmpty()) {
-                        scan()
+                        startMassProvision()
                     }
                 }
                 else -> {
 
                 }
             }
-            listener?.onEvent(result.result, espBleApi?.deviceDescriptor?.mac)
+            eventsHandler?.onEvent(result.result, espBleApi?.deviceDescriptor?.mac)
         } else {
             bleApis.remove(espBleApi)
-            listener?.onFinish(Result(result.throwable))
+            val error = result.throwable as EspPairingException
+            when (error.errorCode) {
+                3011 -> {
+                    espBleApi?.let { api ->
+                        scanWifi(api) {
+                            eventsHandler?.onWifiCredentialsFail(it)
+                        }
+                    }
+
+                }
+            }
+            eventsHandler?.onError(error)
         }
     }
 

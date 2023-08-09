@@ -6,6 +6,7 @@ import com.walabot.home.ble.Message
 import com.walabot.home.ble.Message.ToAppMessage2
 import com.walabot.home.ble.Message.WifiCredResult3
 import com.walabot.home.ble.pairing.Gen2CloudOptions
+import com.walabot.home.ble.sdk.Config
 
 class ProtobufMessagesV3 : ProtocolMediator {
     override fun wifiCredentials(
@@ -20,11 +21,11 @@ class ProtobufMessagesV3 : ProtocolMediator {
             .build()
     }
 
-    override fun cloudDetails(cloudOptions: Gen2CloudOptions?): GeneratedMessageV3? {
+    override fun cloudDetails(cloudOptions: Config): GeneratedMessageV3? {
         return Message.CloudDetails2.newBuilder()
-            .setHttpUrl(cloudOptions?.params?.cloudBaseUrl)
-            .setProjectId(cloudOptions?.params?.cloudProjectId)
-            .setNtpUrl(cloudOptions!!.ntpUrl)
+            .setHttpUrl(cloudOptions.url)
+            .setProjectId(cloudOptions.cloud.name)
+            .setNtpUrl(cloudOptions.mqtt.ntpUrl)
             .build()
     }
 

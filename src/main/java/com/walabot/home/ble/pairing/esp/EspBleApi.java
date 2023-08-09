@@ -282,13 +282,13 @@ public class EspBleApi implements EspApi {
     }
 
     @Override
-    public void sendCloudDetails(Gen2CloudOptions gen2CloudOptions, EspAPICallback<Void> cb) {
+    public void sendCloudDetails(Config config, EspAPICallback<Void> cb) {
         if (_espBleImpl.messageImpl == null) {
             cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
             return;
         }
 
-        GeneratedMessageV3 message = _espBleImpl.messageImpl.cloudDetails(gen2CloudOptions);
+        GeneratedMessageV3 message = _espBleImpl.messageImpl.cloudDetails(config);
         _espBleImpl.sendMessage(Message.ToDeviceMessageType.CLOUD_CONNECT, message, (opResult) ->
         {
             ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());

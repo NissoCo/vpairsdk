@@ -7,6 +7,7 @@ import com.google.protobuf.Parser
 import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.Message.*
 import com.walabot.home.ble.pairing.Gen2CloudOptions
+import com.walabot.home.ble.sdk.Config
 
 interface EspApi {
     //	void connect(byte[] apSsid, byte[] apBssid, byte[] apPassword, EspAPICallback<WalabotDeviceDesc> cb);
@@ -23,7 +24,7 @@ interface EspApi {
         cb: EspAPICallback<WalabotDeviceDesc?>?
     )
 
-    fun sendCloudDetails(cloudOptions: Gen2CloudOptions?, cb: EspAPICallback<Void?>?)
+    fun sendCloudDetails(config: Config, cb: EspAPICallback<Void?>?)
     fun pair(hostAddress: String?, uid: String?, callback: EspAPICallback<EspPairingResponse?>?)
     fun notifyPairingComplete(
         hostAddress: String?,

@@ -4,6 +4,7 @@ import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.walabot.home.ble.Message;
 import com.walabot.home.ble.pairing.Gen2CloudOptions;
+import com.walabot.home.ble.sdk.Config;
 
 public class ProtobufMessagesV1 implements ProtocolMediator
 {
@@ -17,20 +18,20 @@ public class ProtobufMessagesV1 implements ProtocolMediator
 	}
 
 	@Override
-	public GeneratedMessageV3 cloudDetails(Gen2CloudOptions cloudOptions)
+	public GeneratedMessageV3 cloudDetails(Config cloudOptions)
 	{
 		return Message.CloudDetails.newBuilder()
-				.setHttpUrl(cloudOptions.getParams().getCloudBaseUrl())
-				.setMqttUri(cloudOptions.getParams().getMqttUrl())
-				.setMqttPort(cloudOptions.getParams().getMqttPort())
-				.setProjectId(cloudOptions.getParams().getCloudProjectId())
-				.setNtpUrl(cloudOptions.getNtpUrl())
-				.setCloudType(Message.CLOUD_TYPE.GOOLE_CLOUD)
-				.setCloudRegistry(cloudOptions.getMqttRegistryId())
-				.setCloudRegion(cloudOptions.getParams().getCloudRegion())
-				.setMqttUsername(cloudOptions.getMqttUserName())
-				.setMqttPassword(cloudOptions.getMqttPassword())
-				.setMqttClientId(cloudOptions.getMqttClientId())
+				.setHttpUrl(cloudOptions.getUrl())
+				.setMqttUri(cloudOptions.getMqtt().getHostUrl())
+				.setMqttPort(cloudOptions.getMqtt().getPort())
+				.setProjectId(cloudOptions.getCloud().getName())
+				.setNtpUrl(cloudOptions.getMqtt().getNtpUrl())
+				.setCloudType(cloudOptions.getCloud().getType())
+				.setCloudRegistry(cloudOptions.getCloud().getRegistryId())
+				.setCloudRegion(cloudOptions.getCloud().getRegion())
+				.setMqttUsername(cloudOptions.getMqtt().getUserName())
+				.setMqttPassword(cloudOptions.getMqtt().getPwd())
+				.setMqttClientId(cloudOptions.getMqtt().getClientId())
 				.build();
 	}
 

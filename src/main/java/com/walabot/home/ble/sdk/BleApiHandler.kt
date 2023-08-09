@@ -22,8 +22,8 @@ fun EspBleApi.connect(bleDevice: BleDevice) {
     })
 }
 
-fun EspBleApi.sendCloudDetails(wifiDetails: EspWifiItem, password: String) {
-    if (wifiDetails.ssid.isEmpty()) {
+fun EspBleApi.sendCloudDetails(ssid: String, bssid: String, password: String) {
+    if (ssid.isEmpty()) {
         callback.onResult(Result(Throwable("SSID can't be empty")), this)
         return
     }
@@ -33,8 +33,8 @@ fun EspBleApi.sendCloudDetails(wifiDetails: EspWifiItem, password: String) {
     }
     callback.onResult(Result(EspPairingEvent.SendingCloudDetails), this)
     sendWifiCredentials(
-        wifiDetails.ssid.convert(),
-        wifiDetails.bssid.convert(),
+        ssid.convert(),
+        bssid.convert(),
         password.convert(), object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
             override fun onSuccess(obj: WalabotDeviceDesc?) {
                 obj?.let {
@@ -50,12 +50,10 @@ fun EspBleApi.sendCloudDetails(wifiDetails: EspWifiItem, password: String) {
 }
 
 private fun EspBleApi.updateCloud(deviceDesc: WalabotDeviceDesc) {
-    val options = Gen2CloudOptions()
-    options.params = cloudCredentials.cloudParams
-    sendCloudDetails(options, object : EspApi.EspAPICallback<Void?> {
+    sendCloudDetails(config, object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
             callback.onResult(Result(EspPairingEvent.SentCloudDetails), this@updateCloud)
-            if (cloudCredentials.updateCloud) {
+            if (config.updateCloud) {
                 pair(deviceDesc.host ?: "")
             } else {
                 reboot()
@@ -70,10 +68,10 @@ private fun EspBleApi.updateCloud(deviceDesc: WalabotDeviceDesc) {
 
 private fun EspBleApi.pair(host: String) {
     callback.onResult(Result(EspPairingEvent.Pairing), null)
-    pair(host, cloudCredentials.userId, object : EspApi.EspAPICallback<EspPairingResponse?> {
+    pair(host, config.userId, object : EspApi.EspAPICallback<EspPairingResponse?> {
         override fun onSuccess(obj: EspPairingResponse?) {
             callback.onResult(Result(EspPairingEvent.Paired), this@pair)
-            if (cloudCredentials.updateCloud) {
+            if (config.updateCloud) {
                 performParingWithCloud(host, obj?.code)
             } else {
                 notifyPairingComplete(host, obj?.code!!)
@@ -89,7 +87,7 @@ private fun EspBleApi.pair(host: String) {
 private fun EspBleApi.performParingWithCloud(host: String, code: String?) {
     callback.onResult(Result(EspPairingEvent.StagePairWithCloud), this)
     code?.let { it1 ->
-        Connection().pairing(code, cloudCredentials.idToken!!) {
+        Connection().pairing(code, config.token!!) {
             if (it.isSuccess) {
                 callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), this)
                 notifyPairingComplete(host, it1)
@@ -101,7 +99,7 @@ private fun EspBleApi.performParingWithCloud(host: String, code: String?) {
 }
 
 private fun EspBleApi.notifyPairingComplete(host: String, code: String) {
-    notifyPairingComplete(host, cloudCredentials.userId, code, object : EspApi.EspAPICallback<Void?> {
+    notifyPairingComplete(host, config.userId, code, object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
             callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), this@notifyPairingComplete)
             reboot()
