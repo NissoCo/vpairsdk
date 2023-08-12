@@ -102,7 +102,7 @@ class MassProvisioning(val context: Context, var config: Config) :
     }
 
     private fun refreshWifiList(walabotDeviceDesc: WalabotDeviceDesc) {
-        eventsHandler?.onEvent(EspPairingEvent.WifiScan)
+        eventsHandler?.onEvent(EspPairingEvent.WifiScan, false, EspPairingEvent.WifiScan.name, bleApis.first().devInfo, bleApis.first().deviceDescriptor?.mac ?: "")
         scanWifi(bleApis.first()) {
             eventsHandler?.shouldSelect(it)
         }
@@ -155,7 +155,8 @@ class MassProvisioning(val context: Context, var config: Config) :
 
                 }
             }
-            eventsHandler?.onEvent(result.result, espBleApi?.deviceDescriptor?.mac)
+            val message = if (result.isSuccessfull) result.result.name else result.throwable.message ?: ""
+            eventsHandler?.onEvent(result.result, !result.isSuccessfull, message, espBleApi?.devInfo, espBleApi?.deviceDescriptor?.mac ?: "")
         } else {
             bleApis.remove(espBleApi)
             val error = result.throwable as EspPairingException

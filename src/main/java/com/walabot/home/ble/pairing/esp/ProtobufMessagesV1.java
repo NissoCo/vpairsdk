@@ -1,9 +1,10 @@
 package com.walabot.home.ble.pairing.esp;
 
+import androidx.annotation.Nullable;
+
 import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.walabot.home.ble.Message;
-import com.walabot.home.ble.pairing.Gen2CloudOptions;
 import com.walabot.home.ble.sdk.Config;
 
 public class ProtobufMessagesV1 implements ProtocolMediator
@@ -151,6 +152,12 @@ public class ProtobufMessagesV1 implements ProtocolMediator
 	@Override
 	public WifiScanResult parseWifiScanResult(byte[] data) {
 		//ignored
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public Message.DevInfo parseDevInfoResult(@Nullable byte[] data) {
 		return null;
 	}
 }

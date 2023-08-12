@@ -1,5 +1,6 @@
 package com.walabot.home.ble.sdk
 
+import com.walabot.home.ble.Message.DevInfo
 import com.walabot.home.ble.Result
 import com.walabot.home.ble.device.DeviceInfo
 
@@ -61,7 +62,7 @@ interface PairingEvents {
         event: EspPairingEvent,
         isError: Boolean,
         message: String,
-        deviceInfo: DeviceInfo,
+        deviceInfo: DevInfo?,
         deviceId: String)
     fun shouldSelect(wifiList: List<EspWifiItem>)
     fun onMissingPermission(permission: String)

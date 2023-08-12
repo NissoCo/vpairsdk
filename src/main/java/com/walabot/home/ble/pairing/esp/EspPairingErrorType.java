@@ -13,7 +13,8 @@ public enum EspPairingErrorType
 	OTA_CHECK_FAILED("Failed to check for OTA"),
 	FAILED_TO_PERFORM_OTA("Failed to perform OTA"),
 	OPERATIONAL_REBOOT_FAILED("Failed to perform operational reboot"),
-	FACTORY_REBOOT_FAILED("Failed to perform factory reboot");
+	FACTORY_REBOOT_FAILED("Failed to perform factory reboot"),
+	COMMIT_PROVISION_FAILED("Failed to perform commit provision");
 
 	private final String _message;
 

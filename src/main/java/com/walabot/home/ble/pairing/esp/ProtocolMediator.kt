@@ -1,7 +1,8 @@
 package com.walabot.home.ble.pairing.esp
 
 import com.google.protobuf.GeneratedMessageV3
-import com.walabot.home.ble.Message.AP
+import com.walabot.home.ble.Message.AccessPoint
+import com.walabot.home.ble.Message.DevInfo
 import com.walabot.home.ble.sdk.Config
 
 interface ProtocolMediator {
@@ -18,6 +19,7 @@ interface ProtocolMediator {
     fun parseWifiResult(data: ByteArray?): WifiResult?
     fun parsePairResult(data: ByteArray?): PairResult?
     fun parseWifiScanResult(data: ByteArray?): WifiScanResult?
+    fun parseDevInfoResult(data: ByteArray?): DevInfo?
     open class MessageResult {
         var result = 0
 
@@ -37,6 +39,6 @@ interface ProtocolMediator {
     }
 
     class WifiScanResult : MessageResult() {
-        var accessPoints: List<AP>? = null
+        var accessPoints: List<AccessPoint>? = null
     }
 }

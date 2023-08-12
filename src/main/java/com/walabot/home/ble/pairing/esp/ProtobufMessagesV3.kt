@@ -3,9 +3,9 @@ package com.walabot.home.ble.pairing.esp
 import com.google.protobuf.GeneratedMessageV3
 import com.google.protobuf.InvalidProtocolBufferException
 import com.walabot.home.ble.Message
+import com.walabot.home.ble.Message.DevInfo
 import com.walabot.home.ble.Message.ToAppMessage2
 import com.walabot.home.ble.Message.WifiCredResult3
-import com.walabot.home.ble.pairing.Gen2CloudOptions
 import com.walabot.home.ble.sdk.Config
 
 class ProtobufMessagesV3 : ProtocolMediator {
@@ -128,5 +128,13 @@ class ProtobufMessagesV3 : ProtocolMediator {
             e.printStackTrace()
         }
         return null
+    }
+
+    override fun parseDevInfoResult(data: ByteArray?): DevInfo? {
+        return try {
+            DevInfo.parseFrom(data)
+        } catch (exp: Exception) {
+            null
+        }
     }
 }

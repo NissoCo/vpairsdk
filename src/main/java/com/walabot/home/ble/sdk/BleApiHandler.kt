@@ -115,7 +115,7 @@ private fun EspBleApi.reboot() {
     callback.onResult(Result(EspPairingEvent.Rebooting), this)
     reboot(object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
-            callback.onResult(Result(EspPairingEvent.Rebooted), this@reboot)
+            callback.onResult(Result(EspPairingEvent.RebootedToFactory), this@reboot)
             rebootToFactory()
         }
 
@@ -126,7 +126,7 @@ private fun EspBleApi.reboot() {
 }
 
 private fun EspBleApi.rebootToFactory() {
-    callback.onResult(Result(EspPairingEvent.RebootingToFactory), this)
+    callback.onResult(Result(EspPairingEvent.Rebooting), this)
     rebootToFactory(object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
             callback.onResult(Result(EspPairingEvent.RebootedToFactory), this@rebootToFactory)

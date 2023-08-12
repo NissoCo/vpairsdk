@@ -55,6 +55,18 @@ public final class Message {
      * <code>DO_WIFI_SCAN = 8;</code>
      */
     DO_WIFI_SCAN(8),
+    /**
+     * <code>IM_HERE = 9;</code>
+     */
+    IM_HERE(9),
+    /**
+     * <code>COMMIT_PROVISION = 10;</code>
+     */
+    COMMIT_PROVISION(10),
+    /**
+     * <code>GET_DEV_INFO = 11;</code>
+     */
+    GET_DEV_INFO(11),
     UNRECOGNIZED(-1),
     ;
 
@@ -94,6 +106,18 @@ public final class Message {
      * <code>DO_WIFI_SCAN = 8;</code>
      */
     public static final int DO_WIFI_SCAN_VALUE = 8;
+    /**
+     * <code>IM_HERE = 9;</code>
+     */
+    public static final int IM_HERE_VALUE = 9;
+    /**
+     * <code>COMMIT_PROVISION = 10;</code>
+     */
+    public static final int COMMIT_PROVISION_VALUE = 10;
+    /**
+     * <code>GET_DEV_INFO = 11;</code>
+     */
+    public static final int GET_DEV_INFO_VALUE = 11;
 
 
     public final int getNumber() {
@@ -129,6 +153,9 @@ public final class Message {
         case 6: return DO_REBOOT_FACTORY;
         case 7: return DO_REBOOT_OPERATIONAL;
         case 8: return DO_WIFI_SCAN;
+        case 9: return IM_HERE;
+        case 10: return COMMIT_PROVISION;
+        case 11: return GET_DEV_INFO;
         default: return null;
       }
     }
@@ -139,11 +166,7 @@ public final class Message {
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
             ToDeviceMessageType> internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ToDeviceMessageType>() {
-              public ToDeviceMessageType findValueByNumber(int number) {
-                return ToDeviceMessageType.forNumber(number);
-              }
-            };
+            number -> ToDeviceMessageType.forNumber(number);
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
     getValueDescriptor() {
@@ -159,7 +182,7 @@ public final class Message {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
     getDescriptor() {
-      return Message.getDescriptor().getEnumTypes().get(0);
+      return com.walabot.home.ble.Message.getDescriptor().getEnumTypes().get(0);
     }
 
     private static final ToDeviceMessageType[] VALUES = values();
@@ -218,6 +241,14 @@ public final class Message {
      * <code>AP_SCAN_RESULT = 6;</code>
      */
     AP_SCAN_RESULT(6),
+    /**
+     * <code>DEV_INFO_RESULT = 7;</code>
+     */
+    DEV_INFO_RESULT(7),
+    /**
+     * <code>GENERIC_RESULT = 99;</code>
+     */
+    GENERIC_RESULT(99),
     UNRECOGNIZED(-1),
     ;
 
@@ -249,6 +280,14 @@ public final class Message {
      * <code>AP_SCAN_RESULT = 6;</code>
      */
     public static final int AP_SCAN_RESULT_VALUE = 6;
+    /**
+     * <code>DEV_INFO_RESULT = 7;</code>
+     */
+    public static final int DEV_INFO_RESULT_VALUE = 7;
+    /**
+     * <code>GENERIC_RESULT = 99;</code>
+     */
+    public static final int GENERIC_RESULT_VALUE = 99;
 
 
     public final int getNumber() {
@@ -282,6 +321,8 @@ public final class Message {
         case 4: return DO_REBOOT_RESULT;
         case 5: return PERFORM_OTA_RESULT;
         case 6: return AP_SCAN_RESULT;
+        case 7: return DEV_INFO_RESULT;
+        case 99: return GENERIC_RESULT;
         default: return null;
       }
     }
@@ -312,7 +353,7 @@ public final class Message {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
     getDescriptor() {
-      return Message.getDescriptor().getEnumTypes().get(1);
+      return com.walabot.home.ble.Message.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final ToAppMessageType[] VALUES = values();
@@ -510,7 +551,7 @@ public final class Message {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
     getDescriptor() {
-      return Message.getDescriptor().getEnumTypes().get(2);
+      return com.walabot.home.ble.Message.getDescriptor().getEnumTypes().get(2);
     }
 
     private static final ToAppResultType[] VALUES = values();
@@ -636,7 +677,7 @@ public final class Message {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
     getDescriptor() {
-      return Message.getDescriptor().getEnumTypes().get(3);
+      return com.walabot.home.ble.Message.getDescriptor().getEnumTypes().get(3);
     }
 
     private static final CLOUD_TYPE[] VALUES = values();
@@ -684,6 +725,10 @@ public final class Message {
      */
     BLE_SIZE_ERROR(2),
     /**
+     * <code>CLOUD_NOT_REACHABLE = 5;</code>
+     */
+    CLOUD_NOT_REACHABLE(5),
+    /**
      * <code>WIFI_CREDENTIALS_ERROR = 11;</code>
      */
     WIFI_CREDENTIALS_ERROR(11),
@@ -695,6 +740,10 @@ public final class Message {
      * <code>WIFI_LOCAL_ONLY = 13;</code>
      */
     WIFI_LOCAL_ONLY(13),
+    /**
+     * <code>WIFI_SCAN_ERROR_TIMEOUT = 14;</code>
+     */
+    WIFI_SCAN_ERROR_TIMEOUT(14),
     /**
      * <code>NTP_SERVER_ERROR = 21;</code>
      */
@@ -719,6 +768,10 @@ public final class Message {
      */
     public static final int BLE_SIZE_ERROR_VALUE = 2;
     /**
+     * <code>CLOUD_NOT_REACHABLE = 5;</code>
+     */
+    public static final int CLOUD_NOT_REACHABLE_VALUE = 5;
+    /**
      * <code>WIFI_CREDENTIALS_ERROR = 11;</code>
      */
     public static final int WIFI_CREDENTIALS_ERROR_VALUE = 11;
@@ -730,6 +783,10 @@ public final class Message {
      * <code>WIFI_LOCAL_ONLY = 13;</code>
      */
     public static final int WIFI_LOCAL_ONLY_VALUE = 13;
+    /**
+     * <code>WIFI_SCAN_ERROR_TIMEOUT = 14;</code>
+     */
+    public static final int WIFI_SCAN_ERROR_TIMEOUT_VALUE = 14;
     /**
      * <code>NTP_SERVER_ERROR = 21;</code>
      */
@@ -767,9 +824,11 @@ public final class Message {
         case 0: return SUCCESS;
         case 1: return INVALID_REQUEST;
         case 2: return BLE_SIZE_ERROR;
+        case 5: return CLOUD_NOT_REACHABLE;
         case 11: return WIFI_CREDENTIALS_ERROR;
         case 12: return LOW_WIFI_SIGNAL;
         case 13: return WIFI_LOCAL_ONLY;
+        case 14: return WIFI_SCAN_ERROR_TIMEOUT;
         case 21: return NTP_SERVER_ERROR;
         case 31: return READING_PAIR_CODE_FAILED;
         default: return null;
@@ -802,7 +861,7 @@ public final class Message {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
     getDescriptor() {
-      return Message.getDescriptor().getEnumTypes().get(4);
+      return com.walabot.home.ble.Message.getDescriptor().getEnumTypes().get(4);
     }
 
     private static final ToAppResultType2[] VALUES = values();
@@ -880,75 +939,22 @@ public final class Message {
       return new WifiCred();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private WifiCred(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ssid_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              pass_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_WifiCred_descriptor;
+      return com.walabot.home.ble.Message.internal_static_WifiCred_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_WifiCred_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_WifiCred_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.WifiCred.class, Message.WifiCred.Builder.class);
+                      com.walabot.home.ble.Message.WifiCred.class, com.walabot.home.ble.Message.WifiCred.Builder.class);
     }
 
     public static final int SSID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object ssid_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object ssid_ = "";
     /**
      * <code>string ssid = 1;</code>
      * @return The ssid.
@@ -986,7 +992,8 @@ public final class Message {
     }
 
     public static final int PASS_FIELD_NUMBER = 2;
-    private volatile java.lang.Object pass_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object pass_ = "";
     /**
      * <code>string pass = 2;</code>
      * @return The pass.
@@ -1043,7 +1050,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(pass_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, pass_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -1058,7 +1065,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(pass_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, pass_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1068,16 +1075,16 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.WifiCred)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.WifiCred)) {
         return super.equals(obj);
       }
-      Message.WifiCred other = (Message.WifiCred) obj;
+      com.walabot.home.ble.Message.WifiCred other = (com.walabot.home.ble.Message.WifiCred) obj;
 
       if (!getSsid()
               .equals(other.getSsid())) return false;
       if (!getPass()
               .equals(other.getPass())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -1092,74 +1099,76 @@ public final class Message {
       hash = (53 * hash) + getSsid().hashCode();
       hash = (37 * hash) + PASS_FIELD_NUMBER;
       hash = (53 * hash) + getPass().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.WifiCred parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCred parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCred parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCred parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCred parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCred parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCred parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.WifiCred parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.WifiCred parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.WifiCred parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.WifiCred parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.WifiCred parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.WifiCred parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.WifiCred parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -1172,7 +1181,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.WifiCred prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.WifiCred prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1193,59 +1202,53 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:WifiCred)
-            Message.WifiCredOrBuilder {
+            com.walabot.home.ble.Message.WifiCredOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_WifiCred_descriptor;
+        return com.walabot.home.ble.Message.internal_static_WifiCred_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_WifiCred_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_WifiCred_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.WifiCred.class, Message.WifiCred.Builder.class);
+                        com.walabot.home.ble.Message.WifiCred.class, com.walabot.home.ble.Message.WifiCred.Builder.class);
       }
 
-      // Construct using Message.WifiCred.newBuilder()
+      // Construct using com.walabot.home.ble.Message.WifiCred.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ssid_ = "";
-
         pass_ = "";
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_WifiCred_descriptor;
+        return com.walabot.home.ble.Message.internal_static_WifiCred_descriptor;
       }
 
       @java.lang.Override
-      public Message.WifiCred getDefaultInstanceForType() {
-        return Message.WifiCred.getDefaultInstance();
+      public com.walabot.home.ble.Message.WifiCred getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.WifiCred.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.WifiCred build() {
-        Message.WifiCred result = buildPartial();
+      public com.walabot.home.ble.Message.WifiCred build() {
+        com.walabot.home.ble.Message.WifiCred result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1253,12 +1256,21 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.WifiCred buildPartial() {
-        Message.WifiCred result = new Message.WifiCred(this);
-        result.ssid_ = ssid_;
-        result.pass_ = pass_;
+      public com.walabot.home.ble.Message.WifiCred buildPartial() {
+        com.walabot.home.ble.Message.WifiCred result = new com.walabot.home.ble.Message.WifiCred(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.WifiCred result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ssid_ = ssid_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.pass_ = pass_;
+        }
       }
 
       @java.lang.Override
@@ -1295,25 +1307,27 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.WifiCred) {
-          return mergeFrom((Message.WifiCred)other);
+        if (other instanceof com.walabot.home.ble.Message.WifiCred) {
+          return mergeFrom((com.walabot.home.ble.Message.WifiCred)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.WifiCred other) {
-        if (other == Message.WifiCred.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.WifiCred other) {
+        if (other == com.walabot.home.ble.Message.WifiCred.getDefaultInstance()) return this;
         if (!other.getSsid().isEmpty()) {
           ssid_ = other.ssid_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getPass().isEmpty()) {
           pass_ = other.pass_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1328,19 +1342,43 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.WifiCred parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ssid_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                pass_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.WifiCred) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object ssid_ = "";
       /**
@@ -1383,11 +1421,9 @@ public final class Message {
        */
       public Builder setSsid(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         ssid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1396,8 +1432,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearSsid() {
-
         ssid_ = getDefaultInstance().getSsid();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -1408,12 +1444,10 @@ public final class Message {
        */
       public Builder setSsidBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         ssid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1459,11 +1493,9 @@ public final class Message {
        */
       public Builder setPass(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         pass_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1472,8 +1504,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearPass() {
-
         pass_ = getDefaultInstance().getPass();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -1484,12 +1516,10 @@ public final class Message {
        */
       public Builder setPassBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         pass_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1510,12 +1540,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:WifiCred)
-    private static final Message.WifiCred DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.WifiCred DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.WifiCred();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.WifiCred();
     }
 
-    public static Message.WifiCred getDefaultInstance() {
+    public static com.walabot.home.ble.Message.WifiCred getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1526,7 +1556,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WifiCred(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -1540,7 +1581,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.WifiCred getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.WifiCred getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1586,73 +1627,21 @@ public final class Message {
       return new WifiCredResult();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private WifiCredResult(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-
-              ip_ = input.readBytes();
-              break;
-            }
-            case 18: {
-
-              mac_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_WifiCredResult_descriptor;
+      return com.walabot.home.ble.Message.internal_static_WifiCredResult_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_WifiCredResult_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_WifiCredResult_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.WifiCredResult.class, Message.WifiCredResult.Builder.class);
+                      com.walabot.home.ble.Message.WifiCredResult.class, com.walabot.home.ble.Message.WifiCredResult.Builder.class);
     }
 
     public static final int IP_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ip_;
+    private com.google.protobuf.ByteString ip_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes ip = 1;</code>
      * @return The ip.
@@ -1663,7 +1652,7 @@ public final class Message {
     }
 
     public static final int MAC_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString mac_;
+    private com.google.protobuf.ByteString mac_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes mac = 2;</code>
      * @return The mac.
@@ -1693,7 +1682,7 @@ public final class Message {
       if (!mac_.isEmpty()) {
         output.writeBytes(2, mac_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -1710,7 +1699,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeBytesSize(2, mac_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -1720,16 +1709,16 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.WifiCredResult)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.WifiCredResult)) {
         return super.equals(obj);
       }
-      Message.WifiCredResult other = (Message.WifiCredResult) obj;
+      com.walabot.home.ble.Message.WifiCredResult other = (com.walabot.home.ble.Message.WifiCredResult) obj;
 
       if (!getIp()
               .equals(other.getIp())) return false;
       if (!getMac()
               .equals(other.getMac())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -1744,74 +1733,76 @@ public final class Message {
       hash = (53 * hash) + getIp().hashCode();
       hash = (37 * hash) + MAC_FIELD_NUMBER;
       hash = (53 * hash) + getMac().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.WifiCredResult parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCredResult parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCredResult parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCredResult parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCredResult parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCredResult parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCredResult parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.WifiCredResult parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.WifiCredResult parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.WifiCredResult parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.WifiCredResult parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.WifiCredResult parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.WifiCredResult parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.WifiCredResult parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -1824,7 +1815,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.WifiCredResult prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.WifiCredResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1845,59 +1836,53 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:WifiCredResult)
-            Message.WifiCredResultOrBuilder {
+            com.walabot.home.ble.Message.WifiCredResultOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_WifiCredResult_descriptor;
+        return com.walabot.home.ble.Message.internal_static_WifiCredResult_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_WifiCredResult_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_WifiCredResult_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.WifiCredResult.class, Message.WifiCredResult.Builder.class);
+                        com.walabot.home.ble.Message.WifiCredResult.class, com.walabot.home.ble.Message.WifiCredResult.Builder.class);
       }
 
-      // Construct using Message.WifiCredResult.newBuilder()
+      // Construct using com.walabot.home.ble.Message.WifiCredResult.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ip_ = com.google.protobuf.ByteString.EMPTY;
-
         mac_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_WifiCredResult_descriptor;
+        return com.walabot.home.ble.Message.internal_static_WifiCredResult_descriptor;
       }
 
       @java.lang.Override
-      public Message.WifiCredResult getDefaultInstanceForType() {
-        return Message.WifiCredResult.getDefaultInstance();
+      public com.walabot.home.ble.Message.WifiCredResult getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.WifiCredResult.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.WifiCredResult build() {
-        Message.WifiCredResult result = buildPartial();
+      public com.walabot.home.ble.Message.WifiCredResult build() {
+        com.walabot.home.ble.Message.WifiCredResult result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1905,12 +1890,21 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.WifiCredResult buildPartial() {
-        Message.WifiCredResult result = new Message.WifiCredResult(this);
-        result.ip_ = ip_;
-        result.mac_ = mac_;
+      public com.walabot.home.ble.Message.WifiCredResult buildPartial() {
+        com.walabot.home.ble.Message.WifiCredResult result = new com.walabot.home.ble.Message.WifiCredResult(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.WifiCredResult result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ip_ = ip_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.mac_ = mac_;
+        }
       }
 
       @java.lang.Override
@@ -1947,23 +1941,23 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.WifiCredResult) {
-          return mergeFrom((Message.WifiCredResult)other);
+        if (other instanceof com.walabot.home.ble.Message.WifiCredResult) {
+          return mergeFrom((com.walabot.home.ble.Message.WifiCredResult)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.WifiCredResult other) {
-        if (other == Message.WifiCredResult.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.WifiCredResult other) {
+        if (other == com.walabot.home.ble.Message.WifiCredResult.getDefaultInstance()) return this;
         if (other.getIp() != com.google.protobuf.ByteString.EMPTY) {
           setIp(other.getIp());
         }
         if (other.getMac() != com.google.protobuf.ByteString.EMPTY) {
           setMac(other.getMac());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -1978,19 +1972,43 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.WifiCredResult parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ip_ = input.readBytes();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                mac_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.WifiCredResult) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private com.google.protobuf.ByteString ip_ = com.google.protobuf.ByteString.EMPTY;
       /**
@@ -2007,11 +2025,9 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setIp(com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         ip_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -2020,7 +2036,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearIp() {
-
+        bitField0_ = (bitField0_ & ~0x00000001);
         ip_ = getDefaultInstance().getIp();
         onChanged();
         return this;
@@ -2041,11 +2057,9 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setMac(com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         mac_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -2054,7 +2068,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearMac() {
-
+        bitField0_ = (bitField0_ & ~0x00000002);
         mac_ = getDefaultInstance().getMac();
         onChanged();
         return this;
@@ -2076,12 +2090,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:WifiCredResult)
-    private static final Message.WifiCredResult DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.WifiCredResult DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.WifiCredResult();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.WifiCredResult();
     }
 
-    public static Message.WifiCredResult getDefaultInstance() {
+    public static com.walabot.home.ble.Message.WifiCredResult getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2092,7 +2106,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WifiCredResult(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -2106,7 +2131,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.WifiCredResult getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.WifiCredResult getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2215,7 +2240,7 @@ public final class Message {
      * <code>.CLOUD_TYPE cloud_type = 9;</code>
      * @return The cloudType.
      */
-    Message.CLOUD_TYPE getCloudType();
+    com.walabot.home.ble.Message.CLOUD_TYPE getCloudType();
 
     /**
      * <code>string cloud_region = 10;</code>
@@ -2273,128 +2298,22 @@ public final class Message {
       return new CloudDetails();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private CloudDetails(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              projectId_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              httpUrl_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              mqttUri_ = s;
-              break;
-            }
-            case 32: {
-
-              mqttPort_ = input.readInt32();
-              break;
-            }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ntpUrl_ = s;
-              break;
-            }
-            case 50: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              mqttClientId_ = s;
-              break;
-            }
-            case 58: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              mqttUsername_ = s;
-              break;
-            }
-            case 66: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              mqttPassword_ = s;
-              break;
-            }
-            case 72: {
-              int rawValue = input.readEnum();
-
-              cloudType_ = rawValue;
-              break;
-            }
-            case 82: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              cloudRegion_ = s;
-              break;
-            }
-            case 90: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              cloudRegistry_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_CloudDetails_descriptor;
+      return com.walabot.home.ble.Message.internal_static_CloudDetails_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_CloudDetails_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_CloudDetails_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.CloudDetails.class, Message.CloudDetails.Builder.class);
+                      com.walabot.home.ble.Message.CloudDetails.class, com.walabot.home.ble.Message.CloudDetails.Builder.class);
     }
 
     public static final int PROJECT_ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object projectId_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object projectId_ = "";
     /**
      * <code>string project_id = 1;</code>
      * @return The projectId.
@@ -2432,7 +2351,8 @@ public final class Message {
     }
 
     public static final int HTTP_URL_FIELD_NUMBER = 2;
-    private volatile java.lang.Object httpUrl_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object httpUrl_ = "";
     /**
      * <code>string http_url = 2;</code>
      * @return The httpUrl.
@@ -2470,7 +2390,8 @@ public final class Message {
     }
 
     public static final int MQTT_URI_FIELD_NUMBER = 3;
-    private volatile java.lang.Object mqttUri_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object mqttUri_ = "";
     /**
      * <code>string mqtt_uri = 3;</code>
      * @return The mqttUri.
@@ -2508,7 +2429,7 @@ public final class Message {
     }
 
     public static final int MQTT_PORT_FIELD_NUMBER = 4;
-    private int mqttPort_;
+    private int mqttPort_ = 0;
     /**
      * <code>int32 mqtt_port = 4;</code>
      * @return The mqttPort.
@@ -2519,7 +2440,8 @@ public final class Message {
     }
 
     public static final int NTP_URL_FIELD_NUMBER = 5;
-    private volatile java.lang.Object ntpUrl_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object ntpUrl_ = "";
     /**
      * <code>string ntp_url = 5;</code>
      * @return The ntpUrl.
@@ -2557,7 +2479,8 @@ public final class Message {
     }
 
     public static final int MQTT_CLIENT_ID_FIELD_NUMBER = 6;
-    private volatile java.lang.Object mqttClientId_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object mqttClientId_ = "";
     /**
      * <code>string mqtt_client_id = 6;</code>
      * @return The mqttClientId.
@@ -2595,7 +2518,8 @@ public final class Message {
     }
 
     public static final int MQTT_USERNAME_FIELD_NUMBER = 7;
-    private volatile java.lang.Object mqttUsername_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object mqttUsername_ = "";
     /**
      * <code>string mqtt_username = 7;</code>
      * @return The mqttUsername.
@@ -2633,7 +2557,8 @@ public final class Message {
     }
 
     public static final int MQTT_PASSWORD_FIELD_NUMBER = 8;
-    private volatile java.lang.Object mqttPassword_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object mqttPassword_ = "";
     /**
      * <code>string mqtt_password = 8;</code>
      * @return The mqttPassword.
@@ -2671,7 +2596,7 @@ public final class Message {
     }
 
     public static final int CLOUD_TYPE_FIELD_NUMBER = 9;
-    private int cloudType_;
+    private int cloudType_ = 0;
     /**
      * <code>.CLOUD_TYPE cloud_type = 9;</code>
      * @return The enum numeric value on the wire for cloudType.
@@ -2683,14 +2608,14 @@ public final class Message {
      * <code>.CLOUD_TYPE cloud_type = 9;</code>
      * @return The cloudType.
      */
-    @java.lang.Override public Message.CLOUD_TYPE getCloudType() {
-      @SuppressWarnings("deprecation")
-      Message.CLOUD_TYPE result = Message.CLOUD_TYPE.valueOf(cloudType_);
-      return result == null ? Message.CLOUD_TYPE.UNRECOGNIZED : result;
+    @java.lang.Override public com.walabot.home.ble.Message.CLOUD_TYPE getCloudType() {
+      com.walabot.home.ble.Message.CLOUD_TYPE result = com.walabot.home.ble.Message.CLOUD_TYPE.forNumber(cloudType_);
+      return result == null ? com.walabot.home.ble.Message.CLOUD_TYPE.UNRECOGNIZED : result;
     }
 
     public static final int CLOUD_REGION_FIELD_NUMBER = 10;
-    private volatile java.lang.Object cloudRegion_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object cloudRegion_ = "";
     /**
      * <code>string cloud_region = 10;</code>
      * @return The cloudRegion.
@@ -2728,7 +2653,8 @@ public final class Message {
     }
 
     public static final int CLOUD_REGISTRY_FIELD_NUMBER = 11;
-    private volatile java.lang.Object cloudRegistry_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object cloudRegistry_ = "";
     /**
      * <code>string cloud_registry = 11;</code>
      * @return The cloudRegistry.
@@ -2803,7 +2729,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(mqttPassword_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 8, mqttPassword_);
       }
-      if (cloudType_ != Message.CLOUD_TYPE.CUSTOM.getNumber()) {
+      if (cloudType_ != com.walabot.home.ble.Message.CLOUD_TYPE.CUSTOM.getNumber()) {
         output.writeEnum(9, cloudType_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cloudRegion_)) {
@@ -2812,7 +2738,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cloudRegistry_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 11, cloudRegistry_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -2846,7 +2772,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(mqttPassword_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, mqttPassword_);
       }
-      if (cloudType_ != Message.CLOUD_TYPE.CUSTOM.getNumber()) {
+      if (cloudType_ != com.walabot.home.ble.Message.CLOUD_TYPE.CUSTOM.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
                 .computeEnumSize(9, cloudType_);
       }
@@ -2856,7 +2782,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cloudRegistry_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, cloudRegistry_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -2866,10 +2792,10 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.CloudDetails)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.CloudDetails)) {
         return super.equals(obj);
       }
-      Message.CloudDetails other = (Message.CloudDetails) obj;
+      com.walabot.home.ble.Message.CloudDetails other = (com.walabot.home.ble.Message.CloudDetails) obj;
 
       if (!getProjectId()
               .equals(other.getProjectId())) return false;
@@ -2892,7 +2818,7 @@ public final class Message {
               .equals(other.getCloudRegion())) return false;
       if (!getCloudRegistry()
               .equals(other.getCloudRegistry())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -2925,74 +2851,76 @@ public final class Message {
       hash = (53 * hash) + getCloudRegion().hashCode();
       hash = (37 * hash) + CLOUD_REGISTRY_FIELD_NUMBER;
       hash = (53 * hash) + getCloudRegistry().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.CloudDetails parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.CloudDetails parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.CloudDetails parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.CloudDetails parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.CloudDetails parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.CloudDetails parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.CloudDetails parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.CloudDetails parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.CloudDetails parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.CloudDetails parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.CloudDetails parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.CloudDetails parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.CloudDetails parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.CloudDetails parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -3005,7 +2933,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.CloudDetails prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.CloudDetails prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -3026,77 +2954,62 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:CloudDetails)
-            Message.CloudDetailsOrBuilder {
+            com.walabot.home.ble.Message.CloudDetailsOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_CloudDetails_descriptor;
+        return com.walabot.home.ble.Message.internal_static_CloudDetails_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_CloudDetails_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_CloudDetails_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.CloudDetails.class, Message.CloudDetails.Builder.class);
+                        com.walabot.home.ble.Message.CloudDetails.class, com.walabot.home.ble.Message.CloudDetails.Builder.class);
       }
 
-      // Construct using Message.CloudDetails.newBuilder()
+      // Construct using com.walabot.home.ble.Message.CloudDetails.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         projectId_ = "";
-
         httpUrl_ = "";
-
         mqttUri_ = "";
-
         mqttPort_ = 0;
-
         ntpUrl_ = "";
-
         mqttClientId_ = "";
-
         mqttUsername_ = "";
-
         mqttPassword_ = "";
-
         cloudType_ = 0;
-
         cloudRegion_ = "";
-
         cloudRegistry_ = "";
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_CloudDetails_descriptor;
+        return com.walabot.home.ble.Message.internal_static_CloudDetails_descriptor;
       }
 
       @java.lang.Override
-      public Message.CloudDetails getDefaultInstanceForType() {
-        return Message.CloudDetails.getDefaultInstance();
+      public com.walabot.home.ble.Message.CloudDetails getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.CloudDetails.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.CloudDetails build() {
-        Message.CloudDetails result = buildPartial();
+      public com.walabot.home.ble.Message.CloudDetails build() {
+        com.walabot.home.ble.Message.CloudDetails result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -3104,21 +3017,48 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.CloudDetails buildPartial() {
-        Message.CloudDetails result = new Message.CloudDetails(this);
-        result.projectId_ = projectId_;
-        result.httpUrl_ = httpUrl_;
-        result.mqttUri_ = mqttUri_;
-        result.mqttPort_ = mqttPort_;
-        result.ntpUrl_ = ntpUrl_;
-        result.mqttClientId_ = mqttClientId_;
-        result.mqttUsername_ = mqttUsername_;
-        result.mqttPassword_ = mqttPassword_;
-        result.cloudType_ = cloudType_;
-        result.cloudRegion_ = cloudRegion_;
-        result.cloudRegistry_ = cloudRegistry_;
+      public com.walabot.home.ble.Message.CloudDetails buildPartial() {
+        com.walabot.home.ble.Message.CloudDetails result = new com.walabot.home.ble.Message.CloudDetails(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.CloudDetails result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.projectId_ = projectId_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.httpUrl_ = httpUrl_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.mqttUri_ = mqttUri_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.mqttPort_ = mqttPort_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.ntpUrl_ = ntpUrl_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.mqttClientId_ = mqttClientId_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.mqttUsername_ = mqttUsername_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.mqttPassword_ = mqttPassword_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.cloudType_ = cloudType_;
+        }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.cloudRegion_ = cloudRegion_;
+        }
+        if (((from_bitField0_ & 0x00000400) != 0)) {
+          result.cloudRegistry_ = cloudRegistry_;
+        }
       }
 
       @java.lang.Override
@@ -3155,26 +3095,29 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.CloudDetails) {
-          return mergeFrom((Message.CloudDetails)other);
+        if (other instanceof com.walabot.home.ble.Message.CloudDetails) {
+          return mergeFrom((com.walabot.home.ble.Message.CloudDetails)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.CloudDetails other) {
-        if (other == Message.CloudDetails.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.CloudDetails other) {
+        if (other == com.walabot.home.ble.Message.CloudDetails.getDefaultInstance()) return this;
         if (!other.getProjectId().isEmpty()) {
           projectId_ = other.projectId_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getHttpUrl().isEmpty()) {
           httpUrl_ = other.httpUrl_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getMqttUri().isEmpty()) {
           mqttUri_ = other.mqttUri_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (other.getMqttPort() != 0) {
@@ -3182,18 +3125,22 @@ public final class Message {
         }
         if (!other.getNtpUrl().isEmpty()) {
           ntpUrl_ = other.ntpUrl_;
+          bitField0_ |= 0x00000010;
           onChanged();
         }
         if (!other.getMqttClientId().isEmpty()) {
           mqttClientId_ = other.mqttClientId_;
+          bitField0_ |= 0x00000020;
           onChanged();
         }
         if (!other.getMqttUsername().isEmpty()) {
           mqttUsername_ = other.mqttUsername_;
+          bitField0_ |= 0x00000040;
           onChanged();
         }
         if (!other.getMqttPassword().isEmpty()) {
           mqttPassword_ = other.mqttPassword_;
+          bitField0_ |= 0x00000080;
           onChanged();
         }
         if (other.cloudType_ != 0) {
@@ -3201,13 +3148,15 @@ public final class Message {
         }
         if (!other.getCloudRegion().isEmpty()) {
           cloudRegion_ = other.cloudRegion_;
+          bitField0_ |= 0x00000200;
           onChanged();
         }
         if (!other.getCloudRegistry().isEmpty()) {
           cloudRegistry_ = other.cloudRegistry_;
+          bitField0_ |= 0x00000400;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -3222,19 +3171,88 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.CloudDetails parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                projectId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                httpUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                mqttUri_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                mqttPort_ = input.readInt32();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              case 42: {
+                ntpUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                mqttClientId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              case 58: {
+                mqttUsername_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 58
+              case 66: {
+                mqttPassword_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 66
+              case 72: {
+                cloudType_ = input.readEnum();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 72
+              case 82: {
+                cloudRegion_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 82
+              case 90: {
+                cloudRegistry_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000400;
+                break;
+              } // case 90
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.CloudDetails) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object projectId_ = "";
       /**
@@ -3277,11 +3295,9 @@ public final class Message {
        */
       public Builder setProjectId(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         projectId_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -3290,8 +3306,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearProjectId() {
-
         projectId_ = getDefaultInstance().getProjectId();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -3302,12 +3318,10 @@ public final class Message {
        */
       public Builder setProjectIdBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         projectId_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -3353,11 +3367,9 @@ public final class Message {
        */
       public Builder setHttpUrl(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         httpUrl_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -3366,8 +3378,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearHttpUrl() {
-
         httpUrl_ = getDefaultInstance().getHttpUrl();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -3378,12 +3390,10 @@ public final class Message {
        */
       public Builder setHttpUrlBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         httpUrl_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -3429,11 +3439,9 @@ public final class Message {
        */
       public Builder setMqttUri(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         mqttUri_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -3442,8 +3450,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearMqttUri() {
-
         mqttUri_ = getDefaultInstance().getMqttUri();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -3454,12 +3462,10 @@ public final class Message {
        */
       public Builder setMqttUriBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         mqttUri_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -3481,6 +3487,7 @@ public final class Message {
       public Builder setMqttPort(int value) {
 
         mqttPort_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -3489,7 +3496,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearMqttPort() {
-
+        bitField0_ = (bitField0_ & ~0x00000008);
         mqttPort_ = 0;
         onChanged();
         return this;
@@ -3536,11 +3543,9 @@ public final class Message {
        */
       public Builder setNtpUrl(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         ntpUrl_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -3549,8 +3554,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearNtpUrl() {
-
         ntpUrl_ = getDefaultInstance().getNtpUrl();
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -3561,12 +3566,10 @@ public final class Message {
        */
       public Builder setNtpUrlBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         ntpUrl_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -3612,11 +3615,9 @@ public final class Message {
        */
       public Builder setMqttClientId(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         mqttClientId_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -3625,8 +3626,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearMqttClientId() {
-
         mqttClientId_ = getDefaultInstance().getMqttClientId();
+        bitField0_ = (bitField0_ & ~0x00000020);
         onChanged();
         return this;
       }
@@ -3637,12 +3638,10 @@ public final class Message {
        */
       public Builder setMqttClientIdBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         mqttClientId_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -3688,11 +3687,9 @@ public final class Message {
        */
       public Builder setMqttUsername(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         mqttUsername_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -3701,8 +3698,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearMqttUsername() {
-
         mqttUsername_ = getDefaultInstance().getMqttUsername();
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -3713,12 +3710,10 @@ public final class Message {
        */
       public Builder setMqttUsernameBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         mqttUsername_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -3764,11 +3759,9 @@ public final class Message {
        */
       public Builder setMqttPassword(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         mqttPassword_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -3777,8 +3770,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearMqttPassword() {
-
         mqttPassword_ = getDefaultInstance().getMqttPassword();
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -3789,12 +3782,10 @@ public final class Message {
        */
       public Builder setMqttPasswordBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         mqttPassword_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -3813,8 +3804,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setCloudTypeValue(int value) {
-
         cloudType_ = value;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -3823,21 +3814,20 @@ public final class Message {
        * @return The cloudType.
        */
       @java.lang.Override
-      public Message.CLOUD_TYPE getCloudType() {
-        @SuppressWarnings("deprecation")
-        Message.CLOUD_TYPE result = Message.CLOUD_TYPE.valueOf(cloudType_);
-        return result == null ? Message.CLOUD_TYPE.UNRECOGNIZED : result;
+      public com.walabot.home.ble.Message.CLOUD_TYPE getCloudType() {
+        com.walabot.home.ble.Message.CLOUD_TYPE result = com.walabot.home.ble.Message.CLOUD_TYPE.forNumber(cloudType_);
+        return result == null ? com.walabot.home.ble.Message.CLOUD_TYPE.UNRECOGNIZED : result;
       }
       /**
        * <code>.CLOUD_TYPE cloud_type = 9;</code>
        * @param value The cloudType to set.
        * @return This builder for chaining.
        */
-      public Builder setCloudType(Message.CLOUD_TYPE value) {
+      public Builder setCloudType(com.walabot.home.ble.Message.CLOUD_TYPE value) {
         if (value == null) {
           throw new NullPointerException();
         }
-
+        bitField0_ |= 0x00000100;
         cloudType_ = value.getNumber();
         onChanged();
         return this;
@@ -3847,7 +3837,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearCloudType() {
-
+        bitField0_ = (bitField0_ & ~0x00000100);
         cloudType_ = 0;
         onChanged();
         return this;
@@ -3894,11 +3884,9 @@ public final class Message {
        */
       public Builder setCloudRegion(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         cloudRegion_ = value;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -3907,8 +3895,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearCloudRegion() {
-
         cloudRegion_ = getDefaultInstance().getCloudRegion();
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
@@ -3919,12 +3907,10 @@ public final class Message {
        */
       public Builder setCloudRegionBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         cloudRegion_ = value;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -3970,11 +3956,9 @@ public final class Message {
        */
       public Builder setCloudRegistry(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         cloudRegistry_ = value;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
@@ -3983,8 +3967,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearCloudRegistry() {
-
         cloudRegistry_ = getDefaultInstance().getCloudRegistry();
+        bitField0_ = (bitField0_ & ~0x00000400);
         onChanged();
         return this;
       }
@@ -3995,12 +3979,10 @@ public final class Message {
        */
       public Builder setCloudRegistryBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         cloudRegistry_ = value;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
@@ -4021,12 +4003,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:CloudDetails)
-    private static final Message.CloudDetails DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.CloudDetails DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.CloudDetails();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.CloudDetails();
     }
 
-    public static Message.CloudDetails getDefaultInstance() {
+    public static com.walabot.home.ble.Message.CloudDetails getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4037,7 +4019,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CloudDetails(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -4051,7 +4044,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.CloudDetails getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.CloudDetails getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4096,69 +4089,22 @@ public final class Message {
       return new Pair();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Pair(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              uid_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_Pair_descriptor;
+      return com.walabot.home.ble.Message.internal_static_Pair_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_Pair_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_Pair_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.Pair.class, Message.Pair.Builder.class);
+                      com.walabot.home.ble.Message.Pair.class, com.walabot.home.ble.Message.Pair.Builder.class);
     }
 
     public static final int UID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object uid_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object uid_ = "";
     /**
      * <code>string uid = 1;</code>
      * @return The uid.
@@ -4212,7 +4158,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uid_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, uid_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -4224,7 +4170,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(uid_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, uid_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -4234,14 +4180,14 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.Pair)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.Pair)) {
         return super.equals(obj);
       }
-      Message.Pair other = (Message.Pair) obj;
+      com.walabot.home.ble.Message.Pair other = (com.walabot.home.ble.Message.Pair) obj;
 
       if (!getUid()
               .equals(other.getUid())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -4254,74 +4200,76 @@ public final class Message {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + UID_FIELD_NUMBER;
       hash = (53 * hash) + getUid().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.Pair parseFrom(
+    public static com.walabot.home.ble.Message.Pair parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.Pair parseFrom(
+    public static com.walabot.home.ble.Message.Pair parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.Pair parseFrom(
+    public static com.walabot.home.ble.Message.Pair parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.Pair parseFrom(
+    public static com.walabot.home.ble.Message.Pair parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.Pair parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.Pair parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.Pair parseFrom(
+    public static com.walabot.home.ble.Message.Pair parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.Pair parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.Pair parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.Pair parseFrom(
+    public static com.walabot.home.ble.Message.Pair parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.Pair parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.Pair parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.Pair parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.Pair parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.Pair parseFrom(
+    public static com.walabot.home.ble.Message.Pair parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.Pair parseFrom(
+    public static com.walabot.home.ble.Message.Pair parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -4334,7 +4282,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.Pair prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.Pair prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -4355,57 +4303,52 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:Pair)
-            Message.PairOrBuilder {
+            com.walabot.home.ble.Message.PairOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_Pair_descriptor;
+        return com.walabot.home.ble.Message.internal_static_Pair_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_Pair_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_Pair_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.Pair.class, Message.Pair.Builder.class);
+                        com.walabot.home.ble.Message.Pair.class, com.walabot.home.ble.Message.Pair.Builder.class);
       }
 
-      // Construct using Message.Pair.newBuilder()
+      // Construct using com.walabot.home.ble.Message.Pair.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         uid_ = "";
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_Pair_descriptor;
+        return com.walabot.home.ble.Message.internal_static_Pair_descriptor;
       }
 
       @java.lang.Override
-      public Message.Pair getDefaultInstanceForType() {
-        return Message.Pair.getDefaultInstance();
+      public com.walabot.home.ble.Message.Pair getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.Pair.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.Pair build() {
-        Message.Pair result = buildPartial();
+      public com.walabot.home.ble.Message.Pair build() {
+        com.walabot.home.ble.Message.Pair result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4413,11 +4356,18 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.Pair buildPartial() {
-        Message.Pair result = new Message.Pair(this);
-        result.uid_ = uid_;
+      public com.walabot.home.ble.Message.Pair buildPartial() {
+        com.walabot.home.ble.Message.Pair result = new com.walabot.home.ble.Message.Pair(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.Pair result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.uid_ = uid_;
+        }
       }
 
       @java.lang.Override
@@ -4454,21 +4404,22 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.Pair) {
-          return mergeFrom((Message.Pair)other);
+        if (other instanceof com.walabot.home.ble.Message.Pair) {
+          return mergeFrom((com.walabot.home.ble.Message.Pair)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.Pair other) {
-        if (other == Message.Pair.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.Pair other) {
+        if (other == com.walabot.home.ble.Message.Pair.getDefaultInstance()) return this;
         if (!other.getUid().isEmpty()) {
           uid_ = other.uid_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -4483,19 +4434,38 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.Pair parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                uid_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.Pair) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object uid_ = "";
       /**
@@ -4538,11 +4508,9 @@ public final class Message {
        */
       public Builder setUid(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         uid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -4551,8 +4519,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearUid() {
-
         uid_ = getDefaultInstance().getUid();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -4563,12 +4531,10 @@ public final class Message {
        */
       public Builder setUidBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         uid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -4589,12 +4555,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:Pair)
-    private static final Message.Pair DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.Pair DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.Pair();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.Pair();
     }
 
-    public static Message.Pair getDefaultInstance() {
+    public static com.walabot.home.ble.Message.Pair getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4605,7 +4571,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Pair(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -4619,14 +4596,14 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.Pair getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.Pair getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface APOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:AP)
+  public interface AccessPointOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:AccessPoint)
           com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -4666,18 +4643,18 @@ public final class Message {
     int getChannel();
   }
   /**
-   * Protobuf type {@code AP}
+   * Protobuf type {@code AccessPoint}
    */
-  public static final class AP extends
+  public static final class AccessPoint extends
           com.google.protobuf.GeneratedMessageV3 implements
-          // @@protoc_insertion_point(message_implements:AP)
-          APOrBuilder {
+          // @@protoc_insertion_point(message_implements:AccessPoint)
+          AccessPointOrBuilder {
     private static final long serialVersionUID = 0L;
-    // Use AP.newBuilder() to construct.
-    private AP(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use AccessPoint.newBuilder() to construct.
+    private AccessPoint(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private AP() {
+    private AccessPoint() {
       ssid_ = "";
       bssid_ = "";
     }
@@ -4686,88 +4663,25 @@ public final class Message {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
             UnusedPrivateParameter unused) {
-      return new AP();
+      return new AccessPoint();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private AP(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ssid_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              bssid_ = s;
-              break;
-            }
-            case 24: {
-
-              rssi_ = input.readInt32();
-              break;
-            }
-            case 32: {
-
-              channel_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_AP_descriptor;
+      return com.walabot.home.ble.Message.internal_static_AccessPoint_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_AP_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_AccessPoint_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.AP.class, Message.AP.Builder.class);
+                      com.walabot.home.ble.Message.AccessPoint.class, com.walabot.home.ble.Message.AccessPoint.Builder.class);
     }
 
     public static final int SSID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object ssid_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object ssid_ = "";
     /**
      * <code>string ssid = 1;</code>
      * @return The ssid.
@@ -4805,7 +4719,8 @@ public final class Message {
     }
 
     public static final int BSSID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object bssid_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object bssid_ = "";
     /**
      * <code>string bssid = 2;</code>
      * @return The bssid.
@@ -4843,7 +4758,7 @@ public final class Message {
     }
 
     public static final int RSSI_FIELD_NUMBER = 3;
-    private int rssi_;
+    private int rssi_ = 0;
     /**
      * <code>int32 rssi = 3;</code>
      * @return The rssi.
@@ -4854,7 +4769,7 @@ public final class Message {
     }
 
     public static final int CHANNEL_FIELD_NUMBER = 4;
-    private int channel_;
+    private int channel_ = 0;
     /**
      * <code>int32 channel = 4;</code>
      * @return The channel.
@@ -4890,7 +4805,7 @@ public final class Message {
       if (channel_ != 0) {
         output.writeInt32(4, channel_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -4913,7 +4828,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeInt32Size(4, channel_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -4923,10 +4838,10 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.AP)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.AccessPoint)) {
         return super.equals(obj);
       }
-      Message.AP other = (Message.AP) obj;
+      com.walabot.home.ble.Message.AccessPoint other = (com.walabot.home.ble.Message.AccessPoint) obj;
 
       if (!getSsid()
               .equals(other.getSsid())) return false;
@@ -4936,7 +4851,7 @@ public final class Message {
               != other.getRssi()) return false;
       if (getChannel()
               != other.getChannel()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -4955,74 +4870,76 @@ public final class Message {
       hash = (53 * hash) + getRssi();
       hash = (37 * hash) + CHANNEL_FIELD_NUMBER;
       hash = (53 * hash) + getChannel();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.AP parseFrom(
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.AP parseFrom(
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.AP parseFrom(
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.AP parseFrom(
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.AP parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.AP parseFrom(
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.AP parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.AP parseFrom(
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.AP parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.AccessPoint parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.AP parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.AccessPoint parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.AP parseFrom(
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.AP parseFrom(
+    public static com.walabot.home.ble.Message.AccessPoint parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -5035,7 +4952,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.AP prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.AccessPoint prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -5051,68 +4968,60 @@ public final class Message {
       return builder;
     }
     /**
-     * Protobuf type {@code AP}
+     * Protobuf type {@code AccessPoint}
      */
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:AP)
-            Message.APOrBuilder {
+            // @@protoc_insertion_point(builder_implements:AccessPoint)
+            com.walabot.home.ble.Message.AccessPointOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_AP_descriptor;
+        return com.walabot.home.ble.Message.internal_static_AccessPoint_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_AP_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_AccessPoint_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.AP.class, Message.AP.Builder.class);
+                        com.walabot.home.ble.Message.AccessPoint.class, com.walabot.home.ble.Message.AccessPoint.Builder.class);
       }
 
-      // Construct using Message.AP.newBuilder()
+      // Construct using com.walabot.home.ble.Message.AccessPoint.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ssid_ = "";
-
         bssid_ = "";
-
         rssi_ = 0;
-
         channel_ = 0;
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_AP_descriptor;
+        return com.walabot.home.ble.Message.internal_static_AccessPoint_descriptor;
       }
 
       @java.lang.Override
-      public Message.AP getDefaultInstanceForType() {
-        return Message.AP.getDefaultInstance();
+      public com.walabot.home.ble.Message.AccessPoint getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.AccessPoint.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.AP build() {
-        Message.AP result = buildPartial();
+      public com.walabot.home.ble.Message.AccessPoint build() {
+        com.walabot.home.ble.Message.AccessPoint result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5120,14 +5029,27 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.AP buildPartial() {
-        Message.AP result = new Message.AP(this);
-        result.ssid_ = ssid_;
-        result.bssid_ = bssid_;
-        result.rssi_ = rssi_;
-        result.channel_ = channel_;
+      public com.walabot.home.ble.Message.AccessPoint buildPartial() {
+        com.walabot.home.ble.Message.AccessPoint result = new com.walabot.home.ble.Message.AccessPoint(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.AccessPoint result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ssid_ = ssid_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.bssid_ = bssid_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.rssi_ = rssi_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.channel_ = channel_;
+        }
       }
 
       @java.lang.Override
@@ -5164,22 +5086,24 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.AP) {
-          return mergeFrom((Message.AP)other);
+        if (other instanceof com.walabot.home.ble.Message.AccessPoint) {
+          return mergeFrom((com.walabot.home.ble.Message.AccessPoint)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.AP other) {
-        if (other == Message.AP.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.AccessPoint other) {
+        if (other == com.walabot.home.ble.Message.AccessPoint.getDefaultInstance()) return this;
         if (!other.getSsid().isEmpty()) {
           ssid_ = other.ssid_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getBssid().isEmpty()) {
           bssid_ = other.bssid_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (other.getRssi() != 0) {
@@ -5188,7 +5112,7 @@ public final class Message {
         if (other.getChannel() != 0) {
           setChannel(other.getChannel());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -5203,19 +5127,53 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.AP parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ssid_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                bssid_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                rssi_ = input.readInt32();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 32: {
+                channel_ = input.readInt32();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.AP) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object ssid_ = "";
       /**
@@ -5258,11 +5216,9 @@ public final class Message {
        */
       public Builder setSsid(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         ssid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -5271,8 +5227,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearSsid() {
-
         ssid_ = getDefaultInstance().getSsid();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -5283,12 +5239,10 @@ public final class Message {
        */
       public Builder setSsidBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         ssid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -5334,11 +5288,9 @@ public final class Message {
        */
       public Builder setBssid(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         bssid_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -5347,8 +5299,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearBssid() {
-
         bssid_ = getDefaultInstance().getBssid();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -5359,12 +5311,10 @@ public final class Message {
        */
       public Builder setBssidBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         bssid_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -5386,6 +5336,7 @@ public final class Message {
       public Builder setRssi(int value) {
 
         rssi_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -5394,7 +5345,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearRssi() {
-
+        bitField0_ = (bitField0_ & ~0x00000004);
         rssi_ = 0;
         onChanged();
         return this;
@@ -5417,6 +5368,7 @@ public final class Message {
       public Builder setChannel(int value) {
 
         channel_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -5425,7 +5377,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearChannel() {
-
+        bitField0_ = (bitField0_ & ~0x00000008);
         channel_ = 0;
         onChanged();
         return this;
@@ -5443,41 +5395,52 @@ public final class Message {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:AP)
+      // @@protoc_insertion_point(builder_scope:AccessPoint)
     }
 
-    // @@protoc_insertion_point(class_scope:AP)
-    private static final Message.AP DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:AccessPoint)
+    private static final com.walabot.home.ble.Message.AccessPoint DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.AP();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.AccessPoint();
     }
 
-    public static Message.AP getDefaultInstance() {
+    public static com.walabot.home.ble.Message.AccessPoint getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<AP>
-            PARSER = new com.google.protobuf.AbstractParser<AP>() {
+    private static final com.google.protobuf.Parser<AccessPoint>
+            PARSER = new com.google.protobuf.AbstractParser<AccessPoint>() {
       @java.lang.Override
-      public AP parsePartialFrom(
+      public AccessPoint parsePartialFrom(
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AP(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
-    public static com.google.protobuf.Parser<AP> parser() {
+    public static com.google.protobuf.Parser<AccessPoint> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<AP> getParserForType() {
+    public com.google.protobuf.Parser<AccessPoint> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public Message.AP getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.AccessPoint getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5488,27 +5451,27 @@ public final class Message {
           com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
-    java.util.List<Message.AP>
+    java.util.List<com.walabot.home.ble.Message.AccessPoint>
     getAccessPointList();
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
-    Message.AP getAccessPoint(int index);
+    com.walabot.home.ble.Message.AccessPoint getAccessPoint(int index);
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
     int getAccessPointCount();
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
-    java.util.List<? extends Message.APOrBuilder>
+    java.util.List<? extends com.walabot.home.ble.Message.AccessPointOrBuilder>
     getAccessPointOrBuilderList();
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
-    Message.APOrBuilder getAccessPointOrBuilder(
+    com.walabot.home.ble.Message.AccessPointOrBuilder getAccessPointOrBuilder(
             int index);
   }
   /**
@@ -5534,110 +5497,56 @@ public final class Message {
       return new ScanResult();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ScanResult(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                accessPoint_ = new java.util.ArrayList<Message.AP>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              accessPoint_.add(
-                      input.readMessage(Message.AP.parser(), extensionRegistry));
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          accessPoint_ = java.util.Collections.unmodifiableList(accessPoint_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_ScanResult_descriptor;
+      return com.walabot.home.ble.Message.internal_static_ScanResult_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_ScanResult_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_ScanResult_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.ScanResult.class, Message.ScanResult.Builder.class);
+                      com.walabot.home.ble.Message.ScanResult.class, com.walabot.home.ble.Message.ScanResult.Builder.class);
     }
 
     public static final int ACCESS_POINT_FIELD_NUMBER = 1;
-    private java.util.List<Message.AP> accessPoint_;
+    @SuppressWarnings("serial")
+    private java.util.List<com.walabot.home.ble.Message.AccessPoint> accessPoint_;
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<Message.AP> getAccessPointList() {
+    public java.util.List<com.walabot.home.ble.Message.AccessPoint> getAccessPointList() {
       return accessPoint_;
     }
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends Message.APOrBuilder>
+    public java.util.List<? extends com.walabot.home.ble.Message.AccessPointOrBuilder>
     getAccessPointOrBuilderList() {
       return accessPoint_;
     }
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
     @java.lang.Override
     public int getAccessPointCount() {
       return accessPoint_.size();
     }
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
     @java.lang.Override
-    public Message.AP getAccessPoint(int index) {
+    public com.walabot.home.ble.Message.AccessPoint getAccessPoint(int index) {
       return accessPoint_.get(index);
     }
     /**
-     * <code>repeated .AP access_point = 1;</code>
+     * <code>repeated .AccessPoint access_point = 1;</code>
      */
     @java.lang.Override
-    public Message.APOrBuilder getAccessPointOrBuilder(
+    public com.walabot.home.ble.Message.AccessPointOrBuilder getAccessPointOrBuilder(
             int index) {
       return accessPoint_.get(index);
     }
@@ -5659,7 +5568,7 @@ public final class Message {
       for (int i = 0; i < accessPoint_.size(); i++) {
         output.writeMessage(1, accessPoint_.get(i));
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -5672,7 +5581,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeMessageSize(1, accessPoint_.get(i));
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -5682,14 +5591,14 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.ScanResult)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.ScanResult)) {
         return super.equals(obj);
       }
-      Message.ScanResult other = (Message.ScanResult) obj;
+      com.walabot.home.ble.Message.ScanResult other = (com.walabot.home.ble.Message.ScanResult) obj;
 
       if (!getAccessPointList()
               .equals(other.getAccessPointList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -5704,74 +5613,76 @@ public final class Message {
         hash = (37 * hash) + ACCESS_POINT_FIELD_NUMBER;
         hash = (53 * hash) + getAccessPointList().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.ScanResult parseFrom(
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ScanResult parseFrom(
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ScanResult parseFrom(
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ScanResult parseFrom(
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ScanResult parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ScanResult parseFrom(
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ScanResult parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.ScanResult parseFrom(
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.ScanResult parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.ScanResult parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.ScanResult parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.ScanResult parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.ScanResult parseFrom(
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.ScanResult parseFrom(
+    public static com.walabot.home.ble.Message.ScanResult parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -5784,7 +5695,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.ScanResult prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.ScanResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -5805,62 +5716,58 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:ScanResult)
-            Message.ScanResultOrBuilder {
+            com.walabot.home.ble.Message.ScanResultOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_ScanResult_descriptor;
+        return com.walabot.home.ble.Message.internal_static_ScanResult_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_ScanResult_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_ScanResult_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.ScanResult.class, Message.ScanResult.Builder.class);
+                        com.walabot.home.ble.Message.ScanResult.class, com.walabot.home.ble.Message.ScanResult.Builder.class);
       }
 
-      // Construct using Message.ScanResult.newBuilder()
+      // Construct using com.walabot.home.ble.Message.ScanResult.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getAccessPointFieldBuilder();
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         if (accessPointBuilder_ == null) {
           accessPoint_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
+          accessPoint_ = null;
           accessPointBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_ScanResult_descriptor;
+        return com.walabot.home.ble.Message.internal_static_ScanResult_descriptor;
       }
 
       @java.lang.Override
-      public Message.ScanResult getDefaultInstanceForType() {
-        return Message.ScanResult.getDefaultInstance();
+      public com.walabot.home.ble.Message.ScanResult getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.ScanResult.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.ScanResult build() {
-        Message.ScanResult result = buildPartial();
+      public com.walabot.home.ble.Message.ScanResult build() {
+        com.walabot.home.ble.Message.ScanResult result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5868,9 +5775,15 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.ScanResult buildPartial() {
-        Message.ScanResult result = new Message.ScanResult(this);
-        int from_bitField0_ = bitField0_;
+      public com.walabot.home.ble.Message.ScanResult buildPartial() {
+        com.walabot.home.ble.Message.ScanResult result = new com.walabot.home.ble.Message.ScanResult(this);
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(com.walabot.home.ble.Message.ScanResult result) {
         if (accessPointBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             accessPoint_ = java.util.Collections.unmodifiableList(accessPoint_);
@@ -5880,8 +5793,10 @@ public final class Message {
         } else {
           result.accessPoint_ = accessPointBuilder_.build();
         }
-        onBuilt();
-        return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.ScanResult result) {
+        int from_bitField0_ = bitField0_;
       }
 
       @java.lang.Override
@@ -5918,16 +5833,16 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.ScanResult) {
-          return mergeFrom((Message.ScanResult)other);
+        if (other instanceof com.walabot.home.ble.Message.ScanResult) {
+          return mergeFrom((com.walabot.home.ble.Message.ScanResult)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.ScanResult other) {
-        if (other == Message.ScanResult.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.ScanResult other) {
+        if (other == com.walabot.home.ble.Message.ScanResult.getDefaultInstance()) return this;
         if (accessPointBuilder_ == null) {
           if (!other.accessPoint_.isEmpty()) {
             if (accessPoint_.isEmpty()) {
@@ -5954,7 +5869,7 @@ public final class Message {
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -5969,37 +5884,63 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.ScanResult parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                com.walabot.home.ble.Message.AccessPoint m =
+                        input.readMessage(
+                                com.walabot.home.ble.Message.AccessPoint.parser(),
+                                extensionRegistry);
+                if (accessPointBuilder_ == null) {
+                  ensureAccessPointIsMutable();
+                  accessPoint_.add(m);
+                } else {
+                  accessPointBuilder_.addMessage(m);
+                }
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.ScanResult) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
 
-      private java.util.List<Message.AP> accessPoint_ =
+      private java.util.List<com.walabot.home.ble.Message.AccessPoint> accessPoint_ =
               java.util.Collections.emptyList();
       private void ensureAccessPointIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          accessPoint_ = new java.util.ArrayList<Message.AP>(accessPoint_);
+          accessPoint_ = new java.util.ArrayList<com.walabot.home.ble.Message.AccessPoint>(accessPoint_);
           bitField0_ |= 0x00000001;
         }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-              Message.AP, Message.AP.Builder, Message.APOrBuilder> accessPointBuilder_;
+              com.walabot.home.ble.Message.AccessPoint, com.walabot.home.ble.Message.AccessPoint.Builder, com.walabot.home.ble.Message.AccessPointOrBuilder> accessPointBuilder_;
 
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public java.util.List<Message.AP> getAccessPointList() {
+      public java.util.List<com.walabot.home.ble.Message.AccessPoint> getAccessPointList() {
         if (accessPointBuilder_ == null) {
           return java.util.Collections.unmodifiableList(accessPoint_);
         } else {
@@ -6007,7 +5948,7 @@ public final class Message {
         }
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public int getAccessPointCount() {
         if (accessPointBuilder_ == null) {
@@ -6017,9 +5958,9 @@ public final class Message {
         }
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public Message.AP getAccessPoint(int index) {
+      public com.walabot.home.ble.Message.AccessPoint getAccessPoint(int index) {
         if (accessPointBuilder_ == null) {
           return accessPoint_.get(index);
         } else {
@@ -6027,10 +5968,10 @@ public final class Message {
         }
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public Builder setAccessPoint(
-              int index, Message.AP value) {
+              int index, com.walabot.home.ble.Message.AccessPoint value) {
         if (accessPointBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6044,10 +5985,10 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public Builder setAccessPoint(
-              int index, Message.AP.Builder builderForValue) {
+              int index, com.walabot.home.ble.Message.AccessPoint.Builder builderForValue) {
         if (accessPointBuilder_ == null) {
           ensureAccessPointIsMutable();
           accessPoint_.set(index, builderForValue.build());
@@ -6058,9 +5999,9 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public Builder addAccessPoint(Message.AP value) {
+      public Builder addAccessPoint(com.walabot.home.ble.Message.AccessPoint value) {
         if (accessPointBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6074,10 +6015,10 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public Builder addAccessPoint(
-              int index, Message.AP value) {
+              int index, com.walabot.home.ble.Message.AccessPoint value) {
         if (accessPointBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6091,10 +6032,10 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public Builder addAccessPoint(
-              Message.AP.Builder builderForValue) {
+              com.walabot.home.ble.Message.AccessPoint.Builder builderForValue) {
         if (accessPointBuilder_ == null) {
           ensureAccessPointIsMutable();
           accessPoint_.add(builderForValue.build());
@@ -6105,10 +6046,10 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public Builder addAccessPoint(
-              int index, Message.AP.Builder builderForValue) {
+              int index, com.walabot.home.ble.Message.AccessPoint.Builder builderForValue) {
         if (accessPointBuilder_ == null) {
           ensureAccessPointIsMutable();
           accessPoint_.add(index, builderForValue.build());
@@ -6119,10 +6060,10 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public Builder addAllAccessPoint(
-              java.lang.Iterable<? extends Message.AP> values) {
+              java.lang.Iterable<? extends com.walabot.home.ble.Message.AccessPoint> values) {
         if (accessPointBuilder_ == null) {
           ensureAccessPointIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -6134,7 +6075,7 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public Builder clearAccessPoint() {
         if (accessPointBuilder_ == null) {
@@ -6147,7 +6088,7 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
       public Builder removeAccessPoint(int index) {
         if (accessPointBuilder_ == null) {
@@ -6160,16 +6101,16 @@ public final class Message {
         return this;
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public Message.AP.Builder getAccessPointBuilder(
+      public com.walabot.home.ble.Message.AccessPoint.Builder getAccessPointBuilder(
               int index) {
         return getAccessPointFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public Message.APOrBuilder getAccessPointOrBuilder(
+      public com.walabot.home.ble.Message.AccessPointOrBuilder getAccessPointOrBuilder(
               int index) {
         if (accessPointBuilder_ == null) {
           return accessPoint_.get(index);  } else {
@@ -6177,9 +6118,9 @@ public final class Message {
         }
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public java.util.List<? extends Message.APOrBuilder>
+      public java.util.List<? extends com.walabot.home.ble.Message.AccessPointOrBuilder>
       getAccessPointOrBuilderList() {
         if (accessPointBuilder_ != null) {
           return accessPointBuilder_.getMessageOrBuilderList();
@@ -6188,33 +6129,33 @@ public final class Message {
         }
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public Message.AP.Builder addAccessPointBuilder() {
+      public com.walabot.home.ble.Message.AccessPoint.Builder addAccessPointBuilder() {
         return getAccessPointFieldBuilder().addBuilder(
-                Message.AP.getDefaultInstance());
+                com.walabot.home.ble.Message.AccessPoint.getDefaultInstance());
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public Message.AP.Builder addAccessPointBuilder(
+      public com.walabot.home.ble.Message.AccessPoint.Builder addAccessPointBuilder(
               int index) {
         return getAccessPointFieldBuilder().addBuilder(
-                index, Message.AP.getDefaultInstance());
+                index, com.walabot.home.ble.Message.AccessPoint.getDefaultInstance());
       }
       /**
-       * <code>repeated .AP access_point = 1;</code>
+       * <code>repeated .AccessPoint access_point = 1;</code>
        */
-      public java.util.List<Message.AP.Builder>
+      public java.util.List<com.walabot.home.ble.Message.AccessPoint.Builder>
       getAccessPointBuilderList() {
         return getAccessPointFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-              Message.AP, Message.AP.Builder, Message.APOrBuilder>
+              com.walabot.home.ble.Message.AccessPoint, com.walabot.home.ble.Message.AccessPoint.Builder, com.walabot.home.ble.Message.AccessPointOrBuilder>
       getAccessPointFieldBuilder() {
         if (accessPointBuilder_ == null) {
           accessPointBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-                  Message.AP, Message.AP.Builder, Message.APOrBuilder>(
+                  com.walabot.home.ble.Message.AccessPoint, com.walabot.home.ble.Message.AccessPoint.Builder, com.walabot.home.ble.Message.AccessPointOrBuilder>(
                   accessPoint_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
@@ -6240,12 +6181,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:ScanResult)
-    private static final Message.ScanResult DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.ScanResult DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.ScanResult();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.ScanResult();
     }
 
-    public static Message.ScanResult getDefaultInstance() {
+    public static com.walabot.home.ble.Message.ScanResult getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6256,7 +6197,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ScanResult(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -6270,7 +6222,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.ScanResult getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.ScanResult getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6315,69 +6267,22 @@ public final class Message {
       return new PairResult();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PairResult(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              code_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_PairResult_descriptor;
+      return com.walabot.home.ble.Message.internal_static_PairResult_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_PairResult_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_PairResult_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.PairResult.class, Message.PairResult.Builder.class);
+                      com.walabot.home.ble.Message.PairResult.class, com.walabot.home.ble.Message.PairResult.Builder.class);
     }
 
     public static final int CODE_FIELD_NUMBER = 1;
-    private volatile java.lang.Object code_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object code_ = "";
     /**
      * <code>string code = 1;</code>
      * @return The code.
@@ -6431,7 +6336,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(code_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, code_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -6443,7 +6348,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(code_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, code_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -6453,14 +6358,14 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.PairResult)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.PairResult)) {
         return super.equals(obj);
       }
-      Message.PairResult other = (Message.PairResult) obj;
+      com.walabot.home.ble.Message.PairResult other = (com.walabot.home.ble.Message.PairResult) obj;
 
       if (!getCode()
               .equals(other.getCode())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -6473,74 +6378,76 @@ public final class Message {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CODE_FIELD_NUMBER;
       hash = (53 * hash) + getCode().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.PairResult parseFrom(
+    public static com.walabot.home.ble.Message.PairResult parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.PairResult parseFrom(
+    public static com.walabot.home.ble.Message.PairResult parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.PairResult parseFrom(
+    public static com.walabot.home.ble.Message.PairResult parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.PairResult parseFrom(
+    public static com.walabot.home.ble.Message.PairResult parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.PairResult parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.PairResult parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.PairResult parseFrom(
+    public static com.walabot.home.ble.Message.PairResult parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.PairResult parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.PairResult parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.PairResult parseFrom(
+    public static com.walabot.home.ble.Message.PairResult parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.PairResult parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.PairResult parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.PairResult parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.PairResult parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.PairResult parseFrom(
+    public static com.walabot.home.ble.Message.PairResult parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.PairResult parseFrom(
+    public static com.walabot.home.ble.Message.PairResult parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -6553,7 +6460,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.PairResult prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.PairResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -6574,57 +6481,52 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:PairResult)
-            Message.PairResultOrBuilder {
+            com.walabot.home.ble.Message.PairResultOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_PairResult_descriptor;
+        return com.walabot.home.ble.Message.internal_static_PairResult_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_PairResult_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_PairResult_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.PairResult.class, Message.PairResult.Builder.class);
+                        com.walabot.home.ble.Message.PairResult.class, com.walabot.home.ble.Message.PairResult.Builder.class);
       }
 
-      // Construct using Message.PairResult.newBuilder()
+      // Construct using com.walabot.home.ble.Message.PairResult.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         code_ = "";
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_PairResult_descriptor;
+        return com.walabot.home.ble.Message.internal_static_PairResult_descriptor;
       }
 
       @java.lang.Override
-      public Message.PairResult getDefaultInstanceForType() {
-        return Message.PairResult.getDefaultInstance();
+      public com.walabot.home.ble.Message.PairResult getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.PairResult.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.PairResult build() {
-        Message.PairResult result = buildPartial();
+      public com.walabot.home.ble.Message.PairResult build() {
+        com.walabot.home.ble.Message.PairResult result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -6632,11 +6534,18 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.PairResult buildPartial() {
-        Message.PairResult result = new Message.PairResult(this);
-        result.code_ = code_;
+      public com.walabot.home.ble.Message.PairResult buildPartial() {
+        com.walabot.home.ble.Message.PairResult result = new com.walabot.home.ble.Message.PairResult(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.PairResult result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.code_ = code_;
+        }
       }
 
       @java.lang.Override
@@ -6673,21 +6582,22 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.PairResult) {
-          return mergeFrom((Message.PairResult)other);
+        if (other instanceof com.walabot.home.ble.Message.PairResult) {
+          return mergeFrom((com.walabot.home.ble.Message.PairResult)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.PairResult other) {
-        if (other == Message.PairResult.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.PairResult other) {
+        if (other == com.walabot.home.ble.Message.PairResult.getDefaultInstance()) return this;
         if (!other.getCode().isEmpty()) {
           code_ = other.code_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -6702,19 +6612,38 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.PairResult parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                code_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.PairResult) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object code_ = "";
       /**
@@ -6757,11 +6686,9 @@ public final class Message {
        */
       public Builder setCode(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         code_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -6770,8 +6697,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearCode() {
-
         code_ = getDefaultInstance().getCode();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -6782,12 +6709,10 @@ public final class Message {
        */
       public Builder setCodeBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         code_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -6808,12 +6733,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:PairResult)
-    private static final Message.PairResult DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.PairResult DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.PairResult();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.PairResult();
     }
 
-    public static Message.PairResult getDefaultInstance() {
+    public static com.walabot.home.ble.Message.PairResult getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6824,7 +6749,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PairResult(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -6838,7 +6774,1592 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.PairResult getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.PairResult getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface DevInfoOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:DevInfo)
+          com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string dev_id = 1;</code>
+     * @return The devId.
+     */
+    java.lang.String getDevId();
+    /**
+     * <code>string dev_id = 1;</code>
+     * @return The bytes for devId.
+     */
+    com.google.protobuf.ByteString
+    getDevIdBytes();
+
+    /**
+     * <code>string sku = 2;</code>
+     * @return The sku.
+     */
+    java.lang.String getSku();
+    /**
+     * <code>string sku = 2;</code>
+     * @return The bytes for sku.
+     */
+    com.google.protobuf.ByteString
+    getSkuBytes();
+
+    /**
+     * <code>string sn_radar = 3;</code>
+     * @return The snRadar.
+     */
+    java.lang.String getSnRadar();
+    /**
+     * <code>string sn_radar = 3;</code>
+     * @return The bytes for snRadar.
+     */
+    com.google.protobuf.ByteString
+    getSnRadarBytes();
+
+    /**
+     * <code>string sn_product = 4;</code>
+     * @return The snProduct.
+     */
+    java.lang.String getSnProduct();
+    /**
+     * <code>string sn_product = 4;</code>
+     * @return The bytes for snProduct.
+     */
+    com.google.protobuf.ByteString
+    getSnProductBytes();
+
+    /**
+     * <code>string hw_rev_radar = 5;</code>
+     * @return The hwRevRadar.
+     */
+    java.lang.String getHwRevRadar();
+    /**
+     * <code>string hw_rev_radar = 5;</code>
+     * @return The bytes for hwRevRadar.
+     */
+    com.google.protobuf.ByteString
+    getHwRevRadarBytes();
+
+    /**
+     * <code>string hw_rev_product = 6;</code>
+     * @return The hwRevProduct.
+     */
+    java.lang.String getHwRevProduct();
+    /**
+     * <code>string hw_rev_product = 6;</code>
+     * @return The bytes for hwRevProduct.
+     */
+    com.google.protobuf.ByteString
+    getHwRevProductBytes();
+
+    /**
+     * <code>string sw_ver = 7;</code>
+     * @return The swVer.
+     */
+    java.lang.String getSwVer();
+    /**
+     * <code>string sw_ver = 7;</code>
+     * @return The bytes for swVer.
+     */
+    com.google.protobuf.ByteString
+    getSwVerBytes();
+
+    /**
+     * <code>uint32 sw_ver_code = 8;</code>
+     * @return The swVerCode.
+     */
+    int getSwVerCode();
+
+    /**
+     * <code>bool is_provision_committed = 9;</code>
+     * @return The isProvisionCommitted.
+     */
+    boolean getIsProvisionCommitted();
+  }
+  /**
+   * Protobuf type {@code DevInfo}
+   */
+  public static final class DevInfo extends
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:DevInfo)
+          DevInfoOrBuilder {
+    private static final long serialVersionUID = 0L;
+    // Use DevInfo.newBuilder() to construct.
+    private DevInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    public DevInfo() {
+      devId_ = "";
+      sku_ = "";
+      snRadar_ = "";
+      snProduct_ = "";
+      hwRevRadar_ = "";
+      hwRevProduct_ = "";
+      swVer_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+            UnusedPrivateParameter unused) {
+      return new DevInfo();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+      return com.walabot.home.ble.Message.internal_static_DevInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    internalGetFieldAccessorTable() {
+      return com.walabot.home.ble.Message.internal_static_DevInfo_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                      com.walabot.home.ble.Message.DevInfo.class, com.walabot.home.ble.Message.DevInfo.Builder.class);
+    }
+
+    public static final int DEV_ID_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object devId_ = "";
+    /**
+     * <code>string dev_id = 1;</code>
+     * @return The devId.
+     */
+    @java.lang.Override
+    public java.lang.String getDevId() {
+      java.lang.Object ref = devId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        devId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string dev_id = 1;</code>
+     * @return The bytes for devId.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+    getDevIdBytes() {
+      java.lang.Object ref = devId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        devId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SKU_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object sku_ = "";
+    /**
+     * <code>string sku = 2;</code>
+     * @return The sku.
+     */
+    @java.lang.Override
+    public java.lang.String getSku() {
+      java.lang.Object ref = sku_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        sku_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string sku = 2;</code>
+     * @return The bytes for sku.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+    getSkuBytes() {
+      java.lang.Object ref = sku_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        sku_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SN_RADAR_FIELD_NUMBER = 3;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object snRadar_ = "";
+    /**
+     * <code>string sn_radar = 3;</code>
+     * @return The snRadar.
+     */
+    @java.lang.Override
+    public java.lang.String getSnRadar() {
+      java.lang.Object ref = snRadar_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        snRadar_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string sn_radar = 3;</code>
+     * @return The bytes for snRadar.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+    getSnRadarBytes() {
+      java.lang.Object ref = snRadar_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        snRadar_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SN_PRODUCT_FIELD_NUMBER = 4;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object snProduct_ = "";
+    /**
+     * <code>string sn_product = 4;</code>
+     * @return The snProduct.
+     */
+    @java.lang.Override
+    public java.lang.String getSnProduct() {
+      java.lang.Object ref = snProduct_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        snProduct_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string sn_product = 4;</code>
+     * @return The bytes for snProduct.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+    getSnProductBytes() {
+      java.lang.Object ref = snProduct_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        snProduct_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int HW_REV_RADAR_FIELD_NUMBER = 5;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object hwRevRadar_ = "";
+    /**
+     * <code>string hw_rev_radar = 5;</code>
+     * @return The hwRevRadar.
+     */
+    @java.lang.Override
+    public java.lang.String getHwRevRadar() {
+      java.lang.Object ref = hwRevRadar_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        hwRevRadar_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string hw_rev_radar = 5;</code>
+     * @return The bytes for hwRevRadar.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+    getHwRevRadarBytes() {
+      java.lang.Object ref = hwRevRadar_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        hwRevRadar_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int HW_REV_PRODUCT_FIELD_NUMBER = 6;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object hwRevProduct_ = "";
+    /**
+     * <code>string hw_rev_product = 6;</code>
+     * @return The hwRevProduct.
+     */
+    @java.lang.Override
+    public java.lang.String getHwRevProduct() {
+      java.lang.Object ref = hwRevProduct_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        hwRevProduct_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string hw_rev_product = 6;</code>
+     * @return The bytes for hwRevProduct.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+    getHwRevProductBytes() {
+      java.lang.Object ref = hwRevProduct_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        hwRevProduct_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SW_VER_FIELD_NUMBER = 7;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object swVer_ = "";
+    /**
+     * <code>string sw_ver = 7;</code>
+     * @return The swVer.
+     */
+    @java.lang.Override
+    public java.lang.String getSwVer() {
+      java.lang.Object ref = swVer_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        swVer_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string sw_ver = 7;</code>
+     * @return The bytes for swVer.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+    getSwVerBytes() {
+      java.lang.Object ref = swVer_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
+        swVer_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SW_VER_CODE_FIELD_NUMBER = 8;
+    private int swVerCode_ = 0;
+    /**
+     * <code>uint32 sw_ver_code = 8;</code>
+     * @return The swVerCode.
+     */
+    @java.lang.Override
+    public int getSwVerCode() {
+      return swVerCode_;
+    }
+
+    public static final int IS_PROVISION_COMMITTED_FIELD_NUMBER = 9;
+    private boolean isProvisionCommitted_ = false;
+    /**
+     * <code>bool is_provision_committed = 9;</code>
+     * @return The isProvisionCommitted.
+     */
+    @java.lang.Override
+    public boolean getIsProvisionCommitted() {
+      return isProvisionCommitted_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(devId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, devId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sku_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, sku_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(snRadar_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, snRadar_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(snProduct_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, snProduct_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hwRevRadar_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, hwRevRadar_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hwRevProduct_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, hwRevProduct_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(swVer_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, swVer_);
+      }
+      if (swVerCode_ != 0) {
+        output.writeUInt32(8, swVerCode_);
+      }
+      if (isProvisionCommitted_ != false) {
+        output.writeBool(9, isProvisionCommitted_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(devId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, devId_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sku_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, sku_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(snRadar_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, snRadar_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(snProduct_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, snProduct_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hwRevRadar_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, hwRevRadar_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hwRevProduct_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, hwRevProduct_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(swVer_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, swVer_);
+      }
+      if (swVerCode_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeUInt32Size(8, swVerCode_);
+      }
+      if (isProvisionCommitted_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeBoolSize(9, isProvisionCommitted_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+        return true;
+      }
+      if (!(obj instanceof com.walabot.home.ble.Message.DevInfo)) {
+        return super.equals(obj);
+      }
+      com.walabot.home.ble.Message.DevInfo other = (com.walabot.home.ble.Message.DevInfo) obj;
+
+      if (!getDevId()
+              .equals(other.getDevId())) return false;
+      if (!getSku()
+              .equals(other.getSku())) return false;
+      if (!getSnRadar()
+              .equals(other.getSnRadar())) return false;
+      if (!getSnProduct()
+              .equals(other.getSnProduct())) return false;
+      if (!getHwRevRadar()
+              .equals(other.getHwRevRadar())) return false;
+      if (!getHwRevProduct()
+              .equals(other.getHwRevProduct())) return false;
+      if (!getSwVer()
+              .equals(other.getSwVer())) return false;
+      if (getSwVerCode()
+              != other.getSwVerCode()) return false;
+      if (getIsProvisionCommitted()
+              != other.getIsProvisionCommitted()) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DEV_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getDevId().hashCode();
+      hash = (37 * hash) + SKU_FIELD_NUMBER;
+      hash = (53 * hash) + getSku().hashCode();
+      hash = (37 * hash) + SN_RADAR_FIELD_NUMBER;
+      hash = (53 * hash) + getSnRadar().hashCode();
+      hash = (37 * hash) + SN_PRODUCT_FIELD_NUMBER;
+      hash = (53 * hash) + getSnProduct().hashCode();
+      hash = (37 * hash) + HW_REV_RADAR_FIELD_NUMBER;
+      hash = (53 * hash) + getHwRevRadar().hashCode();
+      hash = (37 * hash) + HW_REV_PRODUCT_FIELD_NUMBER;
+      hash = (53 * hash) + getHwRevProduct().hashCode();
+      hash = (37 * hash) + SW_VER_FIELD_NUMBER;
+      hash = (53 * hash) + getSwVer().hashCode();
+      hash = (37 * hash) + SW_VER_CODE_FIELD_NUMBER;
+      hash = (53 * hash) + getSwVerCode();
+      hash = (37 * hash) + IS_PROVISION_COMMITTED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+              getIsProvisionCommitted());
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.walabot.home.ble.Message.DevInfo parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.walabot.home.ble.Message.DevInfo parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+    }
+    public static com.walabot.home.ble.Message.DevInfo parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.walabot.home.ble.Message.DevInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+              ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code DevInfo}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:DevInfo)
+            com.walabot.home.ble.Message.DevInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+        return com.walabot.home.ble.Message.internal_static_DevInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internalGetFieldAccessorTable() {
+        return com.walabot.home.ble.Message.internal_static_DevInfo_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        com.walabot.home.ble.Message.DevInfo.class, com.walabot.home.ble.Message.DevInfo.Builder.class);
+      }
+
+      // Construct using com.walabot.home.ble.Message.DevInfo.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        devId_ = "";
+        sku_ = "";
+        snRadar_ = "";
+        snProduct_ = "";
+        hwRevRadar_ = "";
+        hwRevProduct_ = "";
+        swVer_ = "";
+        swVerCode_ = 0;
+        isProvisionCommitted_ = false;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+      getDescriptorForType() {
+        return com.walabot.home.ble.Message.internal_static_DevInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.walabot.home.ble.Message.DevInfo getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.DevInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.walabot.home.ble.Message.DevInfo build() {
+        com.walabot.home.ble.Message.DevInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.walabot.home.ble.Message.DevInfo buildPartial() {
+        com.walabot.home.ble.Message.DevInfo result = new com.walabot.home.ble.Message.DevInfo(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.DevInfo result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.devId_ = devId_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.sku_ = sku_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.snRadar_ = snRadar_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.snProduct_ = snProduct_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.hwRevRadar_ = hwRevRadar_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.hwRevProduct_ = hwRevProduct_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.swVer_ = swVer_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.swVerCode_ = swVerCode_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.isProvisionCommitted_ = isProvisionCommitted_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.walabot.home.ble.Message.DevInfo) {
+          return mergeFrom((com.walabot.home.ble.Message.DevInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.walabot.home.ble.Message.DevInfo other) {
+        if (other == com.walabot.home.ble.Message.DevInfo.getDefaultInstance()) return this;
+        if (!other.getDevId().isEmpty()) {
+          devId_ = other.devId_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (!other.getSku().isEmpty()) {
+          sku_ = other.sku_;
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        if (!other.getSnRadar().isEmpty()) {
+          snRadar_ = other.snRadar_;
+          bitField0_ |= 0x00000004;
+          onChanged();
+        }
+        if (!other.getSnProduct().isEmpty()) {
+          snProduct_ = other.snProduct_;
+          bitField0_ |= 0x00000008;
+          onChanged();
+        }
+        if (!other.getHwRevRadar().isEmpty()) {
+          hwRevRadar_ = other.hwRevRadar_;
+          bitField0_ |= 0x00000010;
+          onChanged();
+        }
+        if (!other.getHwRevProduct().isEmpty()) {
+          hwRevProduct_ = other.hwRevProduct_;
+          bitField0_ |= 0x00000020;
+          onChanged();
+        }
+        if (!other.getSwVer().isEmpty()) {
+          swVer_ = other.swVer_;
+          bitField0_ |= 0x00000040;
+          onChanged();
+        }
+        if (other.getSwVerCode() != 0) {
+          setSwVerCode(other.getSwVerCode());
+        }
+        if (other.getIsProvisionCommitted() != false) {
+          setIsProvisionCommitted(other.getIsProvisionCommitted());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                devId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                sku_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                snRadar_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                snProduct_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                hwRevRadar_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                hwRevProduct_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              case 58: {
+                swVer_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 58
+              case 64: {
+                swVerCode_ = input.readUInt32();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 64
+              case 72: {
+                isProvisionCommitted_ = input.readBool();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 72
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object devId_ = "";
+      /**
+       * <code>string dev_id = 1;</code>
+       * @return The devId.
+       */
+      public java.lang.String getDevId() {
+        java.lang.Object ref = devId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          devId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string dev_id = 1;</code>
+       * @return The bytes for devId.
+       */
+      public com.google.protobuf.ByteString
+      getDevIdBytes() {
+        java.lang.Object ref = devId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          devId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string dev_id = 1;</code>
+       * @param value The devId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDevId(
+              java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        devId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string dev_id = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDevId() {
+        devId_ = getDefaultInstance().getDevId();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string dev_id = 1;</code>
+       * @param value The bytes for devId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDevIdBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        devId_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object sku_ = "";
+      /**
+       * <code>string sku = 2;</code>
+       * @return The sku.
+       */
+      public java.lang.String getSku() {
+        java.lang.Object ref = sku_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          sku_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string sku = 2;</code>
+       * @return The bytes for sku.
+       */
+      public com.google.protobuf.ByteString
+      getSkuBytes() {
+        java.lang.Object ref = sku_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          sku_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string sku = 2;</code>
+       * @param value The sku to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSku(
+              java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        sku_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string sku = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSku() {
+        sku_ = getDefaultInstance().getSku();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string sku = 2;</code>
+       * @param value The bytes for sku to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSkuBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        sku_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object snRadar_ = "";
+      /**
+       * <code>string sn_radar = 3;</code>
+       * @return The snRadar.
+       */
+      public java.lang.String getSnRadar() {
+        java.lang.Object ref = snRadar_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          snRadar_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string sn_radar = 3;</code>
+       * @return The bytes for snRadar.
+       */
+      public com.google.protobuf.ByteString
+      getSnRadarBytes() {
+        java.lang.Object ref = snRadar_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          snRadar_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string sn_radar = 3;</code>
+       * @param value The snRadar to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSnRadar(
+              java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        snRadar_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string sn_radar = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSnRadar() {
+        snRadar_ = getDefaultInstance().getSnRadar();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string sn_radar = 3;</code>
+       * @param value The bytes for snRadar to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSnRadarBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        snRadar_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object snProduct_ = "";
+      /**
+       * <code>string sn_product = 4;</code>
+       * @return The snProduct.
+       */
+      public java.lang.String getSnProduct() {
+        java.lang.Object ref = snProduct_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          snProduct_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string sn_product = 4;</code>
+       * @return The bytes for snProduct.
+       */
+      public com.google.protobuf.ByteString
+      getSnProductBytes() {
+        java.lang.Object ref = snProduct_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          snProduct_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string sn_product = 4;</code>
+       * @param value The snProduct to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSnProduct(
+              java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        snProduct_ = value;
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string sn_product = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSnProduct() {
+        snProduct_ = getDefaultInstance().getSnProduct();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string sn_product = 4;</code>
+       * @param value The bytes for snProduct to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSnProductBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        snProduct_ = value;
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object hwRevRadar_ = "";
+      /**
+       * <code>string hw_rev_radar = 5;</code>
+       * @return The hwRevRadar.
+       */
+      public java.lang.String getHwRevRadar() {
+        java.lang.Object ref = hwRevRadar_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          hwRevRadar_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string hw_rev_radar = 5;</code>
+       * @return The bytes for hwRevRadar.
+       */
+      public com.google.protobuf.ByteString
+      getHwRevRadarBytes() {
+        java.lang.Object ref = hwRevRadar_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          hwRevRadar_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string hw_rev_radar = 5;</code>
+       * @param value The hwRevRadar to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHwRevRadar(
+              java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        hwRevRadar_ = value;
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hw_rev_radar = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearHwRevRadar() {
+        hwRevRadar_ = getDefaultInstance().getHwRevRadar();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hw_rev_radar = 5;</code>
+       * @param value The bytes for hwRevRadar to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHwRevRadarBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        hwRevRadar_ = value;
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object hwRevProduct_ = "";
+      /**
+       * <code>string hw_rev_product = 6;</code>
+       * @return The hwRevProduct.
+       */
+      public java.lang.String getHwRevProduct() {
+        java.lang.Object ref = hwRevProduct_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          hwRevProduct_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string hw_rev_product = 6;</code>
+       * @return The bytes for hwRevProduct.
+       */
+      public com.google.protobuf.ByteString
+      getHwRevProductBytes() {
+        java.lang.Object ref = hwRevProduct_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          hwRevProduct_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string hw_rev_product = 6;</code>
+       * @param value The hwRevProduct to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHwRevProduct(
+              java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        hwRevProduct_ = value;
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hw_rev_product = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearHwRevProduct() {
+        hwRevProduct_ = getDefaultInstance().getHwRevProduct();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hw_rev_product = 6;</code>
+       * @param value The bytes for hwRevProduct to set.
+       * @return This builder for chaining.
+       */
+      public Builder setHwRevProductBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        hwRevProduct_ = value;
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object swVer_ = "";
+      /**
+       * <code>string sw_ver = 7;</code>
+       * @return The swVer.
+       */
+      public java.lang.String getSwVer() {
+        java.lang.Object ref = swVer_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          swVer_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string sw_ver = 7;</code>
+       * @return The bytes for swVer.
+       */
+      public com.google.protobuf.ByteString
+      getSwVerBytes() {
+        java.lang.Object ref = swVer_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
+          swVer_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string sw_ver = 7;</code>
+       * @param value The swVer to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSwVer(
+              java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        swVer_ = value;
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string sw_ver = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSwVer() {
+        swVer_ = getDefaultInstance().getSwVer();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string sw_ver = 7;</code>
+       * @param value The bytes for swVer to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSwVerBytes(
+              com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        swVer_ = value;
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return this;
+      }
+
+      private int swVerCode_ ;
+      /**
+       * <code>uint32 sw_ver_code = 8;</code>
+       * @return The swVerCode.
+       */
+      @java.lang.Override
+      public int getSwVerCode() {
+        return swVerCode_;
+      }
+      /**
+       * <code>uint32 sw_ver_code = 8;</code>
+       * @param value The swVerCode to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSwVerCode(int value) {
+
+        swVerCode_ = value;
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 sw_ver_code = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSwVerCode() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        swVerCode_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean isProvisionCommitted_ ;
+      /**
+       * <code>bool is_provision_committed = 9;</code>
+       * @return The isProvisionCommitted.
+       */
+      @java.lang.Override
+      public boolean getIsProvisionCommitted() {
+        return isProvisionCommitted_;
+      }
+      /**
+       * <code>bool is_provision_committed = 9;</code>
+       * @param value The isProvisionCommitted to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIsProvisionCommitted(boolean value) {
+
+        isProvisionCommitted_ = value;
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool is_provision_committed = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIsProvisionCommitted() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        isProvisionCommitted_ = false;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:DevInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:DevInfo)
+    private static final com.walabot.home.ble.Message.DevInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.DevInfo();
+    }
+
+    public static com.walabot.home.ble.Message.DevInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DevInfo>
+            PARSER = new com.google.protobuf.AbstractParser<DevInfo>() {
+      @java.lang.Override
+      public DevInfo parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<DevInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DevInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.walabot.home.ble.Message.DevInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6896,75 +8417,22 @@ public final class Message {
       return new PairingComplete();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PairingComplete(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              uid_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              code_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_PairingComplete_descriptor;
+      return com.walabot.home.ble.Message.internal_static_PairingComplete_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_PairingComplete_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_PairingComplete_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.PairingComplete.class, Message.PairingComplete.Builder.class);
+                      com.walabot.home.ble.Message.PairingComplete.class, com.walabot.home.ble.Message.PairingComplete.Builder.class);
     }
 
     public static final int UID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object uid_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object uid_ = "";
     /**
      * <code>string uid = 1;</code>
      * @return The uid.
@@ -7002,7 +8470,8 @@ public final class Message {
     }
 
     public static final int CODE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object code_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object code_ = "";
     /**
      * <code>string code = 2;</code>
      * @return The code.
@@ -7059,7 +8528,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(code_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, code_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -7074,7 +8543,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(code_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, code_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -7084,16 +8553,16 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.PairingComplete)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.PairingComplete)) {
         return super.equals(obj);
       }
-      Message.PairingComplete other = (Message.PairingComplete) obj;
+      com.walabot.home.ble.Message.PairingComplete other = (com.walabot.home.ble.Message.PairingComplete) obj;
 
       if (!getUid()
               .equals(other.getUid())) return false;
       if (!getCode()
               .equals(other.getCode())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -7108,74 +8577,76 @@ public final class Message {
       hash = (53 * hash) + getUid().hashCode();
       hash = (37 * hash) + CODE_FIELD_NUMBER;
       hash = (53 * hash) + getCode().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.PairingComplete parseFrom(
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.PairingComplete parseFrom(
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.PairingComplete parseFrom(
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.PairingComplete parseFrom(
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.PairingComplete parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.PairingComplete parseFrom(
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.PairingComplete parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.PairingComplete parseFrom(
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.PairingComplete parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.PairingComplete parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.PairingComplete parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.PairingComplete parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.PairingComplete parseFrom(
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.PairingComplete parseFrom(
+    public static com.walabot.home.ble.Message.PairingComplete parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -7188,7 +8659,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.PairingComplete prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.PairingComplete prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -7209,59 +8680,53 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:PairingComplete)
-            Message.PairingCompleteOrBuilder {
+            com.walabot.home.ble.Message.PairingCompleteOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_PairingComplete_descriptor;
+        return com.walabot.home.ble.Message.internal_static_PairingComplete_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_PairingComplete_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_PairingComplete_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.PairingComplete.class, Message.PairingComplete.Builder.class);
+                        com.walabot.home.ble.Message.PairingComplete.class, com.walabot.home.ble.Message.PairingComplete.Builder.class);
       }
 
-      // Construct using Message.PairingComplete.newBuilder()
+      // Construct using com.walabot.home.ble.Message.PairingComplete.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         uid_ = "";
-
         code_ = "";
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_PairingComplete_descriptor;
+        return com.walabot.home.ble.Message.internal_static_PairingComplete_descriptor;
       }
 
       @java.lang.Override
-      public Message.PairingComplete getDefaultInstanceForType() {
-        return Message.PairingComplete.getDefaultInstance();
+      public com.walabot.home.ble.Message.PairingComplete getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.PairingComplete.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.PairingComplete build() {
-        Message.PairingComplete result = buildPartial();
+      public com.walabot.home.ble.Message.PairingComplete build() {
+        com.walabot.home.ble.Message.PairingComplete result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -7269,12 +8734,21 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.PairingComplete buildPartial() {
-        Message.PairingComplete result = new Message.PairingComplete(this);
-        result.uid_ = uid_;
-        result.code_ = code_;
+      public com.walabot.home.ble.Message.PairingComplete buildPartial() {
+        com.walabot.home.ble.Message.PairingComplete result = new com.walabot.home.ble.Message.PairingComplete(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.PairingComplete result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.uid_ = uid_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.code_ = code_;
+        }
       }
 
       @java.lang.Override
@@ -7311,25 +8785,27 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.PairingComplete) {
-          return mergeFrom((Message.PairingComplete)other);
+        if (other instanceof com.walabot.home.ble.Message.PairingComplete) {
+          return mergeFrom((com.walabot.home.ble.Message.PairingComplete)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.PairingComplete other) {
-        if (other == Message.PairingComplete.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.PairingComplete other) {
+        if (other == com.walabot.home.ble.Message.PairingComplete.getDefaultInstance()) return this;
         if (!other.getUid().isEmpty()) {
           uid_ = other.uid_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getCode().isEmpty()) {
           code_ = other.code_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -7344,19 +8820,43 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.PairingComplete parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                uid_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                code_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.PairingComplete) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object uid_ = "";
       /**
@@ -7399,11 +8899,9 @@ public final class Message {
        */
       public Builder setUid(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         uid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -7412,8 +8910,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearUid() {
-
         uid_ = getDefaultInstance().getUid();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -7424,12 +8922,10 @@ public final class Message {
        */
       public Builder setUidBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         uid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -7475,11 +8971,9 @@ public final class Message {
        */
       public Builder setCode(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         code_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -7488,8 +8982,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearCode() {
-
         code_ = getDefaultInstance().getCode();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -7500,12 +8994,10 @@ public final class Message {
        */
       public Builder setCodeBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         code_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -7526,12 +9018,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:PairingComplete)
-    private static final Message.PairingComplete DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.PairingComplete DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.PairingComplete();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.PairingComplete();
     }
 
-    public static Message.PairingComplete getDefaultInstance() {
+    public static com.walabot.home.ble.Message.PairingComplete getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7542,7 +9034,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PairingComplete(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -7556,7 +9059,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.PairingComplete getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.PairingComplete getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7606,78 +9109,21 @@ public final class Message {
       return new OTAResult();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private OTAResult(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              hasNewVersion_ = input.readBool();
-              break;
-            }
-            case 16: {
-
-              currentVersionCode_ = input.readInt32();
-              break;
-            }
-            case 24: {
-
-              updateVersionCode_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_OTAResult_descriptor;
+      return com.walabot.home.ble.Message.internal_static_OTAResult_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_OTAResult_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_OTAResult_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.OTAResult.class, Message.OTAResult.Builder.class);
+                      com.walabot.home.ble.Message.OTAResult.class, com.walabot.home.ble.Message.OTAResult.Builder.class);
     }
 
     public static final int HAS_NEW_VERSION_FIELD_NUMBER = 1;
-    private boolean hasNewVersion_;
+    private boolean hasNewVersion_ = false;
     /**
      * <code>bool has_new_version = 1;</code>
      * @return The hasNewVersion.
@@ -7688,7 +9134,7 @@ public final class Message {
     }
 
     public static final int CURRENT_VERSION_CODE_FIELD_NUMBER = 2;
-    private int currentVersionCode_;
+    private int currentVersionCode_ = 0;
     /**
      * <code>int32 current_version_code = 2;</code>
      * @return The currentVersionCode.
@@ -7699,7 +9145,7 @@ public final class Message {
     }
 
     public static final int UPDATE_VERSION_CODE_FIELD_NUMBER = 3;
-    private int updateVersionCode_;
+    private int updateVersionCode_ = 0;
     /**
      * <code>int32 update_version_code = 3;</code>
      * @return The updateVersionCode.
@@ -7732,7 +9178,7 @@ public final class Message {
       if (updateVersionCode_ != 0) {
         output.writeInt32(3, updateVersionCode_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -7753,7 +9199,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeInt32Size(3, updateVersionCode_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -7763,10 +9209,10 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.OTAResult)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.OTAResult)) {
         return super.equals(obj);
       }
-      Message.OTAResult other = (Message.OTAResult) obj;
+      com.walabot.home.ble.Message.OTAResult other = (com.walabot.home.ble.Message.OTAResult) obj;
 
       if (getHasNewVersion()
               != other.getHasNewVersion()) return false;
@@ -7774,7 +9220,7 @@ public final class Message {
               != other.getCurrentVersionCode()) return false;
       if (getUpdateVersionCode()
               != other.getUpdateVersionCode()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -7792,74 +9238,76 @@ public final class Message {
       hash = (53 * hash) + getCurrentVersionCode();
       hash = (37 * hash) + UPDATE_VERSION_CODE_FIELD_NUMBER;
       hash = (53 * hash) + getUpdateVersionCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.OTAResult parseFrom(
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.OTAResult parseFrom(
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.OTAResult parseFrom(
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.OTAResult parseFrom(
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.OTAResult parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.OTAResult parseFrom(
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.OTAResult parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.OTAResult parseFrom(
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.OTAResult parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.OTAResult parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.OTAResult parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.OTAResult parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.OTAResult parseFrom(
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.OTAResult parseFrom(
+    public static com.walabot.home.ble.Message.OTAResult parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -7872,7 +9320,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.OTAResult prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.OTAResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -7893,61 +9341,54 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:OTAResult)
-            Message.OTAResultOrBuilder {
+            com.walabot.home.ble.Message.OTAResultOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_OTAResult_descriptor;
+        return com.walabot.home.ble.Message.internal_static_OTAResult_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_OTAResult_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_OTAResult_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.OTAResult.class, Message.OTAResult.Builder.class);
+                        com.walabot.home.ble.Message.OTAResult.class, com.walabot.home.ble.Message.OTAResult.Builder.class);
       }
 
-      // Construct using Message.OTAResult.newBuilder()
+      // Construct using com.walabot.home.ble.Message.OTAResult.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         hasNewVersion_ = false;
-
         currentVersionCode_ = 0;
-
         updateVersionCode_ = 0;
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_OTAResult_descriptor;
+        return com.walabot.home.ble.Message.internal_static_OTAResult_descriptor;
       }
 
       @java.lang.Override
-      public Message.OTAResult getDefaultInstanceForType() {
-        return Message.OTAResult.getDefaultInstance();
+      public com.walabot.home.ble.Message.OTAResult getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.OTAResult.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.OTAResult build() {
-        Message.OTAResult result = buildPartial();
+      public com.walabot.home.ble.Message.OTAResult build() {
+        com.walabot.home.ble.Message.OTAResult result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -7955,13 +9396,24 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.OTAResult buildPartial() {
-        Message.OTAResult result = new Message.OTAResult(this);
-        result.hasNewVersion_ = hasNewVersion_;
-        result.currentVersionCode_ = currentVersionCode_;
-        result.updateVersionCode_ = updateVersionCode_;
+      public com.walabot.home.ble.Message.OTAResult buildPartial() {
+        com.walabot.home.ble.Message.OTAResult result = new com.walabot.home.ble.Message.OTAResult(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.OTAResult result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.hasNewVersion_ = hasNewVersion_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.currentVersionCode_ = currentVersionCode_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.updateVersionCode_ = updateVersionCode_;
+        }
       }
 
       @java.lang.Override
@@ -7998,16 +9450,16 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.OTAResult) {
-          return mergeFrom((Message.OTAResult)other);
+        if (other instanceof com.walabot.home.ble.Message.OTAResult) {
+          return mergeFrom((com.walabot.home.ble.Message.OTAResult)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.OTAResult other) {
-        if (other == Message.OTAResult.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.OTAResult other) {
+        if (other == com.walabot.home.ble.Message.OTAResult.getDefaultInstance()) return this;
         if (other.getHasNewVersion() != false) {
           setHasNewVersion(other.getHasNewVersion());
         }
@@ -8017,7 +9469,7 @@ public final class Message {
         if (other.getUpdateVersionCode() != 0) {
           setUpdateVersionCode(other.getUpdateVersionCode());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -8032,19 +9484,48 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.OTAResult parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                hasNewVersion_ = input.readBool();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                currentVersionCode_ = input.readInt32();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 24: {
+                updateVersionCode_ = input.readInt32();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.OTAResult) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private boolean hasNewVersion_ ;
       /**
@@ -8063,6 +9544,7 @@ public final class Message {
       public Builder setHasNewVersion(boolean value) {
 
         hasNewVersion_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -8071,7 +9553,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearHasNewVersion() {
-
+        bitField0_ = (bitField0_ & ~0x00000001);
         hasNewVersion_ = false;
         onChanged();
         return this;
@@ -8094,6 +9576,7 @@ public final class Message {
       public Builder setCurrentVersionCode(int value) {
 
         currentVersionCode_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -8102,7 +9585,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearCurrentVersionCode() {
-
+        bitField0_ = (bitField0_ & ~0x00000002);
         currentVersionCode_ = 0;
         onChanged();
         return this;
@@ -8125,6 +9608,7 @@ public final class Message {
       public Builder setUpdateVersionCode(int value) {
 
         updateVersionCode_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -8133,7 +9617,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearUpdateVersionCode() {
-
+        bitField0_ = (bitField0_ & ~0x00000004);
         updateVersionCode_ = 0;
         onChanged();
         return this;
@@ -8155,12 +9639,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:OTAResult)
-    private static final Message.OTAResult DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.OTAResult DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.OTAResult();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.OTAResult();
     }
 
-    public static Message.OTAResult getDefaultInstance() {
+    public static com.walabot.home.ble.Message.OTAResult getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -8171,7 +9655,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new OTAResult(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -8185,7 +9680,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.OTAResult getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.OTAResult getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -8223,68 +9718,21 @@ public final class Message {
       return new OTAPerform();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private OTAPerform(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 24: {
-
-              updateVersionCode_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_OTAPerform_descriptor;
+      return com.walabot.home.ble.Message.internal_static_OTAPerform_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_OTAPerform_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_OTAPerform_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.OTAPerform.class, Message.OTAPerform.Builder.class);
+                      com.walabot.home.ble.Message.OTAPerform.class, com.walabot.home.ble.Message.OTAPerform.Builder.class);
     }
 
     public static final int UPDATE_VERSION_CODE_FIELD_NUMBER = 3;
-    private int updateVersionCode_;
+    private int updateVersionCode_ = 0;
     /**
      * <code>int32 update_version_code = 3;</code>
      * @return The updateVersionCode.
@@ -8311,7 +9759,7 @@ public final class Message {
       if (updateVersionCode_ != 0) {
         output.writeInt32(3, updateVersionCode_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -8324,7 +9772,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeInt32Size(3, updateVersionCode_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -8334,14 +9782,14 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.OTAPerform)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.OTAPerform)) {
         return super.equals(obj);
       }
-      Message.OTAPerform other = (Message.OTAPerform) obj;
+      com.walabot.home.ble.Message.OTAPerform other = (com.walabot.home.ble.Message.OTAPerform) obj;
 
       if (getUpdateVersionCode()
               != other.getUpdateVersionCode()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -8354,74 +9802,76 @@ public final class Message {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + UPDATE_VERSION_CODE_FIELD_NUMBER;
       hash = (53 * hash) + getUpdateVersionCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.OTAPerform parseFrom(
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.OTAPerform parseFrom(
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.OTAPerform parseFrom(
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.OTAPerform parseFrom(
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.OTAPerform parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.OTAPerform parseFrom(
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.OTAPerform parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.OTAPerform parseFrom(
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.OTAPerform parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.OTAPerform parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.OTAPerform parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.OTAPerform parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.OTAPerform parseFrom(
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.OTAPerform parseFrom(
+    public static com.walabot.home.ble.Message.OTAPerform parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -8434,7 +9884,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.OTAPerform prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.OTAPerform prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -8455,57 +9905,52 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:OTAPerform)
-            Message.OTAPerformOrBuilder {
+            com.walabot.home.ble.Message.OTAPerformOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_OTAPerform_descriptor;
+        return com.walabot.home.ble.Message.internal_static_OTAPerform_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_OTAPerform_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_OTAPerform_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.OTAPerform.class, Message.OTAPerform.Builder.class);
+                        com.walabot.home.ble.Message.OTAPerform.class, com.walabot.home.ble.Message.OTAPerform.Builder.class);
       }
 
-      // Construct using Message.OTAPerform.newBuilder()
+      // Construct using com.walabot.home.ble.Message.OTAPerform.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         updateVersionCode_ = 0;
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_OTAPerform_descriptor;
+        return com.walabot.home.ble.Message.internal_static_OTAPerform_descriptor;
       }
 
       @java.lang.Override
-      public Message.OTAPerform getDefaultInstanceForType() {
-        return Message.OTAPerform.getDefaultInstance();
+      public com.walabot.home.ble.Message.OTAPerform getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.OTAPerform.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.OTAPerform build() {
-        Message.OTAPerform result = buildPartial();
+      public com.walabot.home.ble.Message.OTAPerform build() {
+        com.walabot.home.ble.Message.OTAPerform result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -8513,11 +9958,18 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.OTAPerform buildPartial() {
-        Message.OTAPerform result = new Message.OTAPerform(this);
-        result.updateVersionCode_ = updateVersionCode_;
+      public com.walabot.home.ble.Message.OTAPerform buildPartial() {
+        com.walabot.home.ble.Message.OTAPerform result = new com.walabot.home.ble.Message.OTAPerform(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.OTAPerform result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.updateVersionCode_ = updateVersionCode_;
+        }
       }
 
       @java.lang.Override
@@ -8554,20 +10006,20 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.OTAPerform) {
-          return mergeFrom((Message.OTAPerform)other);
+        if (other instanceof com.walabot.home.ble.Message.OTAPerform) {
+          return mergeFrom((com.walabot.home.ble.Message.OTAPerform)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.OTAPerform other) {
-        if (other == Message.OTAPerform.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.OTAPerform other) {
+        if (other == com.walabot.home.ble.Message.OTAPerform.getDefaultInstance()) return this;
         if (other.getUpdateVersionCode() != 0) {
           setUpdateVersionCode(other.getUpdateVersionCode());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -8582,19 +10034,38 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.OTAPerform parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 24: {
+                updateVersionCode_ = input.readInt32();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.OTAPerform) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private int updateVersionCode_ ;
       /**
@@ -8613,6 +10084,7 @@ public final class Message {
       public Builder setUpdateVersionCode(int value) {
 
         updateVersionCode_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -8621,7 +10093,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearUpdateVersionCode() {
-
+        bitField0_ = (bitField0_ & ~0x00000001);
         updateVersionCode_ = 0;
         onChanged();
         return this;
@@ -8643,12 +10115,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:OTAPerform)
-    private static final Message.OTAPerform DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.OTAPerform DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.OTAPerform();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.OTAPerform();
     }
 
-    public static Message.OTAPerform getDefaultInstance() {
+    public static com.walabot.home.ble.Message.OTAPerform getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -8659,7 +10131,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new OTAPerform(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -8673,7 +10156,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.OTAPerform getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.OTAPerform getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -8692,7 +10175,7 @@ public final class Message {
      * <code>.ToDeviceMessageType type = 1;</code>
      * @return The type.
      */
-    Message.ToDeviceMessageType getType();
+    com.walabot.home.ble.Message.ToDeviceMessageType getType();
 
     /**
      * <code>bytes payload = 2;</code>
@@ -8712,7 +10195,7 @@ public final class Message {
     private ToDeviceMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ToDeviceMessage() {
+    public ToDeviceMessage() {
       type_ = 0;
       payload_ = com.google.protobuf.ByteString.EMPTY;
     }
@@ -8724,74 +10207,21 @@ public final class Message {
       return new ToDeviceMessage();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ToDeviceMessage(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              int rawValue = input.readEnum();
-
-              type_ = rawValue;
-              break;
-            }
-            case 18: {
-
-              payload_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_ToDeviceMessage_descriptor;
+      return com.walabot.home.ble.Message.internal_static_ToDeviceMessage_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_ToDeviceMessage_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_ToDeviceMessage_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.ToDeviceMessage.class, Message.ToDeviceMessage.Builder.class);
+                      com.walabot.home.ble.Message.ToDeviceMessage.class, com.walabot.home.ble.Message.ToDeviceMessage.Builder.class);
     }
 
     public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
+    private int type_ = 0;
     /**
      * <code>.ToDeviceMessageType type = 1;</code>
      * @return The enum numeric value on the wire for type.
@@ -8803,14 +10233,13 @@ public final class Message {
      * <code>.ToDeviceMessageType type = 1;</code>
      * @return The type.
      */
-    @java.lang.Override public Message.ToDeviceMessageType getType() {
-      @SuppressWarnings("deprecation")
-      Message.ToDeviceMessageType result = Message.ToDeviceMessageType.valueOf(type_);
-      return result == null ? Message.ToDeviceMessageType.UNRECOGNIZED : result;
+    @java.lang.Override public com.walabot.home.ble.Message.ToDeviceMessageType getType() {
+      com.walabot.home.ble.Message.ToDeviceMessageType result = com.walabot.home.ble.Message.ToDeviceMessageType.forNumber(type_);
+      return result == null ? com.walabot.home.ble.Message.ToDeviceMessageType.UNRECOGNIZED : result;
     }
 
     public static final int PAYLOAD_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString payload_;
+    private com.google.protobuf.ByteString payload_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes payload = 2;</code>
      * @return The payload.
@@ -8834,13 +10263,13 @@ public final class Message {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
             throws java.io.IOException {
-      if (type_ != Message.ToDeviceMessageType.CONNECT_WIFI.getNumber()) {
+      if (type_ != com.walabot.home.ble.Message.ToDeviceMessageType.CONNECT_WIFI.getNumber()) {
         output.writeEnum(1, type_);
       }
       if (!payload_.isEmpty()) {
         output.writeBytes(2, payload_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -8849,7 +10278,7 @@ public final class Message {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != Message.ToDeviceMessageType.CONNECT_WIFI.getNumber()) {
+      if (type_ != com.walabot.home.ble.Message.ToDeviceMessageType.CONNECT_WIFI.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
                 .computeEnumSize(1, type_);
       }
@@ -8857,7 +10286,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeBytesSize(2, payload_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -8867,15 +10296,15 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.ToDeviceMessage)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.ToDeviceMessage)) {
         return super.equals(obj);
       }
-      Message.ToDeviceMessage other = (Message.ToDeviceMessage) obj;
+      com.walabot.home.ble.Message.ToDeviceMessage other = (com.walabot.home.ble.Message.ToDeviceMessage) obj;
 
       if (type_ != other.type_) return false;
       if (!getPayload()
               .equals(other.getPayload())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -8890,74 +10319,76 @@ public final class Message {
       hash = (53 * hash) + type_;
       hash = (37 * hash) + PAYLOAD_FIELD_NUMBER;
       hash = (53 * hash) + getPayload().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.ToDeviceMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToDeviceMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToDeviceMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToDeviceMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToDeviceMessage parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToDeviceMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToDeviceMessage parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.ToDeviceMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.ToDeviceMessage parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.ToDeviceMessage parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.ToDeviceMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.ToDeviceMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToDeviceMessage parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -8970,7 +10401,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.ToDeviceMessage prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.ToDeviceMessage prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -8991,59 +10422,53 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:ToDeviceMessage)
-            Message.ToDeviceMessageOrBuilder {
+            com.walabot.home.ble.Message.ToDeviceMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_ToDeviceMessage_descriptor;
+        return com.walabot.home.ble.Message.internal_static_ToDeviceMessage_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_ToDeviceMessage_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_ToDeviceMessage_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.ToDeviceMessage.class, Message.ToDeviceMessage.Builder.class);
+                        com.walabot.home.ble.Message.ToDeviceMessage.class, com.walabot.home.ble.Message.ToDeviceMessage.Builder.class);
       }
 
-      // Construct using Message.ToDeviceMessage.newBuilder()
+      // Construct using com.walabot.home.ble.Message.ToDeviceMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         type_ = 0;
-
         payload_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_ToDeviceMessage_descriptor;
+        return com.walabot.home.ble.Message.internal_static_ToDeviceMessage_descriptor;
       }
 
       @java.lang.Override
-      public Message.ToDeviceMessage getDefaultInstanceForType() {
-        return Message.ToDeviceMessage.getDefaultInstance();
+      public com.walabot.home.ble.Message.ToDeviceMessage getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.ToDeviceMessage.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.ToDeviceMessage build() {
-        Message.ToDeviceMessage result = buildPartial();
+      public com.walabot.home.ble.Message.ToDeviceMessage build() {
+        com.walabot.home.ble.Message.ToDeviceMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -9051,12 +10476,21 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.ToDeviceMessage buildPartial() {
-        Message.ToDeviceMessage result = new Message.ToDeviceMessage(this);
-        result.type_ = type_;
-        result.payload_ = payload_;
+      public com.walabot.home.ble.Message.ToDeviceMessage buildPartial() {
+        com.walabot.home.ble.Message.ToDeviceMessage result = new com.walabot.home.ble.Message.ToDeviceMessage(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.ToDeviceMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.type_ = type_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.payload_ = payload_;
+        }
       }
 
       @java.lang.Override
@@ -9093,23 +10527,23 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.ToDeviceMessage) {
-          return mergeFrom((Message.ToDeviceMessage)other);
+        if (other instanceof com.walabot.home.ble.Message.ToDeviceMessage) {
+          return mergeFrom((com.walabot.home.ble.Message.ToDeviceMessage)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.ToDeviceMessage other) {
-        if (other == Message.ToDeviceMessage.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.ToDeviceMessage other) {
+        if (other == com.walabot.home.ble.Message.ToDeviceMessage.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
         }
         if (other.getPayload() != com.google.protobuf.ByteString.EMPTY) {
           setPayload(other.getPayload());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -9124,19 +10558,43 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.ToDeviceMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                type_ = input.readEnum();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 18: {
+                payload_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.ToDeviceMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private int type_ = 0;
       /**
@@ -9152,8 +10610,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
-
         type_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -9162,21 +10620,20 @@ public final class Message {
        * @return The type.
        */
       @java.lang.Override
-      public Message.ToDeviceMessageType getType() {
-        @SuppressWarnings("deprecation")
-        Message.ToDeviceMessageType result = Message.ToDeviceMessageType.valueOf(type_);
-        return result == null ? Message.ToDeviceMessageType.UNRECOGNIZED : result;
+      public com.walabot.home.ble.Message.ToDeviceMessageType getType() {
+        com.walabot.home.ble.Message.ToDeviceMessageType result = com.walabot.home.ble.Message.ToDeviceMessageType.forNumber(type_);
+        return result == null ? com.walabot.home.ble.Message.ToDeviceMessageType.UNRECOGNIZED : result;
       }
       /**
        * <code>.ToDeviceMessageType type = 1;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
-      public Builder setType(Message.ToDeviceMessageType value) {
+      public Builder setType(com.walabot.home.ble.Message.ToDeviceMessageType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-
+        bitField0_ |= 0x00000001;
         type_ = value.getNumber();
         onChanged();
         return this;
@@ -9186,7 +10643,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearType() {
-
+        bitField0_ = (bitField0_ & ~0x00000001);
         type_ = 0;
         onChanged();
         return this;
@@ -9207,11 +10664,9 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setPayload(com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         payload_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -9220,7 +10675,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearPayload() {
-
+        bitField0_ = (bitField0_ & ~0x00000002);
         payload_ = getDefaultInstance().getPayload();
         onChanged();
         return this;
@@ -9242,12 +10697,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:ToDeviceMessage)
-    private static final Message.ToDeviceMessage DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.ToDeviceMessage DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.ToDeviceMessage();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.ToDeviceMessage();
     }
 
-    public static Message.ToDeviceMessage getDefaultInstance() {
+    public static com.walabot.home.ble.Message.ToDeviceMessage getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -9258,7 +10713,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ToDeviceMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -9272,7 +10738,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.ToDeviceMessage getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.ToDeviceMessage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -9291,7 +10757,7 @@ public final class Message {
      * <code>.ToAppMessageType type = 1;</code>
      * @return The type.
      */
-    Message.ToAppMessageType getType();
+    com.walabot.home.ble.Message.ToAppMessageType getType();
 
     /**
      * <code>.ToAppResultType result = 2;</code>
@@ -9302,7 +10768,7 @@ public final class Message {
      * <code>.ToAppResultType result = 2;</code>
      * @return The result.
      */
-    Message.ToAppResultType getResult();
+    com.walabot.home.ble.Message.ToAppResultType getResult();
 
     /**
      * <code>bytes payload = 3;</code>
@@ -9335,80 +10801,21 @@ public final class Message {
       return new ToAppMessage();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ToAppMessage(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              int rawValue = input.readEnum();
-
-              type_ = rawValue;
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-
-              result_ = rawValue;
-              break;
-            }
-            case 26: {
-
-              payload_ = input.readBytes();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_ToAppMessage_descriptor;
+      return com.walabot.home.ble.Message.internal_static_ToAppMessage_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_ToAppMessage_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_ToAppMessage_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.ToAppMessage.class, Message.ToAppMessage.Builder.class);
+                      com.walabot.home.ble.Message.ToAppMessage.class, com.walabot.home.ble.Message.ToAppMessage.Builder.class);
     }
 
     public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
+    private int type_ = 0;
     /**
      * <code>.ToAppMessageType type = 1;</code>
      * @return The enum numeric value on the wire for type.
@@ -9420,14 +10827,13 @@ public final class Message {
      * <code>.ToAppMessageType type = 1;</code>
      * @return The type.
      */
-    @java.lang.Override public Message.ToAppMessageType getType() {
-      @SuppressWarnings("deprecation")
-      Message.ToAppMessageType result = Message.ToAppMessageType.valueOf(type_);
-      return result == null ? Message.ToAppMessageType.UNRECOGNIZED : result;
+    @java.lang.Override public com.walabot.home.ble.Message.ToAppMessageType getType() {
+      com.walabot.home.ble.Message.ToAppMessageType result = com.walabot.home.ble.Message.ToAppMessageType.forNumber(type_);
+      return result == null ? com.walabot.home.ble.Message.ToAppMessageType.UNRECOGNIZED : result;
     }
 
     public static final int RESULT_FIELD_NUMBER = 2;
-    private int result_;
+    private int result_ = 0;
     /**
      * <code>.ToAppResultType result = 2;</code>
      * @return The enum numeric value on the wire for result.
@@ -9439,14 +10845,13 @@ public final class Message {
      * <code>.ToAppResultType result = 2;</code>
      * @return The result.
      */
-    @java.lang.Override public Message.ToAppResultType getResult() {
-      @SuppressWarnings("deprecation")
-      Message.ToAppResultType result = Message.ToAppResultType.valueOf(result_);
-      return result == null ? Message.ToAppResultType.UNRECOGNIZED : result;
+    @java.lang.Override public com.walabot.home.ble.Message.ToAppResultType getResult() {
+      com.walabot.home.ble.Message.ToAppResultType result = com.walabot.home.ble.Message.ToAppResultType.forNumber(result_);
+      return result == null ? com.walabot.home.ble.Message.ToAppResultType.UNRECOGNIZED : result;
     }
 
     public static final int PAYLOAD_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString payload_;
+    private com.google.protobuf.ByteString payload_ = com.google.protobuf.ByteString.EMPTY;
     /**
      * <code>bytes payload = 3;</code>
      * @return The payload.
@@ -9470,16 +10875,16 @@ public final class Message {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
             throws java.io.IOException {
-      if (type_ != Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
+      if (type_ != com.walabot.home.ble.Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
         output.writeEnum(1, type_);
       }
-      if (result_ != Message.ToAppResultType.OK.getNumber()) {
+      if (result_ != com.walabot.home.ble.Message.ToAppResultType.OK.getNumber()) {
         output.writeEnum(2, result_);
       }
       if (!payload_.isEmpty()) {
         output.writeBytes(3, payload_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -9488,11 +10893,11 @@ public final class Message {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
+      if (type_ != com.walabot.home.ble.Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
                 .computeEnumSize(1, type_);
       }
-      if (result_ != Message.ToAppResultType.OK.getNumber()) {
+      if (result_ != com.walabot.home.ble.Message.ToAppResultType.OK.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
                 .computeEnumSize(2, result_);
       }
@@ -9500,7 +10905,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeBytesSize(3, payload_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -9510,16 +10915,16 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.ToAppMessage)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.ToAppMessage)) {
         return super.equals(obj);
       }
-      Message.ToAppMessage other = (Message.ToAppMessage) obj;
+      com.walabot.home.ble.Message.ToAppMessage other = (com.walabot.home.ble.Message.ToAppMessage) obj;
 
       if (type_ != other.type_) return false;
       if (result_ != other.result_) return false;
       if (!getPayload()
               .equals(other.getPayload())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -9536,74 +10941,76 @@ public final class Message {
       hash = (53 * hash) + result_;
       hash = (37 * hash) + PAYLOAD_FIELD_NUMBER;
       hash = (53 * hash) + getPayload().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.ToAppMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToAppMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToAppMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToAppMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToAppMessage parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToAppMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToAppMessage parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.ToAppMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.ToAppMessage parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.ToAppMessage parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.ToAppMessage parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.ToAppMessage parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.ToAppMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.ToAppMessage parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -9616,7 +11023,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.ToAppMessage prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.ToAppMessage prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -9637,61 +11044,54 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:ToAppMessage)
-            Message.ToAppMessageOrBuilder {
+            com.walabot.home.ble.Message.ToAppMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_ToAppMessage_descriptor;
+        return com.walabot.home.ble.Message.internal_static_ToAppMessage_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_ToAppMessage_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_ToAppMessage_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.ToAppMessage.class, Message.ToAppMessage.Builder.class);
+                        com.walabot.home.ble.Message.ToAppMessage.class, com.walabot.home.ble.Message.ToAppMessage.Builder.class);
       }
 
-      // Construct using Message.ToAppMessage.newBuilder()
+      // Construct using com.walabot.home.ble.Message.ToAppMessage.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         type_ = 0;
-
         result_ = 0;
-
         payload_ = com.google.protobuf.ByteString.EMPTY;
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_ToAppMessage_descriptor;
+        return com.walabot.home.ble.Message.internal_static_ToAppMessage_descriptor;
       }
 
       @java.lang.Override
-      public Message.ToAppMessage getDefaultInstanceForType() {
-        return Message.ToAppMessage.getDefaultInstance();
+      public com.walabot.home.ble.Message.ToAppMessage getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.ToAppMessage.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.ToAppMessage build() {
-        Message.ToAppMessage result = buildPartial();
+      public com.walabot.home.ble.Message.ToAppMessage build() {
+        com.walabot.home.ble.Message.ToAppMessage result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -9699,13 +11099,24 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.ToAppMessage buildPartial() {
-        Message.ToAppMessage result = new Message.ToAppMessage(this);
-        result.type_ = type_;
-        result.result_ = result_;
-        result.payload_ = payload_;
+      public com.walabot.home.ble.Message.ToAppMessage buildPartial() {
+        com.walabot.home.ble.Message.ToAppMessage result = new com.walabot.home.ble.Message.ToAppMessage(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.ToAppMessage result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.type_ = type_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.result_ = result_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.payload_ = payload_;
+        }
       }
 
       @java.lang.Override
@@ -9742,16 +11153,16 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.ToAppMessage) {
-          return mergeFrom((Message.ToAppMessage)other);
+        if (other instanceof com.walabot.home.ble.Message.ToAppMessage) {
+          return mergeFrom((com.walabot.home.ble.Message.ToAppMessage)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.ToAppMessage other) {
-        if (other == Message.ToAppMessage.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.ToAppMessage other) {
+        if (other == com.walabot.home.ble.Message.ToAppMessage.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
         }
@@ -9761,7 +11172,7 @@ public final class Message {
         if (other.getPayload() != com.google.protobuf.ByteString.EMPTY) {
           setPayload(other.getPayload());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -9776,19 +11187,48 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.ToAppMessage parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                type_ = input.readEnum();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                result_ = input.readEnum();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 26: {
+                payload_ = input.readBytes();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.ToAppMessage) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private int type_ = 0;
       /**
@@ -9804,8 +11244,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
-
         type_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -9814,21 +11254,20 @@ public final class Message {
        * @return The type.
        */
       @java.lang.Override
-      public Message.ToAppMessageType getType() {
-        @SuppressWarnings("deprecation")
-        Message.ToAppMessageType result = Message.ToAppMessageType.valueOf(type_);
-        return result == null ? Message.ToAppMessageType.UNRECOGNIZED : result;
+      public com.walabot.home.ble.Message.ToAppMessageType getType() {
+        com.walabot.home.ble.Message.ToAppMessageType result = com.walabot.home.ble.Message.ToAppMessageType.forNumber(type_);
+        return result == null ? com.walabot.home.ble.Message.ToAppMessageType.UNRECOGNIZED : result;
       }
       /**
        * <code>.ToAppMessageType type = 1;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
-      public Builder setType(Message.ToAppMessageType value) {
+      public Builder setType(com.walabot.home.ble.Message.ToAppMessageType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-
+        bitField0_ |= 0x00000001;
         type_ = value.getNumber();
         onChanged();
         return this;
@@ -9838,7 +11277,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearType() {
-
+        bitField0_ = (bitField0_ & ~0x00000001);
         type_ = 0;
         onChanged();
         return this;
@@ -9858,8 +11297,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setResultValue(int value) {
-
         result_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -9868,21 +11307,20 @@ public final class Message {
        * @return The result.
        */
       @java.lang.Override
-      public Message.ToAppResultType getResult() {
-        @SuppressWarnings("deprecation")
-        Message.ToAppResultType result = Message.ToAppResultType.valueOf(result_);
-        return result == null ? Message.ToAppResultType.UNRECOGNIZED : result;
+      public com.walabot.home.ble.Message.ToAppResultType getResult() {
+        com.walabot.home.ble.Message.ToAppResultType result = com.walabot.home.ble.Message.ToAppResultType.forNumber(result_);
+        return result == null ? com.walabot.home.ble.Message.ToAppResultType.UNRECOGNIZED : result;
       }
       /**
        * <code>.ToAppResultType result = 2;</code>
        * @param value The result to set.
        * @return This builder for chaining.
        */
-      public Builder setResult(Message.ToAppResultType value) {
+      public Builder setResult(com.walabot.home.ble.Message.ToAppResultType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-
+        bitField0_ |= 0x00000002;
         result_ = value.getNumber();
         onChanged();
         return this;
@@ -9892,7 +11330,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearResult() {
-
+        bitField0_ = (bitField0_ & ~0x00000002);
         result_ = 0;
         onChanged();
         return this;
@@ -9913,11 +11351,9 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setPayload(com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         payload_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -9926,7 +11362,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearPayload() {
-
+        bitField0_ = (bitField0_ & ~0x00000004);
         payload_ = getDefaultInstance().getPayload();
         onChanged();
         return this;
@@ -9948,12 +11384,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:ToAppMessage)
-    private static final Message.ToAppMessage DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.ToAppMessage DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.ToAppMessage();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.ToAppMessage();
     }
 
-    public static Message.ToAppMessage getDefaultInstance() {
+    public static com.walabot.home.ble.Message.ToAppMessage getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -9964,7 +11400,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ToAppMessage(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -9978,7 +11425,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.ToAppMessage getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.ToAppMessage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10042,80 +11489,22 @@ public final class Message {
       return new WifiCred2();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private WifiCred2(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ssid_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              pass_ = s;
-              break;
-            }
-            case 24: {
-
-              minRssi_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_WifiCred2_descriptor;
+      return com.walabot.home.ble.Message.internal_static_WifiCred2_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_WifiCred2_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_WifiCred2_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.WifiCred2.class, Message.WifiCred2.Builder.class);
+                      com.walabot.home.ble.Message.WifiCred2.class, com.walabot.home.ble.Message.WifiCred2.Builder.class);
     }
 
     public static final int SSID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object ssid_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object ssid_ = "";
     /**
      * <code>string ssid = 1;</code>
      * @return The ssid.
@@ -10153,7 +11542,8 @@ public final class Message {
     }
 
     public static final int PASS_FIELD_NUMBER = 2;
-    private volatile java.lang.Object pass_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object pass_ = "";
     /**
      * <code>string pass = 2;</code>
      * @return The pass.
@@ -10191,7 +11581,7 @@ public final class Message {
     }
 
     public static final int MIN_RSSI_FIELD_NUMBER = 3;
-    private int minRssi_;
+    private int minRssi_ = 0;
     /**
      * <code>int32 min_rssi = 3;</code>
      * @return The minRssi.
@@ -10224,7 +11614,7 @@ public final class Message {
       if (minRssi_ != 0) {
         output.writeInt32(3, minRssi_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -10243,7 +11633,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeInt32Size(3, minRssi_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -10253,10 +11643,10 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.WifiCred2)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.WifiCred2)) {
         return super.equals(obj);
       }
-      Message.WifiCred2 other = (Message.WifiCred2) obj;
+      com.walabot.home.ble.Message.WifiCred2 other = (com.walabot.home.ble.Message.WifiCred2) obj;
 
       if (!getSsid()
               .equals(other.getSsid())) return false;
@@ -10264,7 +11654,7 @@ public final class Message {
               .equals(other.getPass())) return false;
       if (getMinRssi()
               != other.getMinRssi()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -10281,74 +11671,76 @@ public final class Message {
       hash = (53 * hash) + getPass().hashCode();
       hash = (37 * hash) + MIN_RSSI_FIELD_NUMBER;
       hash = (53 * hash) + getMinRssi();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.WifiCred2 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCred2 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCred2 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCred2 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCred2 parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCred2 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCred2 parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.WifiCred2 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.WifiCred2 parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.WifiCred2 parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.WifiCred2 parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.WifiCred2 parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.WifiCred2 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.WifiCred2 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCred2 parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -10361,7 +11753,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.WifiCred2 prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.WifiCred2 prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -10382,61 +11774,54 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:WifiCred2)
-            Message.WifiCred2OrBuilder {
+            com.walabot.home.ble.Message.WifiCred2OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_WifiCred2_descriptor;
+        return com.walabot.home.ble.Message.internal_static_WifiCred2_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_WifiCred2_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_WifiCred2_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.WifiCred2.class, Message.WifiCred2.Builder.class);
+                        com.walabot.home.ble.Message.WifiCred2.class, com.walabot.home.ble.Message.WifiCred2.Builder.class);
       }
 
-      // Construct using Message.WifiCred2.newBuilder()
+      // Construct using com.walabot.home.ble.Message.WifiCred2.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         ssid_ = "";
-
         pass_ = "";
-
         minRssi_ = 0;
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_WifiCred2_descriptor;
+        return com.walabot.home.ble.Message.internal_static_WifiCred2_descriptor;
       }
 
       @java.lang.Override
-      public Message.WifiCred2 getDefaultInstanceForType() {
-        return Message.WifiCred2.getDefaultInstance();
+      public com.walabot.home.ble.Message.WifiCred2 getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.WifiCred2.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.WifiCred2 build() {
-        Message.WifiCred2 result = buildPartial();
+      public com.walabot.home.ble.Message.WifiCred2 build() {
+        com.walabot.home.ble.Message.WifiCred2 result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -10444,13 +11829,24 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.WifiCred2 buildPartial() {
-        Message.WifiCred2 result = new Message.WifiCred2(this);
-        result.ssid_ = ssid_;
-        result.pass_ = pass_;
-        result.minRssi_ = minRssi_;
+      public com.walabot.home.ble.Message.WifiCred2 buildPartial() {
+        com.walabot.home.ble.Message.WifiCred2 result = new com.walabot.home.ble.Message.WifiCred2(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.WifiCred2 result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.ssid_ = ssid_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.pass_ = pass_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.minRssi_ = minRssi_;
+        }
       }
 
       @java.lang.Override
@@ -10487,28 +11883,30 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.WifiCred2) {
-          return mergeFrom((Message.WifiCred2)other);
+        if (other instanceof com.walabot.home.ble.Message.WifiCred2) {
+          return mergeFrom((com.walabot.home.ble.Message.WifiCred2)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.WifiCred2 other) {
-        if (other == Message.WifiCred2.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.WifiCred2 other) {
+        if (other == com.walabot.home.ble.Message.WifiCred2.getDefaultInstance()) return this;
         if (!other.getSsid().isEmpty()) {
           ssid_ = other.ssid_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getPass().isEmpty()) {
           pass_ = other.pass_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (other.getMinRssi() != 0) {
           setMinRssi(other.getMinRssi());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -10523,19 +11921,48 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.WifiCred2 parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                ssid_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                pass_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 24: {
+                minRssi_ = input.readInt32();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.WifiCred2) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object ssid_ = "";
       /**
@@ -10578,11 +12005,9 @@ public final class Message {
        */
       public Builder setSsid(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         ssid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -10591,8 +12016,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearSsid() {
-
         ssid_ = getDefaultInstance().getSsid();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -10603,12 +12028,10 @@ public final class Message {
        */
       public Builder setSsidBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         ssid_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -10654,11 +12077,9 @@ public final class Message {
        */
       public Builder setPass(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         pass_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -10667,8 +12088,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearPass() {
-
         pass_ = getDefaultInstance().getPass();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -10679,12 +12100,10 @@ public final class Message {
        */
       public Builder setPassBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         pass_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -10706,6 +12125,7 @@ public final class Message {
       public Builder setMinRssi(int value) {
 
         minRssi_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -10714,7 +12134,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearMinRssi() {
-
+        bitField0_ = (bitField0_ & ~0x00000004);
         minRssi_ = 0;
         onChanged();
         return this;
@@ -10736,12 +12156,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:WifiCred2)
-    private static final Message.WifiCred2 DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.WifiCred2 DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.WifiCred2();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.WifiCred2();
     }
 
-    public static Message.WifiCred2 getDefaultInstance() {
+    public static com.walabot.home.ble.Message.WifiCred2 getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10752,7 +12172,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WifiCred2(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -10766,7 +12197,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.WifiCred2 getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.WifiCred2 getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10785,7 +12216,7 @@ public final class Message {
      * <code>.ToAppMessageType type = 1;</code>
      * @return The type.
      */
-    Message.ToAppMessageType getType();
+    com.walabot.home.ble.Message.ToAppMessageType getType();
 
     /**
      * <code>.ToAppResultType2 result = 2;</code>
@@ -10796,7 +12227,7 @@ public final class Message {
      * <code>.ToAppResultType2 result = 2;</code>
      * @return The result.
      */
-    Message.ToAppResultType2 getResult();
+    com.walabot.home.ble.Message.ToAppResultType2 getResult();
 
     /**
      * <code>int32 esp_error = 3;</code>
@@ -10834,85 +12265,21 @@ public final class Message {
       return new WifiCredResult3();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private WifiCredResult3(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              int rawValue = input.readEnum();
-
-              type_ = rawValue;
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-
-              result_ = rawValue;
-              break;
-            }
-            case 24: {
-
-              espError_ = input.readInt32();
-              break;
-            }
-            case 32: {
-
-              mac_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_WifiCredResult3_descriptor;
+      return com.walabot.home.ble.Message.internal_static_WifiCredResult3_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_WifiCredResult3_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_WifiCredResult3_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.WifiCredResult3.class, Message.WifiCredResult3.Builder.class);
+                      com.walabot.home.ble.Message.WifiCredResult3.class, com.walabot.home.ble.Message.WifiCredResult3.Builder.class);
     }
 
     public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
+    private int type_ = 0;
     /**
      * <code>.ToAppMessageType type = 1;</code>
      * @return The enum numeric value on the wire for type.
@@ -10924,14 +12291,13 @@ public final class Message {
      * <code>.ToAppMessageType type = 1;</code>
      * @return The type.
      */
-    @java.lang.Override public Message.ToAppMessageType getType() {
-      @SuppressWarnings("deprecation")
-      Message.ToAppMessageType result = Message.ToAppMessageType.valueOf(type_);
-      return result == null ? Message.ToAppMessageType.UNRECOGNIZED : result;
+    @java.lang.Override public com.walabot.home.ble.Message.ToAppMessageType getType() {
+      com.walabot.home.ble.Message.ToAppMessageType result = com.walabot.home.ble.Message.ToAppMessageType.forNumber(type_);
+      return result == null ? com.walabot.home.ble.Message.ToAppMessageType.UNRECOGNIZED : result;
     }
 
     public static final int RESULT_FIELD_NUMBER = 2;
-    private int result_;
+    private int result_ = 0;
     /**
      * <code>.ToAppResultType2 result = 2;</code>
      * @return The enum numeric value on the wire for result.
@@ -10943,14 +12309,13 @@ public final class Message {
      * <code>.ToAppResultType2 result = 2;</code>
      * @return The result.
      */
-    @java.lang.Override public Message.ToAppResultType2 getResult() {
-      @SuppressWarnings("deprecation")
-      Message.ToAppResultType2 result = Message.ToAppResultType2.valueOf(result_);
-      return result == null ? Message.ToAppResultType2.UNRECOGNIZED : result;
+    @java.lang.Override public com.walabot.home.ble.Message.ToAppResultType2 getResult() {
+      com.walabot.home.ble.Message.ToAppResultType2 result = com.walabot.home.ble.Message.ToAppResultType2.forNumber(result_);
+      return result == null ? com.walabot.home.ble.Message.ToAppResultType2.UNRECOGNIZED : result;
     }
 
     public static final int ESP_ERROR_FIELD_NUMBER = 3;
-    private int espError_;
+    private int espError_ = 0;
     /**
      * <code>int32 esp_error = 3;</code>
      * @return The espError.
@@ -10961,7 +12326,7 @@ public final class Message {
     }
 
     public static final int MAC_FIELD_NUMBER = 4;
-    private long mac_;
+    private long mac_ = 0L;
     /**
      * <code>int64 mac = 4;</code>
      * @return The mac.
@@ -10985,10 +12350,10 @@ public final class Message {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
             throws java.io.IOException {
-      if (type_ != Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
+      if (type_ != com.walabot.home.ble.Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
         output.writeEnum(1, type_);
       }
-      if (result_ != Message.ToAppResultType2.SUCCESS.getNumber()) {
+      if (result_ != com.walabot.home.ble.Message.ToAppResultType2.SUCCESS.getNumber()) {
         output.writeEnum(2, result_);
       }
       if (espError_ != 0) {
@@ -10997,7 +12362,7 @@ public final class Message {
       if (mac_ != 0L) {
         output.writeInt64(4, mac_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -11006,11 +12371,11 @@ public final class Message {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
+      if (type_ != com.walabot.home.ble.Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
                 .computeEnumSize(1, type_);
       }
-      if (result_ != Message.ToAppResultType2.SUCCESS.getNumber()) {
+      if (result_ != com.walabot.home.ble.Message.ToAppResultType2.SUCCESS.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
                 .computeEnumSize(2, result_);
       }
@@ -11022,7 +12387,7 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
                 .computeInt64Size(4, mac_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -11032,10 +12397,10 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.WifiCredResult3)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.WifiCredResult3)) {
         return super.equals(obj);
       }
-      Message.WifiCredResult3 other = (Message.WifiCredResult3) obj;
+      com.walabot.home.ble.Message.WifiCredResult3 other = (com.walabot.home.ble.Message.WifiCredResult3) obj;
 
       if (type_ != other.type_) return false;
       if (result_ != other.result_) return false;
@@ -11043,7 +12408,7 @@ public final class Message {
               != other.getEspError()) return false;
       if (getMac()
               != other.getMac()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -11063,74 +12428,76 @@ public final class Message {
       hash = (37 * hash) + MAC_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
               getMac());
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.WifiCredResult3 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCredResult3 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCredResult3 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCredResult3 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCredResult3 parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.WifiCredResult3 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.WifiCredResult3 parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.WifiCredResult3 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.WifiCredResult3 parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.WifiCredResult3 parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.WifiCredResult3 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.WifiCredResult3 parseFrom(
+    public static com.walabot.home.ble.Message.WifiCredResult3 parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -11143,7 +12510,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.WifiCredResult3 prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.WifiCredResult3 prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -11164,63 +12531,55 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:WifiCredResult3)
-            Message.WifiCredResult3OrBuilder {
+            com.walabot.home.ble.Message.WifiCredResult3OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_WifiCredResult3_descriptor;
+        return com.walabot.home.ble.Message.internal_static_WifiCredResult3_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_WifiCredResult3_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_WifiCredResult3_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.WifiCredResult3.class, Message.WifiCredResult3.Builder.class);
+                        com.walabot.home.ble.Message.WifiCredResult3.class, com.walabot.home.ble.Message.WifiCredResult3.Builder.class);
       }
 
-      // Construct using Message.WifiCredResult3.newBuilder()
+      // Construct using com.walabot.home.ble.Message.WifiCredResult3.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         type_ = 0;
-
         result_ = 0;
-
         espError_ = 0;
-
         mac_ = 0L;
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_WifiCredResult3_descriptor;
+        return com.walabot.home.ble.Message.internal_static_WifiCredResult3_descriptor;
       }
 
       @java.lang.Override
-      public Message.WifiCredResult3 getDefaultInstanceForType() {
-        return Message.WifiCredResult3.getDefaultInstance();
+      public com.walabot.home.ble.Message.WifiCredResult3 getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.WifiCredResult3.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.WifiCredResult3 build() {
-        Message.WifiCredResult3 result = buildPartial();
+      public com.walabot.home.ble.Message.WifiCredResult3 build() {
+        com.walabot.home.ble.Message.WifiCredResult3 result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -11228,14 +12587,27 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.WifiCredResult3 buildPartial() {
-        Message.WifiCredResult3 result = new Message.WifiCredResult3(this);
-        result.type_ = type_;
-        result.result_ = result_;
-        result.espError_ = espError_;
-        result.mac_ = mac_;
+      public com.walabot.home.ble.Message.WifiCredResult3 buildPartial() {
+        com.walabot.home.ble.Message.WifiCredResult3 result = new com.walabot.home.ble.Message.WifiCredResult3(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.WifiCredResult3 result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.type_ = type_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.result_ = result_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.espError_ = espError_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.mac_ = mac_;
+        }
       }
 
       @java.lang.Override
@@ -11272,16 +12644,16 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.WifiCredResult3) {
-          return mergeFrom((Message.WifiCredResult3)other);
+        if (other instanceof com.walabot.home.ble.Message.WifiCredResult3) {
+          return mergeFrom((com.walabot.home.ble.Message.WifiCredResult3)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.WifiCredResult3 other) {
-        if (other == Message.WifiCredResult3.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.WifiCredResult3 other) {
+        if (other == com.walabot.home.ble.Message.WifiCredResult3.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
         }
@@ -11294,7 +12666,7 @@ public final class Message {
         if (other.getMac() != 0L) {
           setMac(other.getMac());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -11309,19 +12681,53 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.WifiCredResult3 parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                type_ = input.readEnum();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                result_ = input.readEnum();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 24: {
+                espError_ = input.readInt32();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 32: {
+                mac_ = input.readInt64();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.WifiCredResult3) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private int type_ = 0;
       /**
@@ -11337,8 +12743,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
-
         type_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -11347,21 +12753,20 @@ public final class Message {
        * @return The type.
        */
       @java.lang.Override
-      public Message.ToAppMessageType getType() {
-        @SuppressWarnings("deprecation")
-        Message.ToAppMessageType result = Message.ToAppMessageType.valueOf(type_);
-        return result == null ? Message.ToAppMessageType.UNRECOGNIZED : result;
+      public com.walabot.home.ble.Message.ToAppMessageType getType() {
+        com.walabot.home.ble.Message.ToAppMessageType result = com.walabot.home.ble.Message.ToAppMessageType.forNumber(type_);
+        return result == null ? com.walabot.home.ble.Message.ToAppMessageType.UNRECOGNIZED : result;
       }
       /**
        * <code>.ToAppMessageType type = 1;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
-      public Builder setType(Message.ToAppMessageType value) {
+      public Builder setType(com.walabot.home.ble.Message.ToAppMessageType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-
+        bitField0_ |= 0x00000001;
         type_ = value.getNumber();
         onChanged();
         return this;
@@ -11371,7 +12776,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearType() {
-
+        bitField0_ = (bitField0_ & ~0x00000001);
         type_ = 0;
         onChanged();
         return this;
@@ -11391,8 +12796,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setResultValue(int value) {
-
         result_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -11401,21 +12806,20 @@ public final class Message {
        * @return The result.
        */
       @java.lang.Override
-      public Message.ToAppResultType2 getResult() {
-        @SuppressWarnings("deprecation")
-        Message.ToAppResultType2 result = Message.ToAppResultType2.valueOf(result_);
-        return result == null ? Message.ToAppResultType2.UNRECOGNIZED : result;
+      public com.walabot.home.ble.Message.ToAppResultType2 getResult() {
+        com.walabot.home.ble.Message.ToAppResultType2 result = com.walabot.home.ble.Message.ToAppResultType2.forNumber(result_);
+        return result == null ? com.walabot.home.ble.Message.ToAppResultType2.UNRECOGNIZED : result;
       }
       /**
        * <code>.ToAppResultType2 result = 2;</code>
        * @param value The result to set.
        * @return This builder for chaining.
        */
-      public Builder setResult(Message.ToAppResultType2 value) {
+      public Builder setResult(com.walabot.home.ble.Message.ToAppResultType2 value) {
         if (value == null) {
           throw new NullPointerException();
         }
-
+        bitField0_ |= 0x00000002;
         result_ = value.getNumber();
         onChanged();
         return this;
@@ -11425,7 +12829,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearResult() {
-
+        bitField0_ = (bitField0_ & ~0x00000002);
         result_ = 0;
         onChanged();
         return this;
@@ -11448,6 +12852,7 @@ public final class Message {
       public Builder setEspError(int value) {
 
         espError_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -11456,7 +12861,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearEspError() {
-
+        bitField0_ = (bitField0_ & ~0x00000004);
         espError_ = 0;
         onChanged();
         return this;
@@ -11479,6 +12884,7 @@ public final class Message {
       public Builder setMac(long value) {
 
         mac_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -11487,7 +12893,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearMac() {
-
+        bitField0_ = (bitField0_ & ~0x00000008);
         mac_ = 0L;
         onChanged();
         return this;
@@ -11509,12 +12915,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:WifiCredResult3)
-    private static final Message.WifiCredResult3 DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.WifiCredResult3 DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.WifiCredResult3();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.WifiCredResult3();
     }
 
-    public static Message.WifiCredResult3 getDefaultInstance() {
+    public static com.walabot.home.ble.Message.WifiCredResult3 getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -11525,7 +12931,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WifiCredResult3(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -11539,7 +12956,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.WifiCredResult3 getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.WifiCredResult3 getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -11610,81 +13027,22 @@ public final class Message {
       return new CloudDetails2();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private CloudDetails2(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              projectId_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              httpUrl_ = s;
-              break;
-            }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              ntpUrl_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_CloudDetails2_descriptor;
+      return com.walabot.home.ble.Message.internal_static_CloudDetails2_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_CloudDetails2_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_CloudDetails2_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.CloudDetails2.class, Message.CloudDetails2.Builder.class);
+                      com.walabot.home.ble.Message.CloudDetails2.class, com.walabot.home.ble.Message.CloudDetails2.Builder.class);
     }
 
     public static final int PROJECT_ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object projectId_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object projectId_ = "";
     /**
      * <code>string project_id = 1;</code>
      * @return The projectId.
@@ -11722,7 +13080,8 @@ public final class Message {
     }
 
     public static final int HTTP_URL_FIELD_NUMBER = 2;
-    private volatile java.lang.Object httpUrl_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object httpUrl_ = "";
     /**
      * <code>string http_url = 2;</code>
      * @return The httpUrl.
@@ -11760,7 +13119,8 @@ public final class Message {
     }
 
     public static final int NTP_URL_FIELD_NUMBER = 5;
-    private volatile java.lang.Object ntpUrl_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object ntpUrl_ = "";
     /**
      * <code>string ntp_url = 5;</code>
      * @return The ntpUrl.
@@ -11820,7 +13180,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ntpUrl_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, ntpUrl_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -11838,7 +13198,7 @@ public final class Message {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ntpUrl_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, ntpUrl_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -11848,10 +13208,10 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.CloudDetails2)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.CloudDetails2)) {
         return super.equals(obj);
       }
-      Message.CloudDetails2 other = (Message.CloudDetails2) obj;
+      com.walabot.home.ble.Message.CloudDetails2 other = (com.walabot.home.ble.Message.CloudDetails2) obj;
 
       if (!getProjectId()
               .equals(other.getProjectId())) return false;
@@ -11859,7 +13219,7 @@ public final class Message {
               .equals(other.getHttpUrl())) return false;
       if (!getNtpUrl()
               .equals(other.getNtpUrl())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -11876,74 +13236,76 @@ public final class Message {
       hash = (53 * hash) + getHttpUrl().hashCode();
       hash = (37 * hash) + NTP_URL_FIELD_NUMBER;
       hash = (53 * hash) + getNtpUrl().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.CloudDetails2 parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.CloudDetails2 parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.CloudDetails2 parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.CloudDetails2 parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.CloudDetails2 parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.CloudDetails2 parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.CloudDetails2 parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.CloudDetails2 parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.CloudDetails2 parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.CloudDetails2 parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.CloudDetails2 parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.CloudDetails2 parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.CloudDetails2 parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.CloudDetails2 parseFrom(
+    public static com.walabot.home.ble.Message.CloudDetails2 parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -11956,7 +13318,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.CloudDetails2 prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.CloudDetails2 prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -11977,61 +13339,54 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:CloudDetails2)
-            Message.CloudDetails2OrBuilder {
+            com.walabot.home.ble.Message.CloudDetails2OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_CloudDetails2_descriptor;
+        return com.walabot.home.ble.Message.internal_static_CloudDetails2_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_CloudDetails2_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_CloudDetails2_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.CloudDetails2.class, Message.CloudDetails2.Builder.class);
+                        com.walabot.home.ble.Message.CloudDetails2.class, com.walabot.home.ble.Message.CloudDetails2.Builder.class);
       }
 
-      // Construct using Message.CloudDetails2.newBuilder()
+      // Construct using com.walabot.home.ble.Message.CloudDetails2.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         projectId_ = "";
-
         httpUrl_ = "";
-
         ntpUrl_ = "";
-
         return this;
       }
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_CloudDetails2_descriptor;
+        return com.walabot.home.ble.Message.internal_static_CloudDetails2_descriptor;
       }
 
       @java.lang.Override
-      public Message.CloudDetails2 getDefaultInstanceForType() {
-        return Message.CloudDetails2.getDefaultInstance();
+      public com.walabot.home.ble.Message.CloudDetails2 getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.CloudDetails2.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.CloudDetails2 build() {
-        Message.CloudDetails2 result = buildPartial();
+      public com.walabot.home.ble.Message.CloudDetails2 build() {
+        com.walabot.home.ble.Message.CloudDetails2 result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -12039,13 +13394,24 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.CloudDetails2 buildPartial() {
-        Message.CloudDetails2 result = new Message.CloudDetails2(this);
-        result.projectId_ = projectId_;
-        result.httpUrl_ = httpUrl_;
-        result.ntpUrl_ = ntpUrl_;
+      public com.walabot.home.ble.Message.CloudDetails2 buildPartial() {
+        com.walabot.home.ble.Message.CloudDetails2 result = new com.walabot.home.ble.Message.CloudDetails2(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.CloudDetails2 result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.projectId_ = projectId_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.httpUrl_ = httpUrl_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.ntpUrl_ = ntpUrl_;
+        }
       }
 
       @java.lang.Override
@@ -12082,29 +13448,32 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.CloudDetails2) {
-          return mergeFrom((Message.CloudDetails2)other);
+        if (other instanceof com.walabot.home.ble.Message.CloudDetails2) {
+          return mergeFrom((com.walabot.home.ble.Message.CloudDetails2)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.CloudDetails2 other) {
-        if (other == Message.CloudDetails2.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.CloudDetails2 other) {
+        if (other == com.walabot.home.ble.Message.CloudDetails2.getDefaultInstance()) return this;
         if (!other.getProjectId().isEmpty()) {
           projectId_ = other.projectId_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getHttpUrl().isEmpty()) {
           httpUrl_ = other.httpUrl_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getNtpUrl().isEmpty()) {
           ntpUrl_ = other.ntpUrl_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -12119,19 +13488,48 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.CloudDetails2 parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                projectId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                httpUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 42: {
+                ntpUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 42
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.CloudDetails2) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object projectId_ = "";
       /**
@@ -12174,11 +13572,9 @@ public final class Message {
        */
       public Builder setProjectId(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         projectId_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -12187,8 +13583,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearProjectId() {
-
         projectId_ = getDefaultInstance().getProjectId();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -12199,12 +13595,10 @@ public final class Message {
        */
       public Builder setProjectIdBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         projectId_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -12250,11 +13644,9 @@ public final class Message {
        */
       public Builder setHttpUrl(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         httpUrl_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -12263,8 +13655,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearHttpUrl() {
-
         httpUrl_ = getDefaultInstance().getHttpUrl();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -12275,12 +13667,10 @@ public final class Message {
        */
       public Builder setHttpUrlBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         httpUrl_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -12326,11 +13716,9 @@ public final class Message {
        */
       public Builder setNtpUrl(
               java.lang.String value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-
+        if (value == null) { throw new NullPointerException(); }
         ntpUrl_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -12339,8 +13727,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearNtpUrl() {
-
         ntpUrl_ = getDefaultInstance().getNtpUrl();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -12351,12 +13739,10 @@ public final class Message {
        */
       public Builder setNtpUrlBytes(
               com.google.protobuf.ByteString value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+        if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-
         ntpUrl_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -12377,12 +13763,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:CloudDetails2)
-    private static final Message.CloudDetails2 DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.CloudDetails2 DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.CloudDetails2();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.CloudDetails2();
     }
 
-    public static Message.CloudDetails2 getDefaultInstance() {
+    public static com.walabot.home.ble.Message.CloudDetails2 getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -12393,7 +13779,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CloudDetails2(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -12407,7 +13804,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.CloudDetails2 getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.CloudDetails2 getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -12426,7 +13823,7 @@ public final class Message {
      * <code>.ToAppMessageType type = 1;</code>
      * @return The type.
      */
-    Message.ToAppMessageType getType();
+    com.walabot.home.ble.Message.ToAppMessageType getType();
 
     /**
      * <code>.ToAppResultType2 result = 2;</code>
@@ -12437,7 +13834,7 @@ public final class Message {
      * <code>.ToAppResultType2 result = 2;</code>
      * @return The result.
      */
-    Message.ToAppResultType2 getResult();
+    com.walabot.home.ble.Message.ToAppResultType2 getResult();
 
     /**
      * <code>int32 esp_error = 3;</code>
@@ -12454,11 +13851,11 @@ public final class Message {
      * <code>.PairResult pair = 4;</code>
      * @return The pair.
      */
-    Message.PairResult getPair();
+    com.walabot.home.ble.Message.PairResult getPair();
     /**
      * <code>.PairResult pair = 4;</code>
      */
-    Message.PairResultOrBuilder getPairOrBuilder();
+    com.walabot.home.ble.Message.PairResultOrBuilder getPairOrBuilder();
 
     /**
      * <code>.ScanResult scan = 5;</code>
@@ -12469,13 +13866,28 @@ public final class Message {
      * <code>.ScanResult scan = 5;</code>
      * @return The scan.
      */
-    Message.ScanResult getScan();
+    com.walabot.home.ble.Message.ScanResult getScan();
     /**
      * <code>.ScanResult scan = 5;</code>
      */
-    Message.ScanResultOrBuilder getScanOrBuilder();
+    com.walabot.home.ble.Message.ScanResultOrBuilder getScanOrBuilder();
 
-    public Message.ToAppMessage2.PayloadCase getPayloadCase();
+    /**
+     * <code>.DevInfo dev_info = 6;</code>
+     * @return Whether the devInfo field is set.
+     */
+    boolean hasDevInfo();
+    /**
+     * <code>.DevInfo dev_info = 6;</code>
+     * @return The devInfo.
+     */
+    com.walabot.home.ble.Message.DevInfo getDevInfo();
+    /**
+     * <code>.DevInfo dev_info = 6;</code>
+     */
+    com.walabot.home.ble.Message.DevInfoOrBuilder getDevInfoOrBuilder();
+
+    com.walabot.home.ble.Message.ToAppMessage2.PayloadCase getPayloadCase();
   }
   /**
    * Protobuf type {@code ToAppMessage2}
@@ -12501,113 +13913,28 @@ public final class Message {
       return new ToAppMessage2();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ToAppMessage2(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              int rawValue = input.readEnum();
-
-              type_ = rawValue;
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-
-              result_ = rawValue;
-              break;
-            }
-            case 24: {
-
-              espError_ = input.readInt32();
-              break;
-            }
-            case 34: {
-              Message.PairResult.Builder subBuilder = null;
-              if (payloadCase_ == 4) {
-                subBuilder = ((Message.PairResult) payload_).toBuilder();
-              }
-              payload_ =
-                      input.readMessage(Message.PairResult.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((Message.PairResult) payload_);
-                payload_ = subBuilder.buildPartial();
-              }
-              payloadCase_ = 4;
-              break;
-            }
-            case 42: {
-              Message.ScanResult.Builder subBuilder = null;
-              if (payloadCase_ == 5) {
-                subBuilder = ((Message.ScanResult) payload_).toBuilder();
-              }
-              payload_ =
-                      input.readMessage(Message.ScanResult.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((Message.ScanResult) payload_);
-                payload_ = subBuilder.buildPartial();
-              }
-              payloadCase_ = 5;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                      input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-      return Message.internal_static_ToAppMessage2_descriptor;
+      return com.walabot.home.ble.Message.internal_static_ToAppMessage2_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
     internalGetFieldAccessorTable() {
-      return Message.internal_static_ToAppMessage2_fieldAccessorTable
+      return com.walabot.home.ble.Message.internal_static_ToAppMessage2_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
-                      Message.ToAppMessage2.class, Message.ToAppMessage2.Builder.class);
+                      com.walabot.home.ble.Message.ToAppMessage2.class, com.walabot.home.ble.Message.ToAppMessage2.Builder.class);
     }
 
     private int payloadCase_ = 0;
+    @SuppressWarnings("serial")
     private java.lang.Object payload_;
     public enum PayloadCase
             implements com.google.protobuf.Internal.EnumLite,
             com.google.protobuf.AbstractMessage.InternalOneOfEnum {
       PAIR(4),
       SCAN(5),
+      DEV_INFO(6),
       PAYLOAD_NOT_SET(0);
       private final int value;
       private PayloadCase(int value) {
@@ -12627,6 +13954,7 @@ public final class Message {
         switch (value) {
           case 4: return PAIR;
           case 5: return SCAN;
+          case 6: return DEV_INFO;
           case 0: return PAYLOAD_NOT_SET;
           default: return null;
         }
@@ -12643,7 +13971,7 @@ public final class Message {
     }
 
     public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
+    private int type_ = 0;
     /**
      * <code>.ToAppMessageType type = 1;</code>
      * @return The enum numeric value on the wire for type.
@@ -12655,14 +13983,13 @@ public final class Message {
      * <code>.ToAppMessageType type = 1;</code>
      * @return The type.
      */
-    @java.lang.Override public Message.ToAppMessageType getType() {
-      @SuppressWarnings("deprecation")
-      Message.ToAppMessageType result = Message.ToAppMessageType.valueOf(type_);
-      return result == null ? Message.ToAppMessageType.UNRECOGNIZED : result;
+    @java.lang.Override public com.walabot.home.ble.Message.ToAppMessageType getType() {
+      com.walabot.home.ble.Message.ToAppMessageType result = com.walabot.home.ble.Message.ToAppMessageType.forNumber(type_);
+      return result == null ? com.walabot.home.ble.Message.ToAppMessageType.UNRECOGNIZED : result;
     }
 
     public static final int RESULT_FIELD_NUMBER = 2;
-    private int result_;
+    private int result_ = 0;
     /**
      * <code>.ToAppResultType2 result = 2;</code>
      * @return The enum numeric value on the wire for result.
@@ -12674,14 +14001,13 @@ public final class Message {
      * <code>.ToAppResultType2 result = 2;</code>
      * @return The result.
      */
-    @java.lang.Override public Message.ToAppResultType2 getResult() {
-      @SuppressWarnings("deprecation")
-      Message.ToAppResultType2 result = Message.ToAppResultType2.valueOf(result_);
-      return result == null ? Message.ToAppResultType2.UNRECOGNIZED : result;
+    @java.lang.Override public com.walabot.home.ble.Message.ToAppResultType2 getResult() {
+      com.walabot.home.ble.Message.ToAppResultType2 result = com.walabot.home.ble.Message.ToAppResultType2.forNumber(result_);
+      return result == null ? com.walabot.home.ble.Message.ToAppResultType2.UNRECOGNIZED : result;
     }
 
     public static final int ESP_ERROR_FIELD_NUMBER = 3;
-    private int espError_;
+    private int espError_ = 0;
     /**
      * <code>int32 esp_error = 3;</code>
      * @return The espError.
@@ -12705,21 +14031,21 @@ public final class Message {
      * @return The pair.
      */
     @java.lang.Override
-    public Message.PairResult getPair() {
+    public com.walabot.home.ble.Message.PairResult getPair() {
       if (payloadCase_ == 4) {
-        return (Message.PairResult) payload_;
+        return (com.walabot.home.ble.Message.PairResult) payload_;
       }
-      return Message.PairResult.getDefaultInstance();
+      return com.walabot.home.ble.Message.PairResult.getDefaultInstance();
     }
     /**
      * <code>.PairResult pair = 4;</code>
      */
     @java.lang.Override
-    public Message.PairResultOrBuilder getPairOrBuilder() {
+    public com.walabot.home.ble.Message.PairResultOrBuilder getPairOrBuilder() {
       if (payloadCase_ == 4) {
-        return (Message.PairResult) payload_;
+        return (com.walabot.home.ble.Message.PairResult) payload_;
       }
-      return Message.PairResult.getDefaultInstance();
+      return com.walabot.home.ble.Message.PairResult.getDefaultInstance();
     }
 
     public static final int SCAN_FIELD_NUMBER = 5;
@@ -12736,21 +14062,52 @@ public final class Message {
      * @return The scan.
      */
     @java.lang.Override
-    public Message.ScanResult getScan() {
+    public com.walabot.home.ble.Message.ScanResult getScan() {
       if (payloadCase_ == 5) {
-        return (Message.ScanResult) payload_;
+        return (com.walabot.home.ble.Message.ScanResult) payload_;
       }
-      return Message.ScanResult.getDefaultInstance();
+      return com.walabot.home.ble.Message.ScanResult.getDefaultInstance();
     }
     /**
      * <code>.ScanResult scan = 5;</code>
      */
     @java.lang.Override
-    public Message.ScanResultOrBuilder getScanOrBuilder() {
+    public com.walabot.home.ble.Message.ScanResultOrBuilder getScanOrBuilder() {
       if (payloadCase_ == 5) {
-        return (Message.ScanResult) payload_;
+        return (com.walabot.home.ble.Message.ScanResult) payload_;
       }
-      return Message.ScanResult.getDefaultInstance();
+      return com.walabot.home.ble.Message.ScanResult.getDefaultInstance();
+    }
+
+    public static final int DEV_INFO_FIELD_NUMBER = 6;
+    /**
+     * <code>.DevInfo dev_info = 6;</code>
+     * @return Whether the devInfo field is set.
+     */
+    @java.lang.Override
+    public boolean hasDevInfo() {
+      return payloadCase_ == 6;
+    }
+    /**
+     * <code>.DevInfo dev_info = 6;</code>
+     * @return The devInfo.
+     */
+    @java.lang.Override
+    public com.walabot.home.ble.Message.DevInfo getDevInfo() {
+      if (payloadCase_ == 6) {
+        return (com.walabot.home.ble.Message.DevInfo) payload_;
+      }
+      return com.walabot.home.ble.Message.DevInfo.getDefaultInstance();
+    }
+    /**
+     * <code>.DevInfo dev_info = 6;</code>
+     */
+    @java.lang.Override
+    public com.walabot.home.ble.Message.DevInfoOrBuilder getDevInfoOrBuilder() {
+      if (payloadCase_ == 6) {
+        return (com.walabot.home.ble.Message.DevInfo) payload_;
+      }
+      return com.walabot.home.ble.Message.DevInfo.getDefaultInstance();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -12767,22 +14124,25 @@ public final class Message {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
             throws java.io.IOException {
-      if (type_ != Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
+      if (type_ != com.walabot.home.ble.Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
         output.writeEnum(1, type_);
       }
-      if (result_ != Message.ToAppResultType2.SUCCESS.getNumber()) {
+      if (result_ != com.walabot.home.ble.Message.ToAppResultType2.SUCCESS.getNumber()) {
         output.writeEnum(2, result_);
       }
       if (espError_ != 0) {
         output.writeInt32(3, espError_);
       }
       if (payloadCase_ == 4) {
-        output.writeMessage(4, (Message.PairResult) payload_);
+        output.writeMessage(4, (com.walabot.home.ble.Message.PairResult) payload_);
       }
       if (payloadCase_ == 5) {
-        output.writeMessage(5, (Message.ScanResult) payload_);
+        output.writeMessage(5, (com.walabot.home.ble.Message.ScanResult) payload_);
       }
-      unknownFields.writeTo(output);
+      if (payloadCase_ == 6) {
+        output.writeMessage(6, (com.walabot.home.ble.Message.DevInfo) payload_);
+      }
+      getUnknownFields().writeTo(output);
     }
 
     @java.lang.Override
@@ -12791,11 +14151,11 @@ public final class Message {
       if (size != -1) return size;
 
       size = 0;
-      if (type_ != Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
+      if (type_ != com.walabot.home.ble.Message.ToAppMessageType.CONNECT_WIFI_RESULT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
                 .computeEnumSize(1, type_);
       }
-      if (result_ != Message.ToAppResultType2.SUCCESS.getNumber()) {
+      if (result_ != com.walabot.home.ble.Message.ToAppResultType2.SUCCESS.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
                 .computeEnumSize(2, result_);
       }
@@ -12805,13 +14165,17 @@ public final class Message {
       }
       if (payloadCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
-                .computeMessageSize(4, (Message.PairResult) payload_);
+                .computeMessageSize(4, (com.walabot.home.ble.Message.PairResult) payload_);
       }
       if (payloadCase_ == 5) {
         size += com.google.protobuf.CodedOutputStream
-                .computeMessageSize(5, (Message.ScanResult) payload_);
+                .computeMessageSize(5, (com.walabot.home.ble.Message.ScanResult) payload_);
       }
-      size += unknownFields.getSerializedSize();
+      if (payloadCase_ == 6) {
+        size += com.google.protobuf.CodedOutputStream
+                .computeMessageSize(6, (com.walabot.home.ble.Message.DevInfo) payload_);
+      }
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -12821,10 +14185,10 @@ public final class Message {
       if (obj == this) {
         return true;
       }
-      if (!(obj instanceof Message.ToAppMessage2)) {
+      if (!(obj instanceof com.walabot.home.ble.Message.ToAppMessage2)) {
         return super.equals(obj);
       }
-      Message.ToAppMessage2 other = (Message.ToAppMessage2) obj;
+      com.walabot.home.ble.Message.ToAppMessage2 other = (com.walabot.home.ble.Message.ToAppMessage2) obj;
 
       if (type_ != other.type_) return false;
       if (result_ != other.result_) return false;
@@ -12840,10 +14204,14 @@ public final class Message {
           if (!getScan()
                   .equals(other.getScan())) return false;
           break;
+        case 6:
+          if (!getDevInfo()
+                  .equals(other.getDevInfo())) return false;
+          break;
         case 0:
         default:
       }
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
@@ -12869,77 +14237,83 @@ public final class Message {
           hash = (37 * hash) + SCAN_FIELD_NUMBER;
           hash = (53 * hash) + getScan().hashCode();
           break;
+        case 6:
+          hash = (37 * hash) + DEV_INFO_FIELD_NUMBER;
+          hash = (53 * hash) + getDevInfo().hashCode();
+          break;
         case 0:
         default:
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Message.ToAppMessage2 parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToAppMessage2 parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToAppMessage2 parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToAppMessage2 parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToAppMessage2 parseFrom(byte[] data)
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Message.ToAppMessage2 parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Message.ToAppMessage2 parseFrom(java.io.InputStream input)
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.ToAppMessage2 parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.ToAppMessage2 parseDelimitedFrom(java.io.InputStream input)
+
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Message.ToAppMessage2 parseDelimitedFrom(
+
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Message.ToAppMessage2 parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
               .parseWithIOException(PARSER, input);
     }
-    public static Message.ToAppMessage2 parseFrom(
+    public static com.walabot.home.ble.Message.ToAppMessage2 parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -12952,7 +14326,7 @@ public final class Message {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Message.ToAppMessage2 prototype) {
+    public static Builder newBuilder(com.walabot.home.ble.Message.ToAppMessage2 prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -12973,44 +14347,46 @@ public final class Message {
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:ToAppMessage2)
-            Message.ToAppMessage2OrBuilder {
+            com.walabot.home.ble.Message.ToAppMessage2OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-        return Message.internal_static_ToAppMessage2_descriptor;
+        return com.walabot.home.ble.Message.internal_static_ToAppMessage2_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-        return Message.internal_static_ToAppMessage2_fieldAccessorTable
+        return com.walabot.home.ble.Message.internal_static_ToAppMessage2_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        Message.ToAppMessage2.class, Message.ToAppMessage2.Builder.class);
+                        com.walabot.home.ble.Message.ToAppMessage2.class, com.walabot.home.ble.Message.ToAppMessage2.Builder.class);
       }
 
-      // Construct using Message.ToAppMessage2.newBuilder()
+      // Construct using com.walabot.home.ble.Message.ToAppMessage2.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
               com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
+
       }
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         type_ = 0;
-
         result_ = 0;
-
         espError_ = 0;
-
+        if (pairBuilder_ != null) {
+          pairBuilder_.clear();
+        }
+        if (scanBuilder_ != null) {
+          scanBuilder_.clear();
+        }
+        if (devInfoBuilder_ != null) {
+          devInfoBuilder_.clear();
+        }
         payloadCase_ = 0;
         payload_ = null;
         return this;
@@ -13019,17 +14395,17 @@ public final class Message {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
       getDescriptorForType() {
-        return Message.internal_static_ToAppMessage2_descriptor;
+        return com.walabot.home.ble.Message.internal_static_ToAppMessage2_descriptor;
       }
 
       @java.lang.Override
-      public Message.ToAppMessage2 getDefaultInstanceForType() {
-        return Message.ToAppMessage2.getDefaultInstance();
+      public com.walabot.home.ble.Message.ToAppMessage2 getDefaultInstanceForType() {
+        return com.walabot.home.ble.Message.ToAppMessage2.getDefaultInstance();
       }
 
       @java.lang.Override
-      public Message.ToAppMessage2 build() {
-        Message.ToAppMessage2 result = buildPartial();
+      public com.walabot.home.ble.Message.ToAppMessage2 build() {
+        com.walabot.home.ble.Message.ToAppMessage2 result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -13037,28 +14413,42 @@ public final class Message {
       }
 
       @java.lang.Override
-      public Message.ToAppMessage2 buildPartial() {
-        Message.ToAppMessage2 result = new Message.ToAppMessage2(this);
-        result.type_ = type_;
-        result.result_ = result_;
-        result.espError_ = espError_;
-        if (payloadCase_ == 4) {
-          if (pairBuilder_ == null) {
-            result.payload_ = payload_;
-          } else {
-            result.payload_ = pairBuilder_.build();
-          }
-        }
-        if (payloadCase_ == 5) {
-          if (scanBuilder_ == null) {
-            result.payload_ = payload_;
-          } else {
-            result.payload_ = scanBuilder_.build();
-          }
-        }
-        result.payloadCase_ = payloadCase_;
+      public com.walabot.home.ble.Message.ToAppMessage2 buildPartial() {
+        com.walabot.home.ble.Message.ToAppMessage2 result = new com.walabot.home.ble.Message.ToAppMessage2(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        buildPartialOneofs(result);
         onBuilt();
         return result;
+      }
+
+      private void buildPartial0(com.walabot.home.ble.Message.ToAppMessage2 result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.type_ = type_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.result_ = result_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.espError_ = espError_;
+        }
+      }
+
+      private void buildPartialOneofs(com.walabot.home.ble.Message.ToAppMessage2 result) {
+        result.payloadCase_ = payloadCase_;
+        result.payload_ = this.payload_;
+        if (payloadCase_ == 4 &&
+                pairBuilder_ != null) {
+          result.payload_ = pairBuilder_.build();
+        }
+        if (payloadCase_ == 5 &&
+                scanBuilder_ != null) {
+          result.payload_ = scanBuilder_.build();
+        }
+        if (payloadCase_ == 6 &&
+                devInfoBuilder_ != null) {
+          result.payload_ = devInfoBuilder_.build();
+        }
       }
 
       @java.lang.Override
@@ -13095,16 +14485,16 @@ public final class Message {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Message.ToAppMessage2) {
-          return mergeFrom((Message.ToAppMessage2)other);
+        if (other instanceof com.walabot.home.ble.Message.ToAppMessage2) {
+          return mergeFrom((com.walabot.home.ble.Message.ToAppMessage2)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Message.ToAppMessage2 other) {
-        if (other == Message.ToAppMessage2.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.walabot.home.ble.Message.ToAppMessage2 other) {
+        if (other == com.walabot.home.ble.Message.ToAppMessage2.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
         }
@@ -13123,11 +14513,15 @@ public final class Message {
             mergeScan(other.getScan());
             break;
           }
+          case DEV_INFO: {
+            mergeDevInfo(other.getDevInfo());
+            break;
+          }
           case PAYLOAD_NOT_SET: {
             break;
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
@@ -13142,17 +14536,66 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws java.io.IOException {
-        Message.ToAppMessage2 parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                type_ = input.readEnum();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                result_ = input.readEnum();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 24: {
+                espError_ = input.readInt32();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 34: {
+                input.readMessage(
+                        getPairFieldBuilder().getBuilder(),
+                        extensionRegistry);
+                payloadCase_ = 4;
+                break;
+              } // case 34
+              case 42: {
+                input.readMessage(
+                        getScanFieldBuilder().getBuilder(),
+                        extensionRegistry);
+                payloadCase_ = 5;
+                break;
+              } // case 42
+              case 50: {
+                input.readMessage(
+                        getDevInfoFieldBuilder().getBuilder(),
+                        extensionRegistry);
+                payloadCase_ = 6;
+                break;
+              } // case 50
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Message.ToAppMessage2) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int payloadCase_ = 0;
@@ -13170,6 +14613,7 @@ public final class Message {
         return this;
       }
 
+      private int bitField0_;
 
       private int type_ = 0;
       /**
@@ -13185,8 +14629,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
-
         type_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -13195,21 +14639,20 @@ public final class Message {
        * @return The type.
        */
       @java.lang.Override
-      public Message.ToAppMessageType getType() {
-        @SuppressWarnings("deprecation")
-        Message.ToAppMessageType result = Message.ToAppMessageType.valueOf(type_);
-        return result == null ? Message.ToAppMessageType.UNRECOGNIZED : result;
+      public com.walabot.home.ble.Message.ToAppMessageType getType() {
+        com.walabot.home.ble.Message.ToAppMessageType result = com.walabot.home.ble.Message.ToAppMessageType.forNumber(type_);
+        return result == null ? com.walabot.home.ble.Message.ToAppMessageType.UNRECOGNIZED : result;
       }
       /**
        * <code>.ToAppMessageType type = 1;</code>
        * @param value The type to set.
        * @return This builder for chaining.
        */
-      public Builder setType(Message.ToAppMessageType value) {
+      public Builder setType(com.walabot.home.ble.Message.ToAppMessageType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-
+        bitField0_ |= 0x00000001;
         type_ = value.getNumber();
         onChanged();
         return this;
@@ -13219,7 +14662,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearType() {
-
+        bitField0_ = (bitField0_ & ~0x00000001);
         type_ = 0;
         onChanged();
         return this;
@@ -13239,8 +14682,8 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder setResultValue(int value) {
-
         result_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -13249,21 +14692,20 @@ public final class Message {
        * @return The result.
        */
       @java.lang.Override
-      public Message.ToAppResultType2 getResult() {
-        @SuppressWarnings("deprecation")
-        Message.ToAppResultType2 result = Message.ToAppResultType2.valueOf(result_);
-        return result == null ? Message.ToAppResultType2.UNRECOGNIZED : result;
+      public com.walabot.home.ble.Message.ToAppResultType2 getResult() {
+        com.walabot.home.ble.Message.ToAppResultType2 result = com.walabot.home.ble.Message.ToAppResultType2.forNumber(result_);
+        return result == null ? com.walabot.home.ble.Message.ToAppResultType2.UNRECOGNIZED : result;
       }
       /**
        * <code>.ToAppResultType2 result = 2;</code>
        * @param value The result to set.
        * @return This builder for chaining.
        */
-      public Builder setResult(Message.ToAppResultType2 value) {
+      public Builder setResult(com.walabot.home.ble.Message.ToAppResultType2 value) {
         if (value == null) {
           throw new NullPointerException();
         }
-
+        bitField0_ |= 0x00000002;
         result_ = value.getNumber();
         onChanged();
         return this;
@@ -13273,7 +14715,7 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearResult() {
-
+        bitField0_ = (bitField0_ & ~0x00000002);
         result_ = 0;
         onChanged();
         return this;
@@ -13296,6 +14738,7 @@ public final class Message {
       public Builder setEspError(int value) {
 
         espError_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -13304,14 +14747,14 @@ public final class Message {
        * @return This builder for chaining.
        */
       public Builder clearEspError() {
-
+        bitField0_ = (bitField0_ & ~0x00000004);
         espError_ = 0;
         onChanged();
         return this;
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-              Message.PairResult, Message.PairResult.Builder, Message.PairResultOrBuilder> pairBuilder_;
+              com.walabot.home.ble.Message.PairResult, com.walabot.home.ble.Message.PairResult.Builder, com.walabot.home.ble.Message.PairResultOrBuilder> pairBuilder_;
       /**
        * <code>.PairResult pair = 4;</code>
        * @return Whether the pair field is set.
@@ -13325,23 +14768,23 @@ public final class Message {
        * @return The pair.
        */
       @java.lang.Override
-      public Message.PairResult getPair() {
+      public com.walabot.home.ble.Message.PairResult getPair() {
         if (pairBuilder_ == null) {
           if (payloadCase_ == 4) {
-            return (Message.PairResult) payload_;
+            return (com.walabot.home.ble.Message.PairResult) payload_;
           }
-          return Message.PairResult.getDefaultInstance();
+          return com.walabot.home.ble.Message.PairResult.getDefaultInstance();
         } else {
           if (payloadCase_ == 4) {
             return pairBuilder_.getMessage();
           }
-          return Message.PairResult.getDefaultInstance();
+          return com.walabot.home.ble.Message.PairResult.getDefaultInstance();
         }
       }
       /**
        * <code>.PairResult pair = 4;</code>
        */
-      public Builder setPair(Message.PairResult value) {
+      public Builder setPair(com.walabot.home.ble.Message.PairResult value) {
         if (pairBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13358,7 +14801,7 @@ public final class Message {
        * <code>.PairResult pair = 4;</code>
        */
       public Builder setPair(
-              Message.PairResult.Builder builderForValue) {
+              com.walabot.home.ble.Message.PairResult.Builder builderForValue) {
         if (pairBuilder_ == null) {
           payload_ = builderForValue.build();
           onChanged();
@@ -13371,11 +14814,11 @@ public final class Message {
       /**
        * <code>.PairResult pair = 4;</code>
        */
-      public Builder mergePair(Message.PairResult value) {
+      public Builder mergePair(com.walabot.home.ble.Message.PairResult value) {
         if (pairBuilder_ == null) {
           if (payloadCase_ == 4 &&
-                  payload_ != Message.PairResult.getDefaultInstance()) {
-            payload_ = Message.PairResult.newBuilder((Message.PairResult) payload_)
+                  payload_ != com.walabot.home.ble.Message.PairResult.getDefaultInstance()) {
+            payload_ = com.walabot.home.ble.Message.PairResult.newBuilder((com.walabot.home.ble.Message.PairResult) payload_)
                     .mergeFrom(value).buildPartial();
           } else {
             payload_ = value;
@@ -13384,8 +14827,9 @@ public final class Message {
         } else {
           if (payloadCase_ == 4) {
             pairBuilder_.mergeFrom(value);
+          } else {
+            pairBuilder_.setMessage(value);
           }
-          pairBuilder_.setMessage(value);
         }
         payloadCase_ = 4;
         return this;
@@ -13412,47 +14856,47 @@ public final class Message {
       /**
        * <code>.PairResult pair = 4;</code>
        */
-      public Message.PairResult.Builder getPairBuilder() {
+      public com.walabot.home.ble.Message.PairResult.Builder getPairBuilder() {
         return getPairFieldBuilder().getBuilder();
       }
       /**
        * <code>.PairResult pair = 4;</code>
        */
       @java.lang.Override
-      public Message.PairResultOrBuilder getPairOrBuilder() {
+      public com.walabot.home.ble.Message.PairResultOrBuilder getPairOrBuilder() {
         if ((payloadCase_ == 4) && (pairBuilder_ != null)) {
           return pairBuilder_.getMessageOrBuilder();
         } else {
           if (payloadCase_ == 4) {
-            return (Message.PairResult) payload_;
+            return (com.walabot.home.ble.Message.PairResult) payload_;
           }
-          return Message.PairResult.getDefaultInstance();
+          return com.walabot.home.ble.Message.PairResult.getDefaultInstance();
         }
       }
       /**
        * <code>.PairResult pair = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-              Message.PairResult, Message.PairResult.Builder, Message.PairResultOrBuilder>
+              com.walabot.home.ble.Message.PairResult, com.walabot.home.ble.Message.PairResult.Builder, com.walabot.home.ble.Message.PairResultOrBuilder>
       getPairFieldBuilder() {
         if (pairBuilder_ == null) {
           if (!(payloadCase_ == 4)) {
-            payload_ = Message.PairResult.getDefaultInstance();
+            payload_ = com.walabot.home.ble.Message.PairResult.getDefaultInstance();
           }
           pairBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-                  Message.PairResult, Message.PairResult.Builder, Message.PairResultOrBuilder>(
-                  (Message.PairResult) payload_,
+                  com.walabot.home.ble.Message.PairResult, com.walabot.home.ble.Message.PairResult.Builder, com.walabot.home.ble.Message.PairResultOrBuilder>(
+                  (com.walabot.home.ble.Message.PairResult) payload_,
                   getParentForChildren(),
                   isClean());
           payload_ = null;
         }
         payloadCase_ = 4;
-        onChanged();;
+        onChanged();
         return pairBuilder_;
       }
 
       private com.google.protobuf.SingleFieldBuilderV3<
-              Message.ScanResult, Message.ScanResult.Builder, Message.ScanResultOrBuilder> scanBuilder_;
+              com.walabot.home.ble.Message.ScanResult, com.walabot.home.ble.Message.ScanResult.Builder, com.walabot.home.ble.Message.ScanResultOrBuilder> scanBuilder_;
       /**
        * <code>.ScanResult scan = 5;</code>
        * @return Whether the scan field is set.
@@ -13466,23 +14910,23 @@ public final class Message {
        * @return The scan.
        */
       @java.lang.Override
-      public Message.ScanResult getScan() {
+      public com.walabot.home.ble.Message.ScanResult getScan() {
         if (scanBuilder_ == null) {
           if (payloadCase_ == 5) {
-            return (Message.ScanResult) payload_;
+            return (com.walabot.home.ble.Message.ScanResult) payload_;
           }
-          return Message.ScanResult.getDefaultInstance();
+          return com.walabot.home.ble.Message.ScanResult.getDefaultInstance();
         } else {
           if (payloadCase_ == 5) {
             return scanBuilder_.getMessage();
           }
-          return Message.ScanResult.getDefaultInstance();
+          return com.walabot.home.ble.Message.ScanResult.getDefaultInstance();
         }
       }
       /**
        * <code>.ScanResult scan = 5;</code>
        */
-      public Builder setScan(Message.ScanResult value) {
+      public Builder setScan(com.walabot.home.ble.Message.ScanResult value) {
         if (scanBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13499,7 +14943,7 @@ public final class Message {
        * <code>.ScanResult scan = 5;</code>
        */
       public Builder setScan(
-              Message.ScanResult.Builder builderForValue) {
+              com.walabot.home.ble.Message.ScanResult.Builder builderForValue) {
         if (scanBuilder_ == null) {
           payload_ = builderForValue.build();
           onChanged();
@@ -13512,11 +14956,11 @@ public final class Message {
       /**
        * <code>.ScanResult scan = 5;</code>
        */
-      public Builder mergeScan(Message.ScanResult value) {
+      public Builder mergeScan(com.walabot.home.ble.Message.ScanResult value) {
         if (scanBuilder_ == null) {
           if (payloadCase_ == 5 &&
-                  payload_ != Message.ScanResult.getDefaultInstance()) {
-            payload_ = Message.ScanResult.newBuilder((Message.ScanResult) payload_)
+                  payload_ != com.walabot.home.ble.Message.ScanResult.getDefaultInstance()) {
+            payload_ = com.walabot.home.ble.Message.ScanResult.newBuilder((com.walabot.home.ble.Message.ScanResult) payload_)
                     .mergeFrom(value).buildPartial();
           } else {
             payload_ = value;
@@ -13525,8 +14969,9 @@ public final class Message {
         } else {
           if (payloadCase_ == 5) {
             scanBuilder_.mergeFrom(value);
+          } else {
+            scanBuilder_.setMessage(value);
           }
-          scanBuilder_.setMessage(value);
         }
         payloadCase_ = 5;
         return this;
@@ -13553,43 +14998,185 @@ public final class Message {
       /**
        * <code>.ScanResult scan = 5;</code>
        */
-      public Message.ScanResult.Builder getScanBuilder() {
+      public com.walabot.home.ble.Message.ScanResult.Builder getScanBuilder() {
         return getScanFieldBuilder().getBuilder();
       }
       /**
        * <code>.ScanResult scan = 5;</code>
        */
       @java.lang.Override
-      public Message.ScanResultOrBuilder getScanOrBuilder() {
+      public com.walabot.home.ble.Message.ScanResultOrBuilder getScanOrBuilder() {
         if ((payloadCase_ == 5) && (scanBuilder_ != null)) {
           return scanBuilder_.getMessageOrBuilder();
         } else {
           if (payloadCase_ == 5) {
-            return (Message.ScanResult) payload_;
+            return (com.walabot.home.ble.Message.ScanResult) payload_;
           }
-          return Message.ScanResult.getDefaultInstance();
+          return com.walabot.home.ble.Message.ScanResult.getDefaultInstance();
         }
       }
       /**
        * <code>.ScanResult scan = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-              Message.ScanResult, Message.ScanResult.Builder, Message.ScanResultOrBuilder>
+              com.walabot.home.ble.Message.ScanResult, com.walabot.home.ble.Message.ScanResult.Builder, com.walabot.home.ble.Message.ScanResultOrBuilder>
       getScanFieldBuilder() {
         if (scanBuilder_ == null) {
           if (!(payloadCase_ == 5)) {
-            payload_ = Message.ScanResult.getDefaultInstance();
+            payload_ = com.walabot.home.ble.Message.ScanResult.getDefaultInstance();
           }
           scanBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-                  Message.ScanResult, Message.ScanResult.Builder, Message.ScanResultOrBuilder>(
-                  (Message.ScanResult) payload_,
+                  com.walabot.home.ble.Message.ScanResult, com.walabot.home.ble.Message.ScanResult.Builder, com.walabot.home.ble.Message.ScanResultOrBuilder>(
+                  (com.walabot.home.ble.Message.ScanResult) payload_,
                   getParentForChildren(),
                   isClean());
           payload_ = null;
         }
         payloadCase_ = 5;
-        onChanged();;
+        onChanged();
         return scanBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+              com.walabot.home.ble.Message.DevInfo, com.walabot.home.ble.Message.DevInfo.Builder, com.walabot.home.ble.Message.DevInfoOrBuilder> devInfoBuilder_;
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       * @return Whether the devInfo field is set.
+       */
+      @java.lang.Override
+      public boolean hasDevInfo() {
+        return payloadCase_ == 6;
+      }
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       * @return The devInfo.
+       */
+      @java.lang.Override
+      public com.walabot.home.ble.Message.DevInfo getDevInfo() {
+        if (devInfoBuilder_ == null) {
+          if (payloadCase_ == 6) {
+            return (com.walabot.home.ble.Message.DevInfo) payload_;
+          }
+          return com.walabot.home.ble.Message.DevInfo.getDefaultInstance();
+        } else {
+          if (payloadCase_ == 6) {
+            return devInfoBuilder_.getMessage();
+          }
+          return com.walabot.home.ble.Message.DevInfo.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       */
+      public Builder setDevInfo(com.walabot.home.ble.Message.DevInfo value) {
+        if (devInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          payload_ = value;
+          onChanged();
+        } else {
+          devInfoBuilder_.setMessage(value);
+        }
+        payloadCase_ = 6;
+        return this;
+      }
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       */
+      public Builder setDevInfo(
+              com.walabot.home.ble.Message.DevInfo.Builder builderForValue) {
+        if (devInfoBuilder_ == null) {
+          payload_ = builderForValue.build();
+          onChanged();
+        } else {
+          devInfoBuilder_.setMessage(builderForValue.build());
+        }
+        payloadCase_ = 6;
+        return this;
+      }
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       */
+      public Builder mergeDevInfo(com.walabot.home.ble.Message.DevInfo value) {
+        if (devInfoBuilder_ == null) {
+          if (payloadCase_ == 6 &&
+                  payload_ != com.walabot.home.ble.Message.DevInfo.getDefaultInstance()) {
+            payload_ = com.walabot.home.ble.Message.DevInfo.newBuilder((com.walabot.home.ble.Message.DevInfo) payload_)
+                    .mergeFrom(value).buildPartial();
+          } else {
+            payload_ = value;
+          }
+          onChanged();
+        } else {
+          if (payloadCase_ == 6) {
+            devInfoBuilder_.mergeFrom(value);
+          } else {
+            devInfoBuilder_.setMessage(value);
+          }
+        }
+        payloadCase_ = 6;
+        return this;
+      }
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       */
+      public Builder clearDevInfo() {
+        if (devInfoBuilder_ == null) {
+          if (payloadCase_ == 6) {
+            payloadCase_ = 0;
+            payload_ = null;
+            onChanged();
+          }
+        } else {
+          if (payloadCase_ == 6) {
+            payloadCase_ = 0;
+            payload_ = null;
+          }
+          devInfoBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       */
+      public com.walabot.home.ble.Message.DevInfo.Builder getDevInfoBuilder() {
+        return getDevInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       */
+      @java.lang.Override
+      public com.walabot.home.ble.Message.DevInfoOrBuilder getDevInfoOrBuilder() {
+        if ((payloadCase_ == 6) && (devInfoBuilder_ != null)) {
+          return devInfoBuilder_.getMessageOrBuilder();
+        } else {
+          if (payloadCase_ == 6) {
+            return (com.walabot.home.ble.Message.DevInfo) payload_;
+          }
+          return com.walabot.home.ble.Message.DevInfo.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>.DevInfo dev_info = 6;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+              com.walabot.home.ble.Message.DevInfo, com.walabot.home.ble.Message.DevInfo.Builder, com.walabot.home.ble.Message.DevInfoOrBuilder>
+      getDevInfoFieldBuilder() {
+        if (devInfoBuilder_ == null) {
+          if (!(payloadCase_ == 6)) {
+            payload_ = com.walabot.home.ble.Message.DevInfo.getDefaultInstance();
+          }
+          devInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                  com.walabot.home.ble.Message.DevInfo, com.walabot.home.ble.Message.DevInfo.Builder, com.walabot.home.ble.Message.DevInfoOrBuilder>(
+                  (com.walabot.home.ble.Message.DevInfo) payload_,
+                  getParentForChildren(),
+                  isClean());
+          payload_ = null;
+        }
+        payloadCase_ = 6;
+        onChanged();
+        return devInfoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -13608,12 +15195,12 @@ public final class Message {
     }
 
     // @@protoc_insertion_point(class_scope:ToAppMessage2)
-    private static final Message.ToAppMessage2 DEFAULT_INSTANCE;
+    private static final com.walabot.home.ble.Message.ToAppMessage2 DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Message.ToAppMessage2();
+      DEFAULT_INSTANCE = new com.walabot.home.ble.Message.ToAppMessage2();
     }
 
-    public static Message.ToAppMessage2 getDefaultInstance() {
+    public static com.walabot.home.ble.Message.ToAppMessage2 getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -13624,7 +15211,18 @@ public final class Message {
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ToAppMessage2(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                  .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -13638,7 +15236,7 @@ public final class Message {
     }
 
     @java.lang.Override
-    public Message.ToAppMessage2 getDefaultInstanceForType() {
+    public com.walabot.home.ble.Message.ToAppMessage2 getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -13665,10 +15263,10 @@ public final class Message {
   com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internal_static_Pair_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-          internal_static_AP_descriptor;
+          internal_static_AccessPoint_descriptor;
   private static final
   com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internal_static_AP_fieldAccessorTable;
+          internal_static_AccessPoint_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
           internal_static_ScanResult_descriptor;
   private static final
@@ -13679,6 +15277,11 @@ public final class Message {
   private static final
   com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internal_static_PairResult_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+          internal_static_DevInfo_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_DevInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
           internal_static_PairingComplete_descriptor;
   private static final
@@ -13742,54 +15345,64 @@ public final class Message {
                     "username\030\007 \001(\t\022\025\n\rmqtt_password\030\010 \001(\t\022\037\n" +
                     "\ncloud_type\030\t \001(\0162\013.CLOUD_TYPE\022\024\n\014cloud_" +
                     "region\030\n \001(\t\022\026\n\016cloud_registry\030\013 \001(\t\"\023\n\004" +
-                    "Pair\022\013\n\003uid\030\001 \001(\t\"@\n\002AP\022\014\n\004ssid\030\001 \001(\t\022\r\n" +
-                    "\005bssid\030\002 \001(\t\022\014\n\004rssi\030\003 \001(\005\022\017\n\007channel\030\004 " +
-                    "\001(\005\"\'\n\nScanResult\022\031\n\014access_point\030\001 \003(\0132" +
-                    "\003.AP\"\032\n\nPairResult\022\014\n\004code\030\001 \001(\t\",\n\017Pair" +
-                    "ingComplete\022\013\n\003uid\030\001 \001(\t\022\014\n\004code\030\002 \001(\t\"_" +
-                    "\n\tOTAResult\022\027\n\017has_new_version\030\001 \001(\010\022\034\n\024" +
-                    "current_version_code\030\002 \001(\005\022\033\n\023update_ver" +
-                    "sion_code\030\003 \001(\005\")\n\nOTAPerform\022\033\n\023update_" +
-                    "version_code\030\003 \001(\005\"F\n\017ToDeviceMessage\022\"\n" +
-                    "\004type\030\001 \001(\0162\024.ToDeviceMessageType\022\017\n\007pay" +
-                    "load\030\002 \001(\014\"b\n\014ToAppMessage\022\037\n\004type\030\001 \001(\016" +
-                    "2\021.ToAppMessageType\022 \n\006result\030\002 \001(\0162\020.To" +
-                    "AppResultType\022\017\n\007payload\030\003 \001(\014\"9\n\tWifiCr" +
-                    "ed2\022\014\n\004ssid\030\001 \001(\t\022\014\n\004pass\030\002 \001(\t\022\020\n\010min_r" +
-                    "ssi\030\003 \001(\005\"u\n\017WifiCredResult3\022\037\n\004type\030\001 \001" +
-                    "(\0162\021.ToAppMessageType\022!\n\006result\030\002 \001(\0162\021." +
-                    "ToAppResultType2\022\021\n\tesp_error\030\003 \001(\005\022\013\n\003m" +
-                    "ac\030\004 \001(\003\"F\n\rCloudDetails2\022\022\n\nproject_id\030" +
-                    "\001 \001(\t\022\020\n\010http_url\030\002 \001(\t\022\017\n\007ntp_url\030\005 \001(\t" +
-                    "\"\253\001\n\rToAppMessage2\022\037\n\004type\030\001 \001(\0162\021.ToApp" +
-                    "MessageType\022!\n\006result\030\002 \001(\0162\021.ToAppResul" +
-                    "tType2\022\021\n\tesp_error\030\003 \001(\005\022\033\n\004pair\030\004 \001(\0132" +
-                    "\013.PairResultH\000\022\033\n\004scan\030\005 \001(\0132\013.ScanResul" +
-                    "tH\000B\t\n\007payload*\323\001\n\023ToDeviceMessageType\022\020" +
-                    "\n\014CONNECT_WIFI\020\000\022\021\n\rCLOUD_CONNECT\020\001\022\021\n\rP" +
-                    "AIR_TO_PHONE\020\002\022\032\n\026PAIR_TO_PHONE_COMPLETE" +
-                    "\020\003\022\023\n\017GET_OTA_VERSION\020\004\022\017\n\013PERFORM_OTA\020\005" +
-                    "\022\025\n\021DO_REBOOT_FACTORY\020\006\022\031\n\025DO_REBOOT_OPE" +
-                    "RATIONAL\020\007\022\020\n\014DO_WIFI_SCAN\020\010*\267\001\n\020ToAppMe" +
-                    "ssageType\022\027\n\023CONNECT_WIFI_RESULT\020\000\022\030\n\024CL" +
-                    "OUD_CONNECT_RESULT\020\001\022\030\n\024PAIR_TO_PHONE_RE" +
-                    "SULT\020\002\022\024\n\020CHECK_OTA_RESULT\020\003\022\024\n\020DO_REBOO" +
-                    "T_RESULT\020\004\022\026\n\022PERFORM_OTA_RESULT\020\005\022\022\n\016AP" +
-                    "_SCAN_RESULT\020\006*\206\002\n\017ToAppResultType\022\006\n\002OK" +
-                    "\020\000\022\021\n\rINVALID_STATE\020\001\022\r\n\tESP_ERROR\020\002\022\032\n\026" +
-                    "WIFI_WRONG_CREDENTIALS\020\003\022\016\n\nAUTHORIZED\020\004" +
-                    "\022\024\n\020SERVER_NOT_FOUND\020\005\022\020\n\014NO_OTA_FOUND\020\006" +
-                    "\022\031\n\025NETWORK_IS_LOCAL_ONLY\020\n\022\031\n\025COULD_NOT" +
-                    "_UPDATE_TIME\020\013\022\020\n\014UNAUTHORIZED\020\014\022\022\n\016PAIR" +
-                    "_CODE_FAIL\020\r\022\031\n\025PAIR_CODE_DELETE_FAIL\020\016*" +
-                    "F\n\nCLOUD_TYPE\022\n\n\006CUSTOM\020\000\022\017\n\013GOOLE_CLOUD" +
-                    "\020\001\022\r\n\tGOOLE_IOT\020\002\022\014\n\010ALI_BABA\020\003*\302\001\n\020ToAp" +
-                    "pResultType2\022\013\n\007SUCCESS\020\000\022\023\n\017INVALID_REQ" +
-                    "UEST\020\001\022\022\n\016BLE_SIZE_ERROR\020\002\022\032\n\026WIFI_CREDE" +
-                    "NTIALS_ERROR\020\013\022\023\n\017LOW_WIFI_SIGNAL\020\014\022\023\n\017W" +
-                    "IFI_LOCAL_ONLY\020\r\022\024\n\020NTP_SERVER_ERROR\020\025\022\034" +
-                    "\n\030READING_PAIR_CODE_FAILED\020\037B \n\036com.wala" +
-                    "bot.home.companion.bleb\006proto3"
+                    "Pair\022\013\n\003uid\030\001 \001(\t\"I\n\013AccessPoint\022\014\n\004ssid" +
+                    "\030\001 \001(\t\022\r\n\005bssid\030\002 \001(\t\022\014\n\004rssi\030\003 \001(\005\022\017\n\007c" +
+                    "hannel\030\004 \001(\005\"0\n\nScanResult\022\"\n\014access_poi" +
+                    "nt\030\001 \003(\0132\014.AccessPoint\"\032\n\nPairResult\022\014\n\004" +
+                    "code\030\001 \001(\t\"\277\001\n\007DevInfo\022\016\n\006dev_id\030\001 \001(\t\022\013" +
+                    "\n\003sku\030\002 \001(\t\022\020\n\010sn_radar\030\003 \001(\t\022\022\n\nsn_prod" +
+                    "uct\030\004 \001(\t\022\024\n\014hw_rev_radar\030\005 \001(\t\022\026\n\016hw_re" +
+                    "v_product\030\006 \001(\t\022\016\n\006sw_ver\030\007 \001(\t\022\023\n\013sw_ve" +
+                    "r_code\030\010 \001(\r\022\036\n\026is_provision_committed\030\t" +
+                    " \001(\010\",\n\017PairingComplete\022\013\n\003uid\030\001 \001(\t\022\014\n\004" +
+                    "code\030\002 \001(\t\"_\n\tOTAResult\022\027\n\017has_new_versi" +
+                    "on\030\001 \001(\010\022\034\n\024current_version_code\030\002 \001(\005\022\033" +
+                    "\n\023update_version_code\030\003 \001(\005\")\n\nOTAPerfor" +
+                    "m\022\033\n\023update_version_code\030\003 \001(\005\"F\n\017ToDevi" +
+                    "ceMessage\022\"\n\004type\030\001 \001(\0162\024.ToDeviceMessag" +
+                    "eType\022\017\n\007payload\030\002 \001(\014\"b\n\014ToAppMessage\022\037" +
+                    "\n\004type\030\001 \001(\0162\021.ToAppMessageType\022 \n\006resul" +
+                    "t\030\002 \001(\0162\020.ToAppResultType\022\017\n\007payload\030\003 \001" +
+                    "(\014\"9\n\tWifiCred2\022\014\n\004ssid\030\001 \001(\t\022\014\n\004pass\030\002 " +
+                    "\001(\t\022\020\n\010min_rssi\030\003 \001(\005\"u\n\017WifiCredResult3" +
+                    "\022\037\n\004type\030\001 \001(\0162\021.ToAppMessageType\022!\n\006res" +
+                    "ult\030\002 \001(\0162\021.ToAppResultType2\022\021\n\tesp_erro" +
+                    "r\030\003 \001(\005\022\013\n\003mac\030\004 \001(\003\"F\n\rCloudDetails2\022\022\n" +
+                    "\nproject_id\030\001 \001(\t\022\020\n\010http_url\030\002 \001(\t\022\017\n\007n" +
+                    "tp_url\030\005 \001(\t\"\311\001\n\rToAppMessage2\022\037\n\004type\030\001" +
+                    " \001(\0162\021.ToAppMessageType\022!\n\006result\030\002 \001(\0162" +
+                    "\021.ToAppResultType2\022\021\n\tesp_error\030\003 \001(\005\022\033\n" +
+                    "\004pair\030\004 \001(\0132\013.PairResultH\000\022\033\n\004scan\030\005 \001(\013" +
+                    "2\013.ScanResultH\000\022\034\n\010dev_info\030\006 \001(\0132\010.DevI" +
+                    "nfoH\000B\t\n\007payload*\210\002\n\023ToDeviceMessageType" +
+                    "\022\020\n\014CONNECT_WIFI\020\000\022\021\n\rCLOUD_CONNECT\020\001\022\021\n" +
+                    "\rPAIR_TO_PHONE\020\002\022\032\n\026PAIR_TO_PHONE_COMPLE" +
+                    "TE\020\003\022\023\n\017GET_OTA_VERSION\020\004\022\017\n\013PERFORM_OTA" +
+                    "\020\005\022\025\n\021DO_REBOOT_FACTORY\020\006\022\031\n\025DO_REBOOT_O" +
+                    "PERATIONAL\020\007\022\020\n\014DO_WIFI_SCAN\020\010\022\013\n\007IM_HER" +
+                    "E\020\t\022\024\n\020COMMIT_PROVISION\020\n\022\020\n\014GET_DEV_INF" +
+                    "O\020\013*\340\001\n\020ToAppMessageType\022\027\n\023CONNECT_WIFI" +
+                    "_RESULT\020\000\022\030\n\024CLOUD_CONNECT_RESULT\020\001\022\030\n\024P" +
+                    "AIR_TO_PHONE_RESULT\020\002\022\024\n\020CHECK_OTA_RESUL" +
+                    "T\020\003\022\024\n\020DO_REBOOT_RESULT\020\004\022\026\n\022PERFORM_OTA" +
+                    "_RESULT\020\005\022\022\n\016AP_SCAN_RESULT\020\006\022\023\n\017DEV_INF" +
+                    "O_RESULT\020\007\022\022\n\016GENERIC_RESULT\020c*\206\002\n\017ToApp" +
+                    "ResultType\022\006\n\002OK\020\000\022\021\n\rINVALID_STATE\020\001\022\r\n" +
+                    "\tESP_ERROR\020\002\022\032\n\026WIFI_WRONG_CREDENTIALS\020\003" +
+                    "\022\016\n\nAUTHORIZED\020\004\022\024\n\020SERVER_NOT_FOUND\020\005\022\020" +
+                    "\n\014NO_OTA_FOUND\020\006\022\031\n\025NETWORK_IS_LOCAL_ONL" +
+                    "Y\020\n\022\031\n\025COULD_NOT_UPDATE_TIME\020\013\022\020\n\014UNAUTH" +
+                    "ORIZED\020\014\022\022\n\016PAIR_CODE_FAIL\020\r\022\031\n\025PAIR_COD" +
+                    "E_DELETE_FAIL\020\016*F\n\nCLOUD_TYPE\022\n\n\006CUSTOM\020" +
+                    "\000\022\017\n\013GOOLE_CLOUD\020\001\022\r\n\tGOOLE_IOT\020\002\022\014\n\010ALI" +
+                    "_BABA\020\003*\370\001\n\020ToAppResultType2\022\013\n\007SUCCESS\020" +
+                    "\000\022\023\n\017INVALID_REQUEST\020\001\022\022\n\016BLE_SIZE_ERROR" +
+                    "\020\002\022\027\n\023CLOUD_NOT_REACHABLE\020\005\022\032\n\026WIFI_CRED" +
+                    "ENTIALS_ERROR\020\013\022\023\n\017LOW_WIFI_SIGNAL\020\014\022\023\n\017" +
+                    "WIFI_LOCAL_ONLY\020\r\022\033\n\027WIFI_SCAN_ERROR_TIM" +
+                    "EOUT\020\016\022\024\n\020NTP_SERVER_ERROR\020\025\022\034\n\030READING_" +
+                    "PAIR_CODE_FAILED\020\037B\026\n\024com.walabot.home.b" +
+                    "leb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
             .internalBuildGeneratedFileFrom(descriptorData,
@@ -13819,11 +15432,11 @@ public final class Message {
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_Pair_descriptor,
             new java.lang.String[] { "Uid", });
-    internal_static_AP_descriptor =
+    internal_static_AccessPoint_descriptor =
             getDescriptor().getMessageTypes().get(4);
-    internal_static_AP_fieldAccessorTable = new
+    internal_static_AccessPoint_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-            internal_static_AP_descriptor,
+            internal_static_AccessPoint_descriptor,
             new java.lang.String[] { "Ssid", "Bssid", "Rssi", "Channel", });
     internal_static_ScanResult_descriptor =
             getDescriptor().getMessageTypes().get(5);
@@ -13837,60 +15450,66 @@ public final class Message {
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_PairResult_descriptor,
             new java.lang.String[] { "Code", });
-    internal_static_PairingComplete_descriptor =
+    internal_static_DevInfo_descriptor =
             getDescriptor().getMessageTypes().get(7);
+    internal_static_DevInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_DevInfo_descriptor,
+            new java.lang.String[] { "DevId", "Sku", "SnRadar", "SnProduct", "HwRevRadar", "HwRevProduct", "SwVer", "SwVerCode", "IsProvisionCommitted", });
+    internal_static_PairingComplete_descriptor =
+            getDescriptor().getMessageTypes().get(8);
     internal_static_PairingComplete_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_PairingComplete_descriptor,
             new java.lang.String[] { "Uid", "Code", });
     internal_static_OTAResult_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(9);
     internal_static_OTAResult_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_OTAResult_descriptor,
             new java.lang.String[] { "HasNewVersion", "CurrentVersionCode", "UpdateVersionCode", });
     internal_static_OTAPerform_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
     internal_static_OTAPerform_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_OTAPerform_descriptor,
             new java.lang.String[] { "UpdateVersionCode", });
     internal_static_ToDeviceMessage_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(11);
     internal_static_ToDeviceMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_ToDeviceMessage_descriptor,
             new java.lang.String[] { "Type", "Payload", });
     internal_static_ToAppMessage_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(12);
     internal_static_ToAppMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_ToAppMessage_descriptor,
             new java.lang.String[] { "Type", "Result", "Payload", });
     internal_static_WifiCred2_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(13);
     internal_static_WifiCred2_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_WifiCred2_descriptor,
             new java.lang.String[] { "Ssid", "Pass", "MinRssi", });
     internal_static_WifiCredResult3_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(14);
     internal_static_WifiCredResult3_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_WifiCredResult3_descriptor,
             new java.lang.String[] { "Type", "Result", "EspError", "Mac", });
     internal_static_CloudDetails2_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(15);
     internal_static_CloudDetails2_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_CloudDetails2_descriptor,
             new java.lang.String[] { "ProjectId", "HttpUrl", "NtpUrl", });
     internal_static_ToAppMessage2_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(16);
     internal_static_ToAppMessage2_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
             internal_static_ToAppMessage2_descriptor,
-            new java.lang.String[] { "Type", "Result", "EspError", "Pair", "Scan", "Payload", });
+            new java.lang.String[] { "Type", "Result", "EspError", "Pair", "Scan", "DevInfo", "Payload", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

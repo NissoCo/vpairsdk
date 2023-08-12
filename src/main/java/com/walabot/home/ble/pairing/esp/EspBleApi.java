@@ -3,6 +3,7 @@ package com.walabot.home.ble.pairing.esp;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -10,20 +11,14 @@ import androidx.annotation.Nullable;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.walabot.home.ble.BleDevice;
-import com.walabot.home.ble.BleDiscoveryCallback;
 import com.walabot.home.ble.Message;
 import com.walabot.home.ble.Result;
 import com.walabot.home.ble.WHBle;
 import com.walabot.home.ble.WHConnectionCallback;
 import com.walabot.home.ble.WHDataCallback;
-import com.walabot.home.ble.WalabotHomeDeviceScanner;
-import com.walabot.home.ble.pairing.Gen2CloudOptions;
-import com.walabot.home.ble.sdk.CloudCredentials;
 import com.walabot.home.ble.sdk.Config;
 import com.walabot.home.ble.sdk.EspPairingEvent;
 
-import java.util.Collection;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EspBleApi implements EspApi {
@@ -33,6 +28,7 @@ public class EspBleApi implements EspApi {
     private WalabotDeviceDesc walabotDescription;
     public Config config;
     public OnResult callback;
+    public Message.DevInfo devInfo;
 
     public static class ESPBleAPIImpl implements WHConnectionCallback, WHDataCallback {
         interface OpCallback {
@@ -213,10 +209,24 @@ public class EspBleApi implements EspApi {
 //                }
                 walabotDescription = new WalabotDeviceDesc("", "", result.getResult().getName());
                 walabotDescription.setProtocolVersion(_espBleImpl._whBle.getProtocolVersion());
-                cb.onSuccess(walabotDescription);
+                fetchDevInfo(cb);
             } else {
                 Log.i(EspBleApi.class.getName(), "connect result failed");
                 cb.onFailure(result.getThrowable());
+            }
+        });
+    }
+
+    private void fetchDevInfo(EspAPICallback<WalabotDeviceDesc> cb) {
+        Handler timer = new Handler();
+        timer.postDelayed(() -> {
+            cb.onSuccess(walabotDescription);
+        }, 3000);
+        _espBleImpl.sendMessage(Message.ToDeviceMessageType.GET_DEV_INFO, null, (dataResult) -> {
+            if (dataResult.isSuccessful()) {
+                devInfo = _espBleImpl.messageImpl.parseDevInfoResult(dataResult.getData());
+                timer.removeCallbacksAndMessages(null);
+                cb.onSuccess(walabotDescription);
             }
         });
     }
@@ -282,7 +292,7 @@ public class EspBleApi implements EspApi {
     }
 
     @Override
-    public void sendCloudDetails(Config config, EspAPICallback<Void> cb) {
+    public void sendCloudDetails(@NonNull Config config, EspAPICallback<Void> cb) {
         if (_espBleImpl.messageImpl == null) {
             cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
             return;
@@ -371,24 +381,28 @@ public class EspBleApi implements EspApi {
 
     @Override
     public void reboot(EspAPICallback<Void> cb) {
-        if (_espBleImpl.messageImpl == null) {
-            cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
-            return;
-        }
-
-        _espBleImpl.sendMessage(Message.ToDeviceMessageType.DO_REBOOT_OPERATIONAL, null, opResult ->
-        {
-            ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
-            if (r == null) {
-                cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_PARSE_CONNECT_RESULT, opResult));
+        if (devInfo != null) {
+            commitProvision(cb);
+        } else {
+            if (_espBleImpl.messageImpl == null) {
+                cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
                 return;
             }
-            if (r.isSuccessful()) {
-                cb.onSuccess(null);
-            } else {
-                cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_SEND_CLOUD_DETAILS, opResult));
-            }
-        });
+
+            _espBleImpl.sendMessage(Message.ToDeviceMessageType.DO_REBOOT_OPERATIONAL, null, opResult ->
+            {
+                ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
+                if (r == null) {
+                    cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_PARSE_CONNECT_RESULT, opResult));
+                    return;
+                }
+                if (r.isSuccessful()) {
+                    cb.onSuccess(null);
+                } else {
+                    cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_SEND_CLOUD_DETAILS, opResult));
+                }
+            });
+        }
     }
 
     @Override
@@ -406,6 +420,23 @@ public class EspBleApi implements EspApi {
                 cb.onSuccess(null);
             } else {
                 cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_SEND_CLOUD_DETAILS, opResult));
+            }
+        });
+    }
+
+    @Override
+    public void commitProvision(EspAPICallback<Void> cb) {
+        if (_espBleImpl.messageImpl == null) {
+            cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
+            return;
+        }
+        _espBleImpl.sendMessage(Message.ToDeviceMessageType.COMMIT_PROVISION, null, opResult ->
+        {
+            ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
+            if (r == null || r.isSuccessful()) {
+                cb.onSuccess(null);
+            } else {
+                cb.onFailure(new EspPairingException(EspPairingErrorType.COMMIT_PROVISION_FAILED, opResult));
             }
         });
     }
