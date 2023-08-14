@@ -57,17 +57,12 @@ enum class EspPairingEvent(val value: Int) {
 interface PairingEvents {
     fun onError(error: Throwable)
     fun onWifiCredentialsFail(wifiList: List<EspWifiItem>)
-    fun onFinish(result: Result<String>)
     fun onEvent(
         event: EspPairingEvent,
         isError: Boolean,
         message: String,
-        deviceInfo: DevInfo?,
+        deviceInfo: Map<String, String>?,
         deviceId: String)
     fun shouldSelect(wifiList: List<EspWifiItem>)
     fun onMissingPermission(permission: String)
-}
-
-interface PairingAnalytics {
-    fun onAnalyticsEvent(message: String, deviceId: String)
 }

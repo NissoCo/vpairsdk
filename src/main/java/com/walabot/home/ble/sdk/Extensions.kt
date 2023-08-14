@@ -1,6 +1,7 @@
 package com.walabot.home.ble.sdk
 
 import android.bluetooth.le.ScanCallback
+import com.walabot.home.ble.Message.DevInfo
 import com.walabot.home.ble.pairing.esp.EspApi
 import com.walabot.home.ble.pairing.esp.EspBleApi
 import com.walabot.home.ble.pairing.esp.ProtocolMediator
@@ -26,4 +27,16 @@ fun ProtocolMediator.WifiScanResult.convert(): List<EspWifiItem>? {
     return accessPoints?.map {
         EspWifiItemImpl(it.ssid, it.bssid, it.rssi)
     }
+}
+
+fun DevInfo.toJson(): Map<String, String> {
+    return mapOf(
+        "devId" to devId,
+        "sku" to sku,
+        "snRadar" to snRadar,
+        "snProduct" to snProduct,
+        "hwRevRadar" to hwRevRadar,
+        "hwRevProduct" to hwRevProduct,
+        "swVer" to swVer
+    )
 }

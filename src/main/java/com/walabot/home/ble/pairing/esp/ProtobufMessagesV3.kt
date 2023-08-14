@@ -7,6 +7,7 @@ import com.walabot.home.ble.Message.DevInfo
 import com.walabot.home.ble.Message.ToAppMessage2
 import com.walabot.home.ble.Message.WifiCredResult3
 import com.walabot.home.ble.sdk.Config
+import com.walabot.home.ble.sdk.toJson
 
 class ProtobufMessagesV3 : ProtocolMediator {
     override fun wifiCredentials(
@@ -130,9 +131,9 @@ class ProtobufMessagesV3 : ProtocolMediator {
         return null
     }
 
-    override fun parseDevInfoResult(data: ByteArray?): DevInfo? {
+    override fun parseDevInfoResult(data: ByteArray?): Map<String, String>? {
         return try {
-            DevInfo.parseFrom(data)
+            DevInfo.parseFrom(data).toJson()
         } catch (exp: Exception) {
             null
         }

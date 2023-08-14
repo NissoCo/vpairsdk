@@ -16,21 +16,41 @@ import com.walabot.home.ble.Result;
 import com.walabot.home.ble.WHBle;
 import com.walabot.home.ble.WHConnectionCallback;
 import com.walabot.home.ble.WHDataCallback;
+import com.walabot.home.ble.sdk.AnalyticsHandler;
 import com.walabot.home.ble.sdk.Config;
 import com.walabot.home.ble.sdk.EspPairingEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EspBleApi implements EspApi {
+
     public interface OnResult {
         void onResult(Result<EspPairingEvent> result, EspBleApi espBleApi);
     }
     private WalabotDeviceDesc walabotDescription;
     public Config config;
     public OnResult callback;
-    public Message.DevInfo devInfo;
+    private Map<String, String> devInfo;
+    public String deviceId;
+    private AnalyticsHandler analyticsHandler;
 
-    public static class ESPBleAPIImpl implements WHConnectionCallback, WHDataCallback {
+    public Map<String, String> getDevInfo() {
+        if (devInfo == null && deviceId != null) {
+            Map<String, String> temp = new HashMap<>();
+            temp.put("devId", deviceId);
+            return temp;
+        }
+        return devInfo;
+    }
+
+    public void setAnalyticsHandler(AnalyticsHandler analyticsHandler) {
+        this.analyticsHandler = analyticsHandler;
+    }
+
+    public static class ESPBleAPIImpl implements WHConnectionCallback, WHDataCallback, AnalyticsHandler {
         interface OpCallback {
             void onData(OpResult result);
         }
@@ -38,7 +58,7 @@ public class EspBleApi implements EspApi {
         interface ConnectionCallback {
             void onConnectionResult(Result<BluetoothDevice> result);
         }
-
+        private AnalyticsHandler analyticsHandler;
         private final WHBle _whBle;
         private final AtomicReference<OpCallback> _opCallback =
                 new AtomicReference<>();
@@ -46,6 +66,13 @@ public class EspBleApi implements EspApi {
                 new AtomicReference<>();
 
         ProtocolMediator messageImpl;
+
+        private AnalyticsHandler getAnalyticsHandler() {
+            if (analyticsHandler == null) {
+                return this;
+            }
+            return analyticsHandler;
+        }
 
         public ESPBleAPIImpl(Context context) {
             _whBle = new WHBle(context);
@@ -84,6 +111,13 @@ public class EspBleApi implements EspApi {
             _opCallback.set(null);
             _connectionCallback.set(null);
         }
+
+
+        @Override
+        public void log(@NonNull String message, @Nullable String deviceId) {
+            Log.d("Analytics", message + "deviceId: " + deviceId);
+        }
+
 
         //region WHConnectionCallback
         @Override
@@ -127,6 +161,7 @@ public class EspBleApi implements EspApi {
         //region WHDataCallback
         @Override
         public final void onReadSuccess(byte[] data) {
+            getAnalyticsHandler().log("On read Characteristics", Objects.requireNonNull(_whBle.getConnectedDevice()).getAddress());
             OpCallback opCallback = _opCallback.getAndSet(null);
             if (opCallback != null) {
                 opCallback.onData(new OpResult(0, data));
@@ -135,6 +170,7 @@ public class EspBleApi implements EspApi {
 
         @Override
         public final void onReadFailed() {
+            getAnalyticsHandler().log("On read Characteristics failed", Objects.requireNonNull(_whBle.getConnectedDevice()).getAddress());
             OpCallback opCallback = _opCallback.getAndSet(null);
             if (opCallback != null) {
                 opCallback.onData(new OpResult(ERR_READ_FAILED, null));
@@ -143,11 +179,12 @@ public class EspBleApi implements EspApi {
 
         @Override
         public void onWriteSuccess(byte[] value) {
-
+            getAnalyticsHandler().log("On write Characteristics", Objects.requireNonNull(_whBle.getConnectedDevice()).getAddress());
         }
 
         @Override
         public final void onWriteFailed(byte[] value) {
+            getAnalyticsHandler().log("On write Characteristics failed", Objects.requireNonNull(_whBle.getConnectedDevice()).getAddress());
             OpCallback opCallback = _opCallback.getAndSet(null);
             if (opCallback != null) {
                 opCallback.onData(new OpResult(ERR_WRITE_FAILED, null));
@@ -169,6 +206,7 @@ public class EspBleApi implements EspApi {
 
     public EspBleApi(Context context, Config config, OnResult callback) {
         _espBleImpl = new ESPBleAPIImpl(context);
+        _espBleImpl.analyticsHandler = analyticsHandler;
         this.config = config;
         this.callback = callback;
     }

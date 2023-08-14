@@ -19,7 +19,7 @@ interface ProtocolMediator {
     fun parseWifiResult(data: ByteArray?): WifiResult?
     fun parsePairResult(data: ByteArray?): PairResult?
     fun parseWifiScanResult(data: ByteArray?): WifiScanResult?
-    fun parseDevInfoResult(data: ByteArray?): DevInfo?
+    fun parseDevInfoResult(data: ByteArray?): Map<String, String>?
     open class MessageResult {
         var result = 0
 

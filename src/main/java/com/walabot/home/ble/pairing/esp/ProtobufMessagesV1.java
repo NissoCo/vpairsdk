@@ -7,6 +7,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.walabot.home.ble.Message;
 import com.walabot.home.ble.sdk.Config;
 
+import java.util.Map;
+
 public class ProtobufMessagesV1 implements ProtocolMediator
 {
 
@@ -157,7 +159,7 @@ public class ProtobufMessagesV1 implements ProtocolMediator
 
 	@Nullable
 	@Override
-	public Message.DevInfo parseDevInfoResult(@Nullable byte[] data) {
+	public Map<String, String > parseDevInfoResult(@Nullable byte[] data) {
 		return null;
 	}
 }

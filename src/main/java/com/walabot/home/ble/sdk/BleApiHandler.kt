@@ -89,6 +89,7 @@ private fun EspBleApi.performParingWithCloud(host: String, code: String?) {
     code?.let { it1 ->
         Connection().pairing(code, config.token!!) {
             if (it.isSuccess) {
+                deviceId = it.getOrNull()?.get("deviceId") as? String
                 callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), this)
                 notifyPairingComplete(host, it1)
             } else {

@@ -10,7 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.Result
-import com.walabot.home.ble.pairing.WifiNetworkMonitor
 import com.walabot.home.ble.pairing.esp.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,10 +47,10 @@ class MassProvisioning(val context: Context, var config: Config) :
     val isBleOn: Boolean
     get() = context.isBleOn()
 
-    private var wifiMonitor: WifiNetworkMonitor? = null
+//    private var wifiMonitor: WifiNetworkMonitor? = null
 //    var currentWifi: EspWifiItem? = null
     var eventsHandler: PairingEvents? = null
-    var analyticsHandler: PairingAnalytics? = null
+    var analyticsHandler: AnalyticsHandler? = null
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -81,6 +80,7 @@ class MassProvisioning(val context: Context, var config: Config) :
 
     private fun connect(bleDevice: BleDevice) {
         val bleApi = EspBleApi(context, config, this)
+        bleApi.setAnalyticsHandler(analyticsHandler)
         bleApis.add(bleApi)
         bleApi.connect(bleDevice)
         pickedDevices?.remove(bleDevice)
@@ -96,15 +96,24 @@ class MassProvisioning(val context: Context, var config: Config) :
             }
 
             override fun onFailure(throwable: Throwable?) {
-                eventsHandler?.onFinish(Result(throwable))
+                eventsHandler?.onEvent(
+                    EspPairingEvent.WifiScan,
+                    true,
+                    throwable?.message ?: "",
+                bleApi.devInfo,
+                bleApi.deviceId)
             }
         })
     }
 
-    private fun refreshWifiList(walabotDeviceDesc: WalabotDeviceDesc) {
+    public fun refreshWifiList(callback: ((List<EspWifiItem>) -> Unit)? = null) {
         eventsHandler?.onEvent(EspPairingEvent.WifiScan, false, EspPairingEvent.WifiScan.name, bleApis.first().devInfo, bleApis.first().deviceDescriptor?.mac ?: "")
         scanWifi(bleApis.first()) {
-            eventsHandler?.shouldSelect(it)
+            if (callback == null) {
+                eventsHandler?.shouldSelect(it)
+            } else {
+                callback(it)
+            }
         }
     }
 
@@ -141,7 +150,7 @@ class MassProvisioning(val context: Context, var config: Config) :
                         config.wifi.ssid?.let {
                             resumeConnection(it, config.wifi.bssid ?: "", config.wifi.pwd ?: "", espBleApi)
                         } ?: kotlin.run {
-                            refreshWifiList(it)
+                            refreshWifiList()
                         }
                     }
                 }
@@ -167,7 +176,6 @@ class MassProvisioning(val context: Context, var config: Config) :
                             eventsHandler?.onWifiCredentialsFail(it)
                         }
                     }
-
                 }
             }
             eventsHandler?.onError(error)
