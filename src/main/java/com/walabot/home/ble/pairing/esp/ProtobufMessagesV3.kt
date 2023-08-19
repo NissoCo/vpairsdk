@@ -24,8 +24,8 @@ class ProtobufMessagesV3 : ProtocolMediator {
 
     override fun cloudDetails(cloudOptions: Config): GeneratedMessageV3? {
         return Message.CloudDetails2.newBuilder()
-            .setHttpUrl(cloudOptions.url)
-            .setProjectId(cloudOptions.cloud.name)
+            .setHttpUrl(cloudOptions.apiURL)
+            .setProjectId(cloudOptions.cloud.projectName)
             .setNtpUrl(cloudOptions.mqtt.ntpUrl)
             .build()
     }
@@ -131,7 +131,7 @@ class ProtobufMessagesV3 : ProtocolMediator {
         return null
     }
 
-    override fun parseDevInfoResult(data: ByteArray?): Map<String, String>? {
+    override fun parseDevInfoResult(data: ByteArray?): Map<String, Any>? {
         return try {
             DevInfo.parseFrom(data).toJson()
         } catch (exp: Exception) {

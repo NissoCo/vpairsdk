@@ -2,7 +2,6 @@ package com.walabot.home.ble.sdk
 
 import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.Result
-import com.walabot.home.ble.pairing.Gen2CloudOptions
 import com.walabot.home.ble.pairing.esp.EspApi
 import com.walabot.home.ble.pairing.esp.EspBleApi
 import com.walabot.home.ble.pairing.esp.EspPairingResponse
@@ -87,7 +86,7 @@ private fun EspBleApi.pair(host: String) {
 private fun EspBleApi.performParingWithCloud(host: String, code: String?) {
     callback.onResult(Result(EspPairingEvent.StagePairWithCloud), this)
     code?.let { it1 ->
-        Connection().pairing(code, config.token!!) {
+        Connection().pairing(code, config.accessToken!!) {
             if (it.isSuccess) {
                 deviceId = it.getOrNull()?.get("deviceId") as? String
                 callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), this)

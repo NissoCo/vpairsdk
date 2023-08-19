@@ -7,29 +7,29 @@ import org.json.JSONObject
 data class WifiModel(
     var ssid: String? = null,
     var bssid: String? = null,
-    var pwd: String? = null
+    var password: String? = null
     )
 
 data class Cloud(
     var registryId: String = "walabot_home_gen2",
-    var region: String = "us-central1",
-    var name: String = "",
-    var type: CLOUD_TYPE = CLOUD_TYPE.GOOLE_CLOUD
+    var cloudRegion: String = "us-central1",
+    var projectName: String = "",
+    var cloudType: CLOUD_TYPE = CLOUD_TYPE.GOOLE_CLOUD
 )
 
 data class MQTT(
     var hostUrl: String = "mqtts://mqtt.googleapis.com",
     var port: Int = 443,
     var userName: String = "unused",
-    var pwd: String = "unused",
+    var password: String = "unused",
     var clientId: String = "unused",
     var ntpUrl: String = "pool.ntp.org"
 )
 
 class Config {
-    lateinit var url: String
+    lateinit var apiURL: String
     var userId: String? = null
-    var token: String? = null
+    var accessToken: String? = null
 
     val wifi: WifiModel by lazy {
         WifiModel()
@@ -53,16 +53,16 @@ class Config {
         val dev: Config
         get() {
             return Config().apply {
-                url = "https://dev.vayyarhomeapisdev.com"
-                cloud.name = "walabothome-app-cloud"
+                apiURL = "https://dev.vayyarhomeapisdev.com"
+                cloud.projectName = "walabothome-app-cloud"
             }
         }
 
         val prod: Config
         get() {
             return Config().apply {
-                url = "https://home.vayyarhomeapisdev.com"
-                cloud.name = "walabot-home"
+                apiURL = "https://home.vayyarhomeapisdev.com"
+                cloud.projectName = "walabot-home"
             }
         }
 
@@ -70,29 +70,29 @@ class Config {
             try {
                 val json = JSONObject(config)
                 val cnfg = Config()
-                cnfg.url = json.optString("url")
-                cnfg.token = json.optString("token")
+                cnfg.apiURL = json.optString("url")
+                cnfg.accessToken = json.optString("token")
 
 
                 val cloudData = json.optJSONObject("cloud")
                 cnfg.cloud.registryId = cloudData?.optString("reigstryId") ?: ""
-                cnfg.cloud.region = cloudData?.optString("region") ?: ""
-                cnfg.cloud.name = cloudData?.optString("name") ?: ""
+                cnfg.cloud.cloudRegion = cloudData?.optString("region") ?: ""
+                cnfg.cloud.projectName = cloudData?.optString("name") ?: ""
                 cloudData?.optInt("type")?.let {
-                    cnfg.cloud.type = CLOUD_TYPE.forNumber(it)
+                    cnfg.cloud.cloudType = CLOUD_TYPE.forNumber(it)
                 }
 
                 val mqtt = json.optJSONObject("mqtt")
                 cnfg.mqtt.hostUrl = mqtt?.optString("hostUrl") ?: ""
                 cnfg.mqtt.port = mqtt?.optInt("port") ?: 443
                 cnfg.mqtt.userName = mqtt?.optString("userName") ?: ""
-                cnfg.mqtt.pwd = mqtt?.optString("pwd") ?: ""
+                cnfg.mqtt.password = mqtt?.optString("pwd") ?: ""
                 cnfg.mqtt.clientId = mqtt?.optString("clientId")?: ""
                 cnfg.mqtt.ntpUrl = mqtt?.optString("ntpUrl") ?: ""
 
                 val wifiData = json.optJSONObject("wifi")
                 cnfg.wifi.ssid = wifiData?.optString("ssid")
-                cnfg.wifi.pwd = wifiData?.optString("pwd" )
+                cnfg.wifi.password = wifiData?.optString("pwd" )
 
                 return cnfg
             } catch (e: JSONException) {

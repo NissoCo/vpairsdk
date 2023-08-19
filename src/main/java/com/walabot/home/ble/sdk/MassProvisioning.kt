@@ -129,7 +129,7 @@ class MassProvisioning(val context: Context, var config: Config) :
             if (config.wifi.ssid == null) {
                 config.wifi.ssid = ssid
                 config.wifi.bssid = bssid
-                config.wifi.pwd = password
+                config.wifi.password = password
             }
         }
         var currentApi = bleApi
@@ -148,7 +148,7 @@ class MassProvisioning(val context: Context, var config: Config) :
                 EspPairingEvent.Connected -> {
                     espBleApi?.deviceDescriptor?.let {
                         config.wifi.ssid?.let {
-                            resumeConnection(it, config.wifi.bssid ?: "", config.wifi.pwd ?: "", espBleApi)
+                            resumeConnection(it, config.wifi.bssid ?: "", config.wifi.password ?: "", espBleApi)
                         } ?: kotlin.run {
                             refreshWifiList()
                         }

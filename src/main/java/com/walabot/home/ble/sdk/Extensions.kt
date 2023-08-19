@@ -29,14 +29,16 @@ fun ProtocolMediator.WifiScanResult.convert(): List<EspWifiItem>? {
     }
 }
 
-fun DevInfo.toJson(): Map<String, String> {
+fun DevInfo.toJson(): Map<String, Any> {
     return mapOf(
-        "devId" to devId,
+        "devID" to devId,
         "sku" to sku,
         "snRadar" to snRadar,
         "snProduct" to snProduct,
         "hwRevRadar" to hwRevRadar,
         "hwRevProduct" to hwRevProduct,
-        "swVer" to swVer
+        "swVer" to swVer,
+        "swVerCode" to swVerCode,
+        "isProvisionComitted" to isProvisionCommitted
     )
 }

@@ -24,16 +24,16 @@ public class ProtobufMessagesV1 implements ProtocolMediator
 	public GeneratedMessageV3 cloudDetails(Config cloudOptions)
 	{
 		return Message.CloudDetails.newBuilder()
-				.setHttpUrl(cloudOptions.getUrl())
+				.setHttpUrl(cloudOptions.getApiURL())
 				.setMqttUri(cloudOptions.getMqtt().getHostUrl())
 				.setMqttPort(cloudOptions.getMqtt().getPort())
-				.setProjectId(cloudOptions.getCloud().getName())
+				.setProjectId(cloudOptions.getCloud().getProjectName())
 				.setNtpUrl(cloudOptions.getMqtt().getNtpUrl())
-				.setCloudType(cloudOptions.getCloud().getType())
+				.setCloudType(cloudOptions.getCloud().getCloudType())
 				.setCloudRegistry(cloudOptions.getCloud().getRegistryId())
-				.setCloudRegion(cloudOptions.getCloud().getRegion())
+				.setCloudRegion(cloudOptions.getCloud().getCloudRegion())
 				.setMqttUsername(cloudOptions.getMqtt().getUserName())
-				.setMqttPassword(cloudOptions.getMqtt().getPwd())
+				.setMqttPassword(cloudOptions.getMqtt().getPassword())
 				.setMqttClientId(cloudOptions.getMqtt().getClientId())
 				.build();
 	}
