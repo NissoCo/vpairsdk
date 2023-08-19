@@ -1,11 +1,11 @@
 package com.walabot.home.ble.pairing.esp;
 
-import androidx.annotation.Nullable;
-
 import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.walabot.home.ble.Message;
 import com.walabot.home.ble.sdk.Config;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -157,9 +157,9 @@ public class ProtobufMessagesV1 implements ProtocolMediator
 		return null;
 	}
 
-	@Nullable
-	@Override
-	public Map<String, String > parseDevInfoResult(@Nullable byte[] data) {
+	@org.jetbrains.annotations.Nullable
+    @Override
+	public Map<String, Object> parseDevInfoResult(@Nullable byte[] data) {
 		return null;
 	}
 }
