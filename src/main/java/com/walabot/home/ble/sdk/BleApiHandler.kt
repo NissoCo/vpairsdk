@@ -9,6 +9,7 @@ import com.walabot.home.ble.pairing.esp.WalabotDeviceDesc
 
 
 fun EspBleApi.connect(bleDevice: BleDevice) {
+    callback.onResult(Result(EspPairingEvent.Connecting), this)
     connect(bleDevice, object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
         override fun onSuccess(obj: WalabotDeviceDesc?) {
             callback.onResult(Result(EspPairingEvent.Connected), this@connect)
@@ -30,7 +31,7 @@ fun EspBleApi.sendCloudDetails(ssid: String, bssid: String, password: String) {
         callback.onResult(Result(Throwable("Device not connected")), this)
         return
     }
-    callback.onResult(Result(EspPairingEvent.SendingCloudDetails), this)
+    callback.onResult(Result(EspPairingEvent.WifiConnecting), this)
     sendWifiCredentials(
         ssid.convert(),
         bssid.convert(),
@@ -49,6 +50,7 @@ fun EspBleApi.sendCloudDetails(ssid: String, bssid: String, password: String) {
 }
 
 private fun EspBleApi.updateCloud(deviceDesc: WalabotDeviceDesc) {
+    callback.onResult(Result(EspPairingEvent.WifiConnected), this@updateCloud)
     sendCloudDetails(config, object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
             callback.onResult(Result(EspPairingEvent.SentCloudDetails), this@updateCloud)

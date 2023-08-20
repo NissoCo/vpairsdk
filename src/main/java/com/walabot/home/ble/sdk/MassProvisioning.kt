@@ -30,6 +30,7 @@ fun Context.isBleOn(): Boolean {
 
 class MassProvisioning(val context: Context, var config: Config) :
     EspBleApi.OnResult {
+    var wifiIsValid = false
     private val scanner: VayyarScanner by lazy {
         VayyarScanner(context, arrayListOf(UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c")))
     }
@@ -124,20 +125,11 @@ class MassProvisioning(val context: Context, var config: Config) :
         }
     }
 
-    fun resumeConnection(ssid: String, bssid: String, password: String, bleApi: EspBleApi? = null) {
-        if (config.wifi.ssid == null) {
-            if (config.wifi.ssid == null) {
-                config.wifi.ssid = ssid
-                config.wifi.bssid = bssid
-                config.wifi.password = password
-            }
-        }
-        var currentApi = bleApi
-        if (bleApi == null) {
-            currentApi = bleApis.first()
-        }
-        if (bleApi == null) startMassProvisioning()
-        currentApi?.sendCloudDetails(ssid, bssid, password)
+    fun resumeConnection(ssid: String, bssid: String, password: String) {
+        config.wifi.ssid = ssid
+        config.wifi.bssid = bssid
+        config.wifi.password = password
+        bleApis.first().sendCloudDetails(ssid, bssid, password)
     }
 
 
@@ -146,11 +138,20 @@ class MassProvisioning(val context: Context, var config: Config) :
         if (result.isSuccessfull) {
             when (result.result) {
                 EspPairingEvent.Connected -> {
+                    if (config.wifi.ssid == null){
+                        refreshWifiList()
+                    } else {
+                        espBleApi?.sendCloudDetails(
+                            config.wifi.ssid ?: "",
+                            config.wifi.bssid ?: "",
+                            config.wifi.password ?: "")
+                    }
+                }
+                EspPairingEvent.WifiConnected -> {
                     espBleApi?.deviceDescriptor?.let {
-                        config.wifi.ssid?.let {
-                            resumeConnection(it, config.wifi.bssid ?: "", config.wifi.password ?: "", espBleApi)
-                        } ?: kotlin.run {
-                            refreshWifiList()
+                        if (!wifiIsValid) {
+                            wifiIsValid = true
+                            startMassProvisioning()
                         }
                     }
                 }
@@ -167,22 +168,26 @@ class MassProvisioning(val context: Context, var config: Config) :
             val message = if (result.isSuccessfull) result.result.name else result.throwable.message ?: ""
             eventsHandler?.onEvent(result.result, !result.isSuccessfull, message, espBleApi?.devInfo, espBleApi?.deviceDescriptor?.mac ?: "")
         } else {
-            bleApis.remove(espBleApi)
             val error = result.throwable as EspPairingException
-            when (error.errorCode) {
+            when (error.resultCode) {
                 3011 -> {
                     espBleApi?.let { api ->
                         scanWifi(api) {
                             eventsHandler?.onWifiCredentialsFail(it)
                         }
                     }
+                    return
                 }
             }
+            bleApis.remove(espBleApi)
             eventsHandler?.onError(error)
         }
     }
 
     fun stopPairing() {
-
+        bleApis.forEach {
+            it.stop()
+        }
+        bleApis.clear()
     }
 }

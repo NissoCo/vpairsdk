@@ -3,7 +3,6 @@ package com.walabot.home.ble.pairing.esp;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -23,6 +22,8 @@ import com.walabot.home.ble.sdk.EspPairingEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EspBleApi implements EspApi {
@@ -33,13 +34,13 @@ public class EspBleApi implements EspApi {
     private WalabotDeviceDesc walabotDescription;
     public Config config;
     public OnResult callback;
-    private Map<String, String> devInfo;
+    private Map<String, Object> devInfo;
     public String deviceId;
     private AnalyticsHandler analyticsHandler;
 
-    public Map<String, String> getDevInfo() {
+    public Map<String, Object> getDevInfo() {
         if (devInfo == null && deviceId != null) {
-            Map<String, String> temp = new HashMap<>();
+            Map<String, Object> temp = new HashMap<>();
             temp.put("devId", deviceId);
             return temp;
         }
@@ -245,7 +246,7 @@ public class EspBleApi implements EspApi {
 //                if (result.getResult() != null && result.getResult().getName() != null) {
 //
 //                }
-                walabotDescription = new WalabotDeviceDesc("", "", result.getResult().getName());
+                walabotDescription = new WalabotDeviceDesc(bleDevice.getDevice().getAddress(), "", result.getResult().getName());
                 walabotDescription.setProtocolVersion(_espBleImpl._whBle.getProtocolVersion());
                 fetchDevInfo(cb);
             } else {
@@ -256,14 +257,17 @@ public class EspBleApi implements EspApi {
     }
 
     private void fetchDevInfo(EspAPICallback<WalabotDeviceDesc> cb) {
-        Handler timer = new Handler();
-        timer.postDelayed(() -> {
-            cb.onSuccess(walabotDescription);
-        }, 3000);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                cb.onSuccess(walabotDescription);
+            }
+        }, 2000);
         _espBleImpl.sendMessage(Message.ToDeviceMessageType.GET_DEV_INFO, null, (dataResult) -> {
             if (dataResult.isSuccessful()) {
                 devInfo = _espBleImpl.messageImpl.parseDevInfoResult(dataResult.getData());
-                timer.removeCallbacksAndMessages(null);
+                timer.cancel();
                 cb.onSuccess(walabotDescription);
             }
         });
@@ -318,7 +322,7 @@ public class EspBleApi implements EspApi {
                     } else {
                         // we got a valid status, we parsed the payload, but the IP/MAC was
                         // broken, or we got invalid status (like network is local only)
-                        EspPairingException e = new EspPairingException(EspPairingErrorType.CONNECT_FAILED, dataResult);
+                        EspPairingException e = new EspPairingException("Wrong Wifi Code", wifiResult.getResult(), 0);
                         cb.onFailure(e);
                     }
                 }
