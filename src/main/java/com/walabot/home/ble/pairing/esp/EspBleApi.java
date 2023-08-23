@@ -263,7 +263,7 @@ public class EspBleApi implements EspApi {
             public void run() {
                 cb.onSuccess(walabotDescription);
             }
-        }, 2000);
+        }, 3000);
         _espBleImpl.sendMessage(Message.ToDeviceMessageType.GET_DEV_INFO, null, (dataResult) -> {
             if (dataResult.isSuccessful()) {
                 devInfo = _espBleImpl.messageImpl.parseDevInfoResult(dataResult.getData());

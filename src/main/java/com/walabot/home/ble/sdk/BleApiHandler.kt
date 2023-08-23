@@ -73,7 +73,7 @@ private fun EspBleApi.pair(host: String) {
         override fun onSuccess(obj: EspPairingResponse?) {
             callback.onResult(Result(EspPairingEvent.Paired), this@pair)
             if (config.updateCloud) {
-                performParingWithCloud(host, obj?.code)
+                performPairingWithCloud(host, obj?.code)
             } else {
                 notifyPairingComplete(host, obj?.code!!)
             }
@@ -85,7 +85,7 @@ private fun EspBleApi.pair(host: String) {
     })
 }
 
-private fun EspBleApi.performParingWithCloud(host: String, code: String?) {
+private fun EspBleApi.performPairingWithCloud(host: String, code: String?) {
     callback.onResult(Result(EspPairingEvent.StagePairWithCloud), this)
     code?.let { it1 ->
         Connection().pairing(code, config.accessToken!!) {

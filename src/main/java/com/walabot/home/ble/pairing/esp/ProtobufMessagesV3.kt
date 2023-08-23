@@ -133,9 +133,10 @@ class ProtobufMessagesV3 : ProtocolMediator {
 
     override fun parseDevInfoResult(data: ByteArray?): Map<String, Any>? {
         return try {
-            DevInfo.parseFrom(data).toJson()
-        } catch (exp: Exception) {
+            ToAppMessage2.parseFrom(data).devInfo?.toJson()
+        } catch (e: Exception) {
             null
         }
+
     }
 }
