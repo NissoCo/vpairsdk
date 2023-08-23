@@ -8,5 +8,5 @@ enum class AnalyticsComponents(val value: String) {
 }
 
 interface AnalyticsHandler {
-    fun log(components: ArrayList<AnalyticsComponents>)
+    fun log(message: String, deviceId: String?)
 }

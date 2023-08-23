@@ -1,5 +1,6 @@
 package com.walabot.home.ble.pairing.esp;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
@@ -9,30 +10,48 @@ import androidx.annotation.Nullable;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.walabot.home.ble.BleDevice;
-import com.walabot.home.ble.BleDiscoveryCallback;
 import com.walabot.home.ble.Message;
 import com.walabot.home.ble.Result;
 import com.walabot.home.ble.WHBle;
 import com.walabot.home.ble.WHConnectionCallback;
 import com.walabot.home.ble.WHDataCallback;
-import com.walabot.home.ble.WalabotHomeDeviceScanner;
-import com.walabot.home.ble.pairing.Gen2CloudOptions;
-import com.walabot.home.ble.sdk.CloudCredentials;
+import com.walabot.home.ble.sdk.AnalyticsHandler;
+import com.walabot.home.ble.sdk.Config;
 import com.walabot.home.ble.sdk.EspPairingEvent;
 
-import java.util.Collection;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EspBleApi implements EspApi {
+
     public interface OnResult {
         void onResult(Result<EspPairingEvent> result, EspBleApi espBleApi);
     }
     private WalabotDeviceDesc walabotDescription;
-    public CloudCredentials cloudCredentials;
+    public Config config;
     public OnResult callback;
+    private Map<String, Object> devInfo;
+    public String deviceId;
+    private AnalyticsHandler analyticsHandler;
 
-    public static class ESPBleAPIImpl implements WHConnectionCallback, WHDataCallback {
+    public Map<String, Object> getDevInfo() {
+        if (devInfo == null && deviceId != null) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("devId", deviceId);
+            return temp;
+        }
+        return devInfo;
+    }
+
+    public void setAnalyticsHandler(AnalyticsHandler analyticsHandler) {
+        this.analyticsHandler = analyticsHandler;
+    }
+
+    public static class ESPBleAPIImpl implements WHConnectionCallback, WHDataCallback, AnalyticsHandler {
         interface OpCallback {
             void onData(OpResult result);
         }
@@ -40,9 +59,8 @@ public class EspBleApi implements EspApi {
         interface ConnectionCallback {
             void onConnectionResult(Result<BluetoothDevice> result);
         }
-
+        private AnalyticsHandler analyticsHandler;
         private final WHBle _whBle;
-        private final WalabotHomeDeviceScanner _scanner;
         private final AtomicReference<OpCallback> _opCallback =
                 new AtomicReference<>();
         private final AtomicReference<ConnectionCallback> _connectionCallback =
@@ -50,10 +68,15 @@ public class EspBleApi implements EspApi {
 
         ProtocolMediator messageImpl;
 
+        private AnalyticsHandler getAnalyticsHandler() {
+            if (analyticsHandler == null) {
+                return this;
+            }
+            return analyticsHandler;
+        }
+
         public ESPBleAPIImpl(Context context) {
             _whBle = new WHBle(context);
-            UUID SERVICE_WALABOT_HOME = UUID.fromString("21a07e04-1fbf-4bf6-b484-d319b8282a1c");
-            _scanner = new WalabotHomeDeviceScanner(context, SERVICE_WALABOT_HOME);
         }
 
         public void sendMessage(Message.ToDeviceMessageType type, @Nullable GeneratedMessageV3 payload, OpCallback cb) {
@@ -82,7 +105,6 @@ public class EspBleApi implements EspApi {
         }
 
         public void disconnect() {
-            _scanner.stopScan();
             BluetoothDevice device = _whBle.getSelectedDevice();
             if (device != null) {
                 _whBle.disconnect(device, true);
@@ -90,6 +112,13 @@ public class EspBleApi implements EspApi {
             _opCallback.set(null);
             _connectionCallback.set(null);
         }
+
+
+        @Override
+        public void log(@NonNull String message, @Nullable String deviceId) {
+            Log.d("Analytics", message + "deviceId: " + deviceId);
+        }
+
 
         //region WHConnectionCallback
         @Override
@@ -133,6 +162,7 @@ public class EspBleApi implements EspApi {
         //region WHDataCallback
         @Override
         public final void onReadSuccess(byte[] data) {
+            getAnalyticsHandler().log("On read Characteristics", Objects.requireNonNull(_whBle.getConnectedDevice()).getAddress());
             OpCallback opCallback = _opCallback.getAndSet(null);
             if (opCallback != null) {
                 opCallback.onData(new OpResult(0, data));
@@ -141,6 +171,7 @@ public class EspBleApi implements EspApi {
 
         @Override
         public final void onReadFailed() {
+            getAnalyticsHandler().log("On read Characteristics failed", Objects.requireNonNull(_whBle.getConnectedDevice()).getAddress());
             OpCallback opCallback = _opCallback.getAndSet(null);
             if (opCallback != null) {
                 opCallback.onData(new OpResult(ERR_READ_FAILED, null));
@@ -149,11 +180,12 @@ public class EspBleApi implements EspApi {
 
         @Override
         public void onWriteSuccess(byte[] value) {
-
+            getAnalyticsHandler().log("On write Characteristics", Objects.requireNonNull(_whBle.getConnectedDevice()).getAddress());
         }
 
         @Override
         public final void onWriteFailed(byte[] value) {
+            getAnalyticsHandler().log("On write Characteristics failed", Objects.requireNonNull(_whBle.getConnectedDevice()).getAddress());
             OpCallback opCallback = _opCallback.getAndSet(null);
             if (opCallback != null) {
                 opCallback.onData(new OpResult(ERR_WRITE_FAILED, null));
@@ -173,9 +205,10 @@ public class EspBleApi implements EspApi {
 
     private final ESPBleAPIImpl _espBleImpl;
 
-    public EspBleApi(Context context, CloudCredentials cloudCredentials, OnResult callback) {
+    public EspBleApi(Context context, Config config, OnResult callback) {
         _espBleImpl = new ESPBleAPIImpl(context);
-        this.cloudCredentials = cloudCredentials;
+        _espBleImpl.analyticsHandler = analyticsHandler;
+        this.config = config;
         this.callback = callback;
     }
 
@@ -199,6 +232,7 @@ public class EspBleApi implements EspApi {
 
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void connect(@NonNull BleDevice bleDevice, EspAPICallback<WalabotDeviceDesc> cb) {
         _espBleImpl.connect(bleDevice, (result) ->
@@ -212,12 +246,29 @@ public class EspBleApi implements EspApi {
 //                if (result.getResult() != null && result.getResult().getName() != null) {
 //
 //                }
-                walabotDescription = new WalabotDeviceDesc("", "", result.getResult().getName());
+                walabotDescription = new WalabotDeviceDesc(bleDevice.getDevice().getAddress(), "", result.getResult().getName());
                 walabotDescription.setProtocolVersion(_espBleImpl._whBle.getProtocolVersion());
-                cb.onSuccess(walabotDescription);
+                fetchDevInfo(cb);
             } else {
                 Log.i(EspBleApi.class.getName(), "connect result failed");
                 cb.onFailure(result.getThrowable());
+            }
+        });
+    }
+
+    private void fetchDevInfo(EspAPICallback<WalabotDeviceDesc> cb) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                cb.onSuccess(walabotDescription);
+            }
+        }, 3000);
+        _espBleImpl.sendMessage(Message.ToDeviceMessageType.GET_DEV_INFO, null, (dataResult) -> {
+            if (dataResult.isSuccessful()) {
+                devInfo = _espBleImpl.messageImpl.parseDevInfoResult(dataResult.getData());
+                timer.cancel();
+                cb.onSuccess(walabotDescription);
             }
         });
     }
@@ -271,7 +322,7 @@ public class EspBleApi implements EspApi {
                     } else {
                         // we got a valid status, we parsed the payload, but the IP/MAC was
                         // broken, or we got invalid status (like network is local only)
-                        EspPairingException e = new EspPairingException(EspPairingErrorType.CONNECT_FAILED, dataResult);
+                        EspPairingException e = new EspPairingException("Wrong Wifi Code", wifiResult.getResult(), 0);
                         cb.onFailure(e);
                     }
                 }
@@ -283,13 +334,13 @@ public class EspBleApi implements EspApi {
     }
 
     @Override
-    public void sendCloudDetails(Gen2CloudOptions gen2CloudOptions, EspAPICallback<Void> cb) {
+    public void sendCloudDetails(@NonNull Config config, EspAPICallback<Void> cb) {
         if (_espBleImpl.messageImpl == null) {
             cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
             return;
         }
 
-        GeneratedMessageV3 message = _espBleImpl.messageImpl.cloudDetails(gen2CloudOptions);
+        GeneratedMessageV3 message = _espBleImpl.messageImpl.cloudDetails(config);
         _espBleImpl.sendMessage(Message.ToDeviceMessageType.CLOUD_CONNECT, message, (opResult) ->
         {
             ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
@@ -372,24 +423,28 @@ public class EspBleApi implements EspApi {
 
     @Override
     public void reboot(EspAPICallback<Void> cb) {
-        if (_espBleImpl.messageImpl == null) {
-            cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
-            return;
-        }
-
-        _espBleImpl.sendMessage(Message.ToDeviceMessageType.DO_REBOOT_OPERATIONAL, null, opResult ->
-        {
-            ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
-            if (r == null) {
-                cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_PARSE_CONNECT_RESULT, opResult));
+        if (devInfo != null) {
+            commitProvision(cb);
+        } else {
+            if (_espBleImpl.messageImpl == null) {
+                cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
                 return;
             }
-            if (r.isSuccessful()) {
-                cb.onSuccess(null);
-            } else {
-                cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_SEND_CLOUD_DETAILS, opResult));
-            }
-        });
+
+            _espBleImpl.sendMessage(Message.ToDeviceMessageType.DO_REBOOT_OPERATIONAL, null, opResult ->
+            {
+                ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
+                if (r == null) {
+                    cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_PARSE_CONNECT_RESULT, opResult));
+                    return;
+                }
+                if (r.isSuccessful()) {
+                    cb.onSuccess(null);
+                } else {
+                    cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_SEND_CLOUD_DETAILS, opResult));
+                }
+            });
+        }
     }
 
     @Override
@@ -407,6 +462,23 @@ public class EspBleApi implements EspApi {
                 cb.onSuccess(null);
             } else {
                 cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_SEND_CLOUD_DETAILS, opResult));
+            }
+        });
+    }
+
+    @Override
+    public void commitProvision(EspAPICallback<Void> cb) {
+        if (_espBleImpl.messageImpl == null) {
+            cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
+            return;
+        }
+        _espBleImpl.sendMessage(Message.ToDeviceMessageType.COMMIT_PROVISION, null, opResult ->
+        {
+            ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
+            if (r == null || r.isSuccessful()) {
+                cb.onSuccess(null);
+            } else {
+                cb.onFailure(new EspPairingException(EspPairingErrorType.COMMIT_PROVISION_FAILED, opResult));
             }
         });
     }

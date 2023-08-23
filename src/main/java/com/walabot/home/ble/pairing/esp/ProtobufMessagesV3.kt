@@ -3,9 +3,11 @@ package com.walabot.home.ble.pairing.esp
 import com.google.protobuf.GeneratedMessageV3
 import com.google.protobuf.InvalidProtocolBufferException
 import com.walabot.home.ble.Message
+import com.walabot.home.ble.Message.DevInfo
 import com.walabot.home.ble.Message.ToAppMessage2
 import com.walabot.home.ble.Message.WifiCredResult3
-import com.walabot.home.ble.pairing.Gen2CloudOptions
+import com.walabot.home.ble.sdk.Config
+import com.walabot.home.ble.sdk.toJson
 
 class ProtobufMessagesV3 : ProtocolMediator {
     override fun wifiCredentials(
@@ -20,11 +22,11 @@ class ProtobufMessagesV3 : ProtocolMediator {
             .build()
     }
 
-    override fun cloudDetails(cloudOptions: Gen2CloudOptions?): GeneratedMessageV3? {
+    override fun cloudDetails(cloudOptions: Config): GeneratedMessageV3? {
         return Message.CloudDetails2.newBuilder()
-            .setHttpUrl(cloudOptions?.params?.cloudBaseUrl)
-            .setProjectId(cloudOptions?.params?.cloudProjectId)
-            .setNtpUrl(cloudOptions!!.ntpUrl)
+            .setHttpUrl(cloudOptions.apiURL)
+            .setProjectId(cloudOptions.cloud.projectName)
+            .setNtpUrl(cloudOptions.mqtt.ntpUrl)
             .build()
     }
 
@@ -127,5 +129,14 @@ class ProtobufMessagesV3 : ProtocolMediator {
             e.printStackTrace()
         }
         return null
+    }
+
+    override fun parseDevInfoResult(data: ByteArray?): Map<String, Any>? {
+        return try {
+            ToAppMessage2.parseFrom(data).devInfo?.toJson()
+        } catch (e: Exception) {
+            null
+        }
+
     }
 }

@@ -5,8 +5,8 @@ import com.google.protobuf.GeneratedMessageV3
 import com.google.protobuf.InvalidProtocolBufferException
 import com.google.protobuf.Parser
 import com.walabot.home.ble.BleDevice
-import com.walabot.home.ble.Message.*
-import com.walabot.home.ble.pairing.Gen2CloudOptions
+import com.walabot.home.ble.Message
+import com.walabot.home.ble.sdk.Config
 
 interface EspApi {
     //	void connect(byte[] apSsid, byte[] apBssid, byte[] apPassword, EspAPICallback<WalabotDeviceDesc> cb);
@@ -23,7 +23,7 @@ interface EspApi {
         cb: EspAPICallback<WalabotDeviceDesc?>?
     )
 
-    fun sendCloudDetails(cloudOptions: Gen2CloudOptions?, cb: EspAPICallback<Void?>?)
+    fun sendCloudDetails(config: Config, cb: EspAPICallback<Void?>?)
     fun pair(hostAddress: String?, uid: String?, callback: EspAPICallback<EspPairingResponse?>?)
     fun notifyPairingComplete(
         hostAddress: String?,
@@ -36,6 +36,7 @@ interface EspApi {
     fun performOta(versionCode: Int, cb: EspAPICallback<Void?>?)
     fun reboot(cb: EspAPICallback<Void?>?)
     fun rebootToFactory(cb: EspAPICallback<Void?>?)
+    fun commitProvision(cb: EspAPICallback<Void?>?)
     fun stop()
     interface EspAPICallback<T> {
         fun onSuccess(obj: T)
@@ -50,10 +51,10 @@ interface EspApi {
 
     companion object {
         fun generateOutGoingMessage(
-            type: ToDeviceMessageType?,
+            type: Message.ToDeviceMessageType?,
             payload: GeneratedMessageV3?
         ): ByteArray? {
-            val builder = ToDeviceMessage.newBuilder()
+            val builder = Message.ToDeviceMessage.newBuilder()
                 .setType(type)
             if (payload != null) {
                 builder.payload = payload.toByteString()
@@ -61,9 +62,9 @@ interface EspApi {
             return builder.build().toByteArray()
         }
 
-        fun parseMessage(data: ByteArray?): ToAppMessage? {
+        fun parseMessage(data: ByteArray?): Message.ToAppMessage? {
             try {
-                return ToAppMessage.parseFrom(data)
+                return Message.ToAppMessage.parseFrom(data)
             } catch (e: InvalidProtocolBufferException) {
                 e.printStackTrace()
             }

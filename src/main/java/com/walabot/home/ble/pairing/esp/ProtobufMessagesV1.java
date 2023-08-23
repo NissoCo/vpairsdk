@@ -3,7 +3,11 @@ package com.walabot.home.ble.pairing.esp;
 import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.walabot.home.ble.Message;
-import com.walabot.home.ble.pairing.Gen2CloudOptions;
+import com.walabot.home.ble.sdk.Config;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public class ProtobufMessagesV1 implements ProtocolMediator
 {
@@ -17,20 +21,20 @@ public class ProtobufMessagesV1 implements ProtocolMediator
 	}
 
 	@Override
-	public GeneratedMessageV3 cloudDetails(Gen2CloudOptions cloudOptions)
+	public GeneratedMessageV3 cloudDetails(Config cloudOptions)
 	{
 		return Message.CloudDetails.newBuilder()
-				.setHttpUrl(cloudOptions.getParams().getCloudBaseUrl())
-				.setMqttUri(cloudOptions.getParams().getMqttUrl())
-				.setMqttPort(cloudOptions.getParams().getMqttPort())
-				.setProjectId(cloudOptions.getParams().getCloudProjectId())
-				.setNtpUrl(cloudOptions.getNtpUrl())
-				.setCloudType(Message.CLOUD_TYPE.GOOLE_CLOUD)
-				.setCloudRegistry(cloudOptions.getMqttRegistryId())
-				.setCloudRegion(cloudOptions.getParams().getCloudRegion())
-				.setMqttUsername(cloudOptions.getMqttUserName())
-				.setMqttPassword(cloudOptions.getMqttPassword())
-				.setMqttClientId(cloudOptions.getMqttClientId())
+				.setHttpUrl(cloudOptions.getApiURL())
+				.setMqttUri(cloudOptions.getMqtt().getHostUrl())
+				.setMqttPort(cloudOptions.getMqtt().getPort())
+				.setProjectId(cloudOptions.getCloud().getProjectName())
+				.setNtpUrl(cloudOptions.getMqtt().getNtpUrl())
+				.setCloudType(cloudOptions.getCloud().getCloudType())
+				.setCloudRegistry(cloudOptions.getCloud().getRegistryId())
+				.setCloudRegion(cloudOptions.getCloud().getCloudRegion())
+				.setMqttUsername(cloudOptions.getMqtt().getUserName())
+				.setMqttPassword(cloudOptions.getMqtt().getPassword())
+				.setMqttClientId(cloudOptions.getMqtt().getClientId())
 				.build();
 	}
 
@@ -150,6 +154,12 @@ public class ProtobufMessagesV1 implements ProtocolMediator
 	@Override
 	public WifiScanResult parseWifiScanResult(byte[] data) {
 		//ignored
+		return null;
+	}
+
+	@org.jetbrains.annotations.Nullable
+    @Override
+	public Map<String, Object> parseDevInfoResult(@Nullable byte[] data) {
 		return null;
 	}
 }
