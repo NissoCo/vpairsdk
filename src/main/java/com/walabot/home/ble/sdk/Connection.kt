@@ -17,9 +17,9 @@ val version = "3"
 class Connection {
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun pairing(code: String, token: String, callback: (Result<Map<String, Any>>) -> Unit) {
+    fun pairing(host: String, code: String, token: String, callback: (Result<Map<String, Any>>) -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
-            val url = URL("${dev}pairing/$code")
+            val url = URL("${host}/pairing/$code")
             val httpURLConnection = url.openConnection() as HttpURLConnection
             httpURLConnection.requestMethod = "PUT"
             httpURLConnection.setRequestProperty(

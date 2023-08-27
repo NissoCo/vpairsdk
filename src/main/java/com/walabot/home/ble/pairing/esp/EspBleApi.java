@@ -316,8 +316,8 @@ public class EspBleApi implements EspApi {
                 ProtocolMediator.WifiResult wifiResult = _espBleImpl.messageImpl.parseWifiResult(dataResult.getData());
                 if (wifiResult != null) {
                     if (wifiResult.isSuccessful() && wifiResult.getMac() != null && !wifiResult.getMac().isEmpty()) {
-                        String name = walabotDescription.getName();
-                        walabotDescription = new WalabotDeviceDesc(wifiResult.getMac(), wifiResult.getIp(), name);
+//                        String name = walabotDescription.getName();
+//                        walabotDescription = new WalabotDeviceDesc(wifiResult.getMac(), wifiResult.getIp(), name);
                         cb.onSuccess(walabotDescription);
                     } else {
                         // we got a valid status, we parsed the payload, but the IP/MAC was

@@ -70,29 +70,30 @@ class Config {
             try {
                 val json = JSONObject(config)
                 val cnfg = Config()
-                cnfg.apiURL = json.optString("url")
-                cnfg.accessToken = json.optString("token")
+                cnfg.userId = json.optString("userId")
+                cnfg.apiURL = json.optString("apiURL")
+                cnfg.accessToken = json.optString("accessToken")
 
 
                 val cloudData = json.optJSONObject("cloud")
-                cnfg.cloud.registryId = cloudData?.optString("reigstryId") ?: ""
-                cnfg.cloud.cloudRegion = cloudData?.optString("region") ?: ""
-                cnfg.cloud.projectName = cloudData?.optString("name") ?: ""
-                cloudData?.optInt("type")?.let {
+                cnfg.cloud.registryId = cloudData?.optString("registryId") ?: ""
+                cnfg.cloud.cloudRegion = cloudData?.optString("cloudRegion") ?: ""
+                cnfg.cloud.projectName = cloudData?.optString("projectName") ?: ""
+                cloudData?.optInt("cloudType")?.let {
                     cnfg.cloud.cloudType = CLOUD_TYPE.forNumber(it)
                 }
 
                 val mqtt = json.optJSONObject("mqtt")
                 cnfg.mqtt.hostUrl = mqtt?.optString("hostUrl") ?: ""
                 cnfg.mqtt.port = mqtt?.optInt("port") ?: 443
-                cnfg.mqtt.userName = mqtt?.optString("userName") ?: ""
-                cnfg.mqtt.password = mqtt?.optString("pwd") ?: ""
+                cnfg.mqtt.userName = mqtt?.optString("username") ?: ""
+                cnfg.mqtt.password = mqtt?.optString("password") ?: ""
                 cnfg.mqtt.clientId = mqtt?.optString("clientId")?: ""
                 cnfg.mqtt.ntpUrl = mqtt?.optString("ntpUrl") ?: ""
 
                 val wifiData = json.optJSONObject("wifi")
                 cnfg.wifi.ssid = wifiData?.optString("ssid")
-                cnfg.wifi.password = wifiData?.optString("pwd" )
+                cnfg.wifi.password = wifiData?.optString("password" )
 
                 return cnfg
             } catch (e: JSONException) {

@@ -64,5 +64,5 @@ interface PairingEvents {
         deviceInfo: Map<String, Any>?,
         deviceId: String)
     fun shouldSelect(wifiList: List<EspWifiItem>)
-    fun onMissingPermission(permission: String)
+    fun onMissingPermission(permissions: List<String>)
 }

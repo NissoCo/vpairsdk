@@ -65,10 +65,12 @@ class MassProvisioning(val context: Context, var config: Config) :
                 }
             }
         } else {
+            val permissions = ArrayList<String>()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                eventsHandler?.onMissingPermission(Manifest.permission.BLUETOOTH_SCAN)
+                permissions.add("Bluetooth")
             }
-            eventsHandler?.onMissingPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            permissions.add("Location")
+            eventsHandler?.onMissingPermission(permissions)
         }
     }
 
@@ -165,8 +167,7 @@ class MassProvisioning(val context: Context, var config: Config) :
 
                 }
             }
-            val message = if (result.isSuccessfull) result.result.name else result.throwable.message ?: ""
-            eventsHandler?.onEvent(result.result, !result.isSuccessfull, message, espBleApi?.devInfo, espBleApi?.deviceDescriptor?.mac ?: "")
+            eventsHandler?.onEvent(result.result, false, result.result.name, espBleApi?.devInfo, espBleApi?.deviceDescriptor?.mac ?: "")
         } else {
             val error = result.throwable as EspPairingException
             when (error.resultCode) {
@@ -178,16 +179,22 @@ class MassProvisioning(val context: Context, var config: Config) :
                     }
                     return
                 }
+                3012 -> {
+                    eventsHandler?.onError(error)
+                    return
+                }
             }
             bleApis.remove(espBleApi)
-            eventsHandler?.onError(error)
+            eventsHandler?.onEvent(result.result, true, result.throwable.message ?: "", espBleApi?.devInfo, espBleApi?.deviceDescriptor?.mac ?: "")
         }
     }
 
     fun stopPairing() {
+        scanner.stopScan()
         bleApis.forEach {
             it.stop()
         }
         bleApis.clear()
+        wifiIsValid = false
     }
 }

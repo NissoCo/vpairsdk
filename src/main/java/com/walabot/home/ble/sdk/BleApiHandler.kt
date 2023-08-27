@@ -16,7 +16,7 @@ fun EspBleApi.connect(bleDevice: BleDevice) {
         }
 
         override fun onFailure(throwable: Throwable?) {
-            callback.onResult(Result(throwable), this@connect)
+            callback.onResult(Result<EspPairingEvent?>(throwable).apply { this.result = EspPairingEvent.Connecting }, this@connect)
         }
 
     })
@@ -37,6 +37,7 @@ fun EspBleApi.sendCloudDetails(ssid: String, bssid: String, password: String) {
         bssid.convert(),
         password.convert(), object : EspApi.EspAPICallback<WalabotDeviceDesc?> {
             override fun onSuccess(obj: WalabotDeviceDesc?) {
+                callback.onResult(Result(EspPairingEvent.WifiConnected), this@sendCloudDetails)
                 obj?.let {
                     updateCloud(it)
                 }
@@ -44,13 +45,13 @@ fun EspBleApi.sendCloudDetails(ssid: String, bssid: String, password: String) {
             }
 
             override fun onFailure(throwable: Throwable?) {
-                callback.onResult(Result(throwable), this@sendCloudDetails)
+                callback.onResult(Result<EspPairingEvent?>(throwable).apply { this.result = EspPairingEvent.WifiConnected }, this@sendCloudDetails)
             }
         })
 }
 
 private fun EspBleApi.updateCloud(deviceDesc: WalabotDeviceDesc) {
-    callback.onResult(Result(EspPairingEvent.WifiConnected), this@updateCloud)
+    callback.onResult(Result(EspPairingEvent.SendingCloudDetails), this@updateCloud)
     sendCloudDetails(config, object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
             callback.onResult(Result(EspPairingEvent.SentCloudDetails), this@updateCloud)
@@ -62,7 +63,7 @@ private fun EspBleApi.updateCloud(deviceDesc: WalabotDeviceDesc) {
         }
 
         override fun onFailure(throwable: Throwable?) {
-            callback.onResult(Result(throwable), this@updateCloud)
+            callback.onResult(Result<EspPairingEvent?>(throwable).apply { this.result = EspPairingEvent.SendingCloudDetails }, this@updateCloud)
         }
     })
 }
@@ -80,7 +81,7 @@ private fun EspBleApi.pair(host: String) {
         }
 
         override fun onFailure(throwable: Throwable?) {
-            callback.onResult(Result(throwable), this@pair)
+            callback.onResult(Result<EspPairingEvent?>(throwable).apply { this.result = EspPairingEvent.Pairing }, this@pair)
         }
     })
 }
@@ -88,13 +89,13 @@ private fun EspBleApi.pair(host: String) {
 private fun EspBleApi.performPairingWithCloud(host: String, code: String?) {
     callback.onResult(Result(EspPairingEvent.StagePairWithCloud), this)
     code?.let { it1 ->
-        Connection().pairing(code, config.accessToken!!) {
+        Connection().pairing(config.apiURL, code, config.accessToken!!) {
             if (it.isSuccess) {
                 deviceId = it.getOrNull()?.get("deviceId") as? String
                 callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), this)
                 notifyPairingComplete(host, it1)
             } else {
-                callback.onResult(Result(Throwable("Failed to pair with the cloud")), this)
+                callback.onResult(Result<EspPairingEvent?>(Throwable("Failed to pair with the cloud")).apply { this.result = EspPairingEvent.StagePairWithCloud }, this)
             }
         }
     }
@@ -108,7 +109,7 @@ private fun EspBleApi.notifyPairingComplete(host: String, code: String) {
         }
 
         override fun onFailure(throwable: Throwable?) {
-            callback.onResult(Result(throwable), this@notifyPairingComplete)
+            callback.onResult(Result<EspPairingEvent?>(throwable).apply { this.result = EspPairingEvent.NotifyPairingComplete }, this@notifyPairingComplete)
         }
     })
 }
@@ -122,7 +123,7 @@ private fun EspBleApi.reboot() {
         }
 
         override fun onFailure(throwable: Throwable?) {
-            callback.onResult(Result(throwable), this@reboot)
+            callback.onResult(Result<EspPairingEvent?>(throwable).apply { this.result = EspPairingEvent.Rebooting }, this@reboot)
         }
     })
 }
@@ -136,7 +137,7 @@ private fun EspBleApi.rebootToFactory() {
         }
 
         override fun onFailure(throwable: Throwable?) {
-            callback.onResult(Result(throwable), this@rebootToFactory)
+            callback.onResult(Result<EspPairingEvent?>(throwable).apply { this.result = EspPairingEvent.Rebooting }, this@rebootToFactory)
         }
     })
 }

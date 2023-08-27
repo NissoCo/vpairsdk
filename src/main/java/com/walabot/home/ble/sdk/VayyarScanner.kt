@@ -22,7 +22,7 @@ class VayyarScanner(val context: Context, val services: ArrayList<UUID>) {
         return@lazy HashMap()
     }
 
-    lateinit var sCallback: ScanCallback
+    private var sCallback: ScanCallback? = null
 
     @SuppressLint("MissingPermission")
     @RequiresApi(Build.VERSION_CODES.M)
@@ -87,5 +87,16 @@ class VayyarScanner(val context: Context, val services: ArrayList<UUID>) {
                 }
             }, 3000)
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    fun stopScan() {
+        sCallback?.let {
+            val bluetoothManager =
+                context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+            bluetoothManager.adapter.bluetoothLeScanner.stopScan(it)
+        }
+        handler?.removeCallbacksAndMessages(null)
+        devices.clear()
     }
 }
