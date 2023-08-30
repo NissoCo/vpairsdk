@@ -422,8 +422,9 @@ public class EspBleApi implements EspApi {
     }
 
     @Override
-    public void reboot(EspAPICallback<Void> cb) {
+    public void reboot(EspAPICallback<EspPairingEvent> cb) {
         if (devInfo != null) {
+            cb.onSuccess(EspPairingEvent.CommittingProvision);
             commitProvision(cb);
         } else {
             if (_espBleImpl.messageImpl == null) {
@@ -439,7 +440,7 @@ public class EspBleApi implements EspApi {
                     return;
                 }
                 if (r.isSuccessful()) {
-                    cb.onSuccess(null);
+                    cb.onSuccess(EspPairingEvent.Rebooting);
                 } else {
                     cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_SEND_CLOUD_DETAILS, opResult));
                 }
@@ -467,7 +468,7 @@ public class EspBleApi implements EspApi {
     }
 
     @Override
-    public void commitProvision(EspAPICallback<Void> cb) {
+    public void commitProvision(EspAPICallback<EspPairingEvent> cb) {
         if (_espBleImpl.messageImpl == null) {
             cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
             return;
@@ -476,7 +477,7 @@ public class EspBleApi implements EspApi {
         {
             ProtocolMediator.MessageResult r = _espBleImpl.messageImpl.parseResult(opResult.getData());
             if (r == null || r.isSuccessful()) {
-                cb.onSuccess(null);
+                cb.onSuccess(EspPairingEvent.ProvisionCommited);
             } else {
                 cb.onFailure(new EspPairingException(EspPairingErrorType.COMMIT_PROVISION_FAILED, opResult));
             }

@@ -7,6 +7,7 @@ import com.google.protobuf.Parser
 import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.Message
 import com.walabot.home.ble.sdk.Config
+import com.walabot.home.ble.sdk.EspPairingEvent
 
 interface EspApi {
     //	void connect(byte[] apSsid, byte[] apBssid, byte[] apPassword, EspAPICallback<WalabotDeviceDesc> cb);
@@ -34,9 +35,9 @@ interface EspApi {
 
     fun checkOta(cb: EspAPICallback<CheckOtaResult?>?)
     fun performOta(versionCode: Int, cb: EspAPICallback<Void?>?)
-    fun reboot(cb: EspAPICallback<Void?>?)
+    fun reboot(cb: EspAPICallback<EspPairingEvent>?)
     fun rebootToFactory(cb: EspAPICallback<Void?>?)
-    fun commitProvision(cb: EspAPICallback<Void?>?)
+    fun commitProvision(cb: EspAPICallback<EspPairingEvent>?)
     fun stop()
     interface EspAPICallback<T> {
         fun onSuccess(obj: T)

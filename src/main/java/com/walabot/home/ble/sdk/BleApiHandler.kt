@@ -52,7 +52,7 @@ fun EspBleApi.sendCloudDetails(ssid: String, bssid: String, password: String) {
 
 private fun EspBleApi.updateCloud(deviceDesc: WalabotDeviceDesc) {
     callback.onResult(Result(EspPairingEvent.SendingCloudDetails), this@updateCloud)
-    sendCloudDetails(config, object : EspApi.EspAPICallback<Void?> {
+        sendCloudDetails(config, object : EspApi.EspAPICallback<Void?> {
         override fun onSuccess(obj: Void?) {
             callback.onResult(Result(EspPairingEvent.SentCloudDetails), this@updateCloud)
             if (config.updateCloud) {
@@ -115,11 +115,11 @@ private fun EspBleApi.notifyPairingComplete(host: String, code: String) {
 }
 
 private fun EspBleApi.reboot() {
-    callback.onResult(Result(EspPairingEvent.Rebooting), this)
-    reboot(object : EspApi.EspAPICallback<Void?> {
-        override fun onSuccess(obj: Void?) {
-            callback.onResult(Result(EspPairingEvent.RebootedToFactory), this@reboot)
-            rebootToFactory()
+//    callback.onResult(Result(EspPairingEvent.Rebooting), this)
+    reboot(object : EspApi.EspAPICallback<EspPairingEvent> {
+        override fun onSuccess(obj: EspPairingEvent) {
+            callback.onResult(Result(obj), this@reboot)
+//            rebootToFactory()
         }
 
         override fun onFailure(throwable: Throwable?) {

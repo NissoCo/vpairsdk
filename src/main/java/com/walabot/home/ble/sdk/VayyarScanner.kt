@@ -17,7 +17,7 @@ import java.util.UUID
 
 class VayyarScanner(val context: Context, val services: ArrayList<UUID>) {
 
-    private var handler: Handler? = null
+//    private var handler: Handler? = null
     val devices: HashMap<String, BleDevice> by lazy {
         return@lazy HashMap()
     }
@@ -26,7 +26,7 @@ class VayyarScanner(val context: Context, val services: ArrayList<UUID>) {
 
     @SuppressLint("MissingPermission")
     @RequiresApi(Build.VERSION_CODES.M)
-    fun startScan(scanCallback: (Result<List<BleDevice>>) -> Unit) {
+    fun startScan(scanCallback: (Result<BleDevice>) -> Unit) {
         val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         val bluetoothAdapter = bluetoothManager.adapter
         if (bluetoothAdapter.isEnabled) {
@@ -50,23 +50,13 @@ class VayyarScanner(val context: Context, val services: ArrayList<UUID>) {
                             result?.device
                         )
                         devices[device.address] = device
+                        scanCallback(Result.success(device))
                     }
 
                 }
 
                 override fun onBatchScanResults(results: MutableList<ScanResult>?) {
-                    results?.map {
-                        BleDevice(
-                            it.device?.address,
-                            it.device?.name,
-                            it.scanRecord?.bytes,
-                            it.device
-                        )
-                    }?.toList()?.let { batch ->
-                        batch.forEach {
-                            devices[it.address] = it
-                        }
-                    }
+
 
                 }
 
@@ -75,17 +65,17 @@ class VayyarScanner(val context: Context, val services: ArrayList<UUID>) {
                 }
             }
             bluetoothAdapter.bluetoothLeScanner.startScan(filters, build, sCallback)
-            handler = Handler(Looper.getMainLooper())
-            handler?.postDelayed({
-                bluetoothAdapter.bluetoothLeScanner.stopScan(sCallback)
-                handler?.removeCallbacksAndMessages(null)
-                if (devices.isNotEmpty()) {
-                    scanCallback(Result.success(devices.values.toList()))
-                    devices.clear()
-                } else {
-                    startScan(scanCallback)
-                }
-            }, 3000)
+//            handler = Handler(Looper.getMainLooper())
+//            handler?.postDelayed({
+//                bluetoothAdapter.bluetoothLeScanner.stopScan(sCallback)
+//                handler?.removeCallbacksAndMessages(null)
+//                if (devices.isNotEmpty()) {
+//                    scanCallback(Result.success(devices.values.toList()))
+//                    devices.clear()
+//                } else {
+//                    startScan(scanCallback)
+//                }
+//            }, 3000)
         }
     }
 
@@ -96,7 +86,7 @@ class VayyarScanner(val context: Context, val services: ArrayList<UUID>) {
                 context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
             bluetoothManager.adapter.bluetoothLeScanner.stopScan(it)
         }
-        handler?.removeCallbacksAndMessages(null)
+//        handler?.removeCallbacksAndMessages(null)
         devices.clear()
     }
 }

@@ -74,19 +74,28 @@ class MassProvisioning(val context: Context, var config: Config) :
         }
     }
 
-    fun connect(devices: List<BleDevice>) {
-        pickedDevices = ArrayList(devices)
-        pickedDevices?.let {
-            connect(it.first())
-        }
-    }
+//    fun connect(devices: List<BleDevice>) {
+//        pickedDevices = ArrayList(devices)
+//        pickedDevices?.let {
+//            connect(it.first())
+//        }
+//    }
 
     private fun connect(bleDevice: BleDevice) {
-        val bleApi = EspBleApi(context, config, this)
-        bleApi.setAnalyticsHandler(analyticsHandler)
-        bleApis.add(bleApi)
-        bleApi.connect(bleDevice)
-        pickedDevices?.remove(bleDevice)
+        if (pickedDevices == null || wifiIsValid) {
+            if (pickedDevices == null) {
+                pickedDevices = ArrayList()
+            } else {
+                pickedDevices?.remove(bleDevice)
+            }
+            val bleApi = EspBleApi(context, config, this)
+            bleApi.setAnalyticsHandler(analyticsHandler)
+            bleApis.add(bleApi)
+            bleApi.connect(bleDevice)
+        } else {
+            pickedDevices?.add(bleDevice)
+        }
+
     }
 
     private fun scanWifi(bleApi: EspBleApi, onSuccess: (List<EspWifiItem>) -> Unit) {
@@ -159,9 +168,9 @@ class MassProvisioning(val context: Context, var config: Config) :
                 }
                 EspPairingEvent.RebootedToFactory -> {
                     bleApis.remove(espBleApi)
-                    if (bleApis.isEmpty()) {
-                        startMassProvision()
-                    }
+//                    if (bleApis.isEmpty()) {
+//                        startMassProvision()
+//                    }
                 }
                 else -> {
 
@@ -194,6 +203,8 @@ class MassProvisioning(val context: Context, var config: Config) :
         bleApis.forEach {
             it.stop()
         }
+        pickedDevices?.clear()
+        pickedDevices = null
         bleApis.clear()
         wifiIsValid = false
     }

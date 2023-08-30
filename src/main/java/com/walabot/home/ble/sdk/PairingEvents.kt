@@ -24,8 +24,7 @@ enum class EspPairingEvent(val value: Int) {
     CommittingProvision(17),
     ProvisionCommited(18),
     Rebooting(19),
-    RebootedToFactory(20),
-    ;
+    RebootedToFactory(20);
 
     override fun toString(): String {
         return when(value) {
