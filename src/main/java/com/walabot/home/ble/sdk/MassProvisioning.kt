@@ -99,12 +99,9 @@ class MassProvisioning(val context: Context, var config: Config) :
     }
 
     private fun scanWifi(bleApi: EspBleApi, onSuccess: (List<EspWifiItem>) -> Unit) {
-        bleApi.sendWiFiScanRequest(object :
-            EspApi.EspAPICallback<ProtocolMediator.WifiScanResult?> {
-            override fun onSuccess(obj: ProtocolMediator.WifiScanResult?) {
-                obj?.convert()?.let {
-                    onSuccess(it)
-                }
+        bleApi.sendWiFiScanRequest(object : EspApi.EspAPICallback<List<EspWifiItem>> {
+            override fun onSuccess(obj: List<EspWifiItem>) {
+                onSuccess(obj)
             }
 
             override fun onFailure(throwable: Throwable?) {
@@ -112,9 +109,10 @@ class MassProvisioning(val context: Context, var config: Config) :
                     EspPairingEvent.WifiScan,
                     true,
                     throwable?.message ?: "",
-                bleApi.devInfo,
-                bleApi.deviceId)
+                    bleApi.devInfo,
+                    bleApi.deviceId)
             }
+
         })
     }
 

@@ -9,9 +9,6 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 
-val dev = "https://us-central1-walabothome-app-cloud.cloudfunctions.net/"
-val prod = "https://us-central1-walabot-home.cloudfunctions.net/"
-val vayyarCare = "https://us-central1-vayyar-care.cloudfunctions.net/"
 val version = "3"
 
 class Connection {

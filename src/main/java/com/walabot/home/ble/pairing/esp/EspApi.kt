@@ -8,6 +8,7 @@ import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.Message
 import com.walabot.home.ble.sdk.Config
 import com.walabot.home.ble.sdk.EspPairingEvent
+import com.walabot.home.ble.sdk.EspWifiItem
 
 interface EspApi {
     //	void connect(byte[] apSsid, byte[] apBssid, byte[] apPassword, EspAPICallback<WalabotDeviceDesc> cb);
@@ -16,7 +17,7 @@ interface EspApi {
     val deviceDescriptor: WalabotDeviceDesc?
     fun connect(cb: EspAPICallback<WalabotDeviceDesc?>?)
     fun connect(bleDevice: BleDevice, cb: EspAPICallback<WalabotDeviceDesc?>?)
-    fun sendWiFiScanRequest(cb: EspAPICallback<ProtocolMediator.WifiScanResult?>?)
+    fun sendWiFiScanRequest(cb: EspAPICallback<List<EspWifiItem>>?)
     fun sendWifiCredentials(
         ssid: ByteArray?,
         bssid: ByteArray?,

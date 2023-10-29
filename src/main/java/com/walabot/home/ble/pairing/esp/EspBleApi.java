@@ -3,6 +3,7 @@ package com.walabot.home.ble.pairing.esp;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.net.wifi.WifiInfo;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -15,11 +16,16 @@ import com.walabot.home.ble.Result;
 import com.walabot.home.ble.WHBle;
 import com.walabot.home.ble.WHConnectionCallback;
 import com.walabot.home.ble.WHDataCallback;
+import com.walabot.home.ble.pairing.WifiNetworkMonitor;
 import com.walabot.home.ble.sdk.AnalyticsHandler;
 import com.walabot.home.ble.sdk.Config;
 import com.walabot.home.ble.sdk.EspPairingEvent;
+import com.walabot.home.ble.sdk.EspWifiItem;
+import com.walabot.home.ble.sdk.EspWifiItemImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
@@ -41,7 +47,7 @@ public class EspBleApi implements EspApi {
     public Map<String, Object> getDevInfo() {
         if (devInfo == null && deviceId != null) {
             Map<String, Object> temp = new HashMap<>();
-            temp.put("devId", deviceId);
+            temp.put("devID", deviceId);
             return temp;
         }
         return devInfo;
@@ -204,8 +210,11 @@ public class EspBleApi implements EspApi {
     }
 
     private final ESPBleAPIImpl _espBleImpl;
+    private final Context _context;
+    WifiNetworkMonitor monitor;
 
     public EspBleApi(Context context, Config config, OnResult callback) {
+        _context = context;
         _espBleImpl = new ESPBleAPIImpl(context);
         _espBleImpl.analyticsHandler = analyticsHandler;
         this.config = config;
@@ -274,31 +283,46 @@ public class EspBleApi implements EspApi {
     }
 
     @Override
-    public void sendWiFiScanRequest(EspAPICallback<ProtocolMediator.WifiScanResult> cb) {
+    public void sendWiFiScanRequest(EspAPICallback<List<EspWifiItem>> cb) {
         if (_espBleImpl.messageImpl == null || !_espBleImpl.isConnected()) {
             cb.onFailure(new EspPairingException(EspPairingErrorType.FAILED_TO_FIND_SERVICE, null));
             return;
         }
+        if (_espBleImpl.messageImpl instanceof ProtobufMessagesV1) {
+            monitor = new WifiNetworkMonitor(_context);
+            monitor.setScanEvents(info -> {
+                ArrayList<EspWifiItem> list = new ArrayList<>();
+                if (info != null) {
+                    list.add(new EspWifiItemImpl(info.getSSID().replaceAll("\"", ""), info.getBSSID(), info.getRssi()));
+                }
+                cb.onSuccess(list);
+            });
+            monitor.startScanWifi();
+        } else {
+            _espBleImpl.sendMessage(Message.ToDeviceMessageType.DO_WIFI_SCAN, null, (dataResult) ->
+            {
+                if (dataResult == null || dataResult.getData() == null) {
+                    EspPairingException e = new EspPairingException("error", 0, 0);
+                    cb.onFailure(e);
+                    return;
+                }
 
-        _espBleImpl.sendMessage(Message.ToDeviceMessageType.DO_WIFI_SCAN, null, (dataResult) ->
-        {
-            if (dataResult == null || dataResult.getData() == null) {
-                EspPairingException e = new EspPairingException("error", 0, 0);
-                cb.onFailure(e);
-                return;
-            }
+                ProtocolMediator.WifiScanResult scanResult = _espBleImpl.messageImpl.parseWifiScanResult(dataResult.getData());
+                if (scanResult.isSuccessful()) {
+                    ArrayList<EspWifiItem> items = new ArrayList<>();
+                    for (Message.AccessPoint accessPoint : Objects.requireNonNull(scanResult.getAccessPoints())) {
+                        items.add(new EspWifiItemImpl(accessPoint.getSsid(), accessPoint.getBssid(), accessPoint.getRssi()));
+                    }
+                    cb.onSuccess(items);
+                } else {
+                    EspPairingException e = new EspPairingException(scanResult.toString(),
+                            scanResult.getResult(),
+                            scanResult.getEsp_error());
+                    cb.onFailure(e);
+                }
 
-            ProtocolMediator.WifiScanResult scanResult = _espBleImpl.messageImpl.parseWifiScanResult(dataResult.getData());
-            if (scanResult.isSuccessful()) {
-                cb.onSuccess(scanResult);
-            } else {
-                EspPairingException e = new EspPairingException(scanResult.toString(),
-                        scanResult.getResult(),
-                        scanResult.getEsp_error());
-                cb.onFailure(e);
-            }
-
-        });
+            });
+        }
 
     }
 

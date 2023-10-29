@@ -2,10 +2,7 @@ package com.walabot.home.ble.sdk
 
 import com.walabot.home.ble.BleDevice
 import com.walabot.home.ble.Result
-import com.walabot.home.ble.pairing.esp.EspApi
-import com.walabot.home.ble.pairing.esp.EspBleApi
-import com.walabot.home.ble.pairing.esp.EspPairingResponse
-import com.walabot.home.ble.pairing.esp.WalabotDeviceDesc
+import com.walabot.home.ble.pairing.esp.*
 
 
 fun EspBleApi.connect(bleDevice: BleDevice) {
@@ -95,7 +92,7 @@ private fun EspBleApi.performPairingWithCloud(host: String, code: String?) {
                 callback.onResult(Result(EspPairingEvent.NotifyPairingComplete), this)
                 notifyPairingComplete(host, it1)
             } else {
-                callback.onResult(Result<EspPairingEvent?>(Throwable("Failed to pair with the cloud")).apply { this.result = EspPairingEvent.StagePairWithCloud }, this)
+                callback.onResult(Result<EspPairingEvent?>(EspPairingException(EspPairingErrorType.PAIRING_FAILED, null)).apply { this.result = EspPairingEvent.StagePairWithCloud }, this)
             }
         }
     }

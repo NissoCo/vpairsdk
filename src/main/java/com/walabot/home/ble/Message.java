@@ -4654,7 +4654,7 @@ public final class Message {
     private AccessPoint(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private AccessPoint() {
+    public AccessPoint() {
       ssid_ = "";
       bssid_ = "";
     }
