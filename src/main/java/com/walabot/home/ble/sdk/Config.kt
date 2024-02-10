@@ -1,6 +1,6 @@
-package com.walabot.home.ble.sdk
+package com.example.vpairsdk_flutter.ble.sdk
 
-import com.walabot.home.ble.Message.CLOUD_TYPE
+import com.example.vpairsdk_flutter.ble.Message.CLOUD_TYPE
 import org.json.JSONException
 import org.json.JSONObject
 

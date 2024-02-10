@@ -1,4 +1,4 @@
-package com.walabot.home.ble.sdk
+package com.example.vpairsdk_flutter.ble.sdk
 
 enum class AnalyticsComponents(val value: String) {
     Action("action"),

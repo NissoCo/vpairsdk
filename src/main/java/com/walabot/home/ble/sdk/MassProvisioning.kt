@@ -1,4 +1,4 @@
-package com.walabot.home.ble.sdk
+package com.example.vpairsdk_flutter.ble.sdk
 
 import android.Manifest
 import android.bluetooth.BluetoothManager
@@ -8,9 +8,10 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.walabot.home.ble.BleDevice
-import com.walabot.home.ble.Result
-import com.walabot.home.ble.pairing.esp.*
+import com.example.vpairsdk_flutter.ble.BleDevice
+import com.example.vpairsdk_flutter.ble.Result
+import com.example.vpairsdk_flutter.ble.pairing.esp.*
+import com.walabot.home.ble.pairing.esp.EspApi
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -99,12 +100,9 @@ class MassProvisioning(val context: Context, var config: Config) :
     }
 
     private fun scanWifi(bleApi: EspBleApi, onSuccess: (List<EspWifiItem>) -> Unit) {
-        bleApi.sendWiFiScanRequest(object :
-            EspApi.EspAPICallback<ProtocolMediator.WifiScanResult?> {
-            override fun onSuccess(obj: ProtocolMediator.WifiScanResult?) {
-                obj?.convert()?.let {
-                    onSuccess(it)
-                }
+        bleApi.sendWiFiScanRequest(object : EspApi.EspAPICallback<List<EspWifiItem>> {
+            override fun onSuccess(obj: List<EspWifiItem>) {
+                onSuccess(obj)
             }
 
             override fun onFailure(throwable: Throwable?) {
@@ -112,9 +110,10 @@ class MassProvisioning(val context: Context, var config: Config) :
                     EspPairingEvent.WifiScan,
                     true,
                     throwable?.message ?: "",
-                bleApi.devInfo,
-                bleApi.deviceId)
+                    bleApi.devInfo,
+                    bleApi.deviceId)
             }
+
         })
     }
 

@@ -1,4 +1,4 @@
-package com.walabot.home.ble
+package com.example.vpairsdk_flutter.ble
 
 import android.annotation.TargetApi
 import android.bluetooth.BluetoothAdapter.LeScanCallback
@@ -12,7 +12,7 @@ import android.content.Context
 import android.os.Build
 import android.os.ParcelUuid
 import android.util.Log
-import com.walabot.home.ble.BleScannerCallback
+import com.example.vpairsdk_flutter.ble.BleScannerCallback
 import java.util.*
 
 /**

@@ -1,7 +1,7 @@
 
 
 import android.util.Log
-import com.walabot.home.ble.BleService
+import com.example.vpairsdk_flutter.ble.BleService
 import kotlinx.coroutines.*
 import java.nio.ByteBuffer
 import java.nio.ByteOrder

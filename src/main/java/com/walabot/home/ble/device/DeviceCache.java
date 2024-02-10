@@ -1,7 +1,7 @@
-package com.walabot.home.ble.device;
+package com.example.vpairsdk_flutter.ble.device;
 
-import com.walabot.home.ble.device.PairedDevicesResult;
-import com.walabot.home.ble.device.PairedDevicesList;
+import com.example.vpairsdk_flutter.ble.device.PairedDevicesResult;
+import com.example.vpairsdk_flutter.ble.device.PairedDevicesList;
 
 import java.util.HashMap;
 import java.util.Map;

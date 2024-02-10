@@ -1,4 +1,4 @@
-package com.walabot.home.ble.sdk
+package com.example.vpairsdk_flutter.ble.sdk
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothManager
@@ -12,7 +12,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.ParcelUuid
 import androidx.annotation.RequiresApi
-import com.walabot.home.ble.BleDevice
+import com.example.vpairsdk_flutter.ble.BleDevice
 import java.util.UUID
 
 class VayyarScanner(val context: Context, val services: ArrayList<UUID>) {

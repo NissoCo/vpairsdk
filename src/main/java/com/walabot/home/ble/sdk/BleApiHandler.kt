@@ -1,11 +1,11 @@
-package com.walabot.home.ble.sdk
+package com.example.vpairsdk_flutter.ble.sdk
 
-import com.walabot.home.ble.BleDevice
-import com.walabot.home.ble.Result
+import com.example.vpairsdk_flutter.ble.BleDevice
+import com.example.vpairsdk_flutter.ble.Result
 import com.walabot.home.ble.pairing.esp.EspApi
-import com.walabot.home.ble.pairing.esp.EspBleApi
-import com.walabot.home.ble.pairing.esp.EspPairingResponse
-import com.walabot.home.ble.pairing.esp.WalabotDeviceDesc
+import com.example.vpairsdk_flutter.ble.pairing.esp.EspBleApi
+import com.example.vpairsdk_flutter.ble.pairing.esp.EspPairingResponse
+import com.example.vpairsdk_flutter.ble.pairing.esp.WalabotDeviceDesc
 
 
 fun EspBleApi.connect(bleDevice: BleDevice) {

@@ -1,9 +1,9 @@
-package com.walabot.home.ble.pairing.esp;
+package com.example.vpairsdk_flutter.ble.pairing.esp;
 
 import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.walabot.home.ble.Message;
-import com.walabot.home.ble.sdk.Config;
+import com.example.vpairsdk_flutter.ble.Message;
+import com.example.vpairsdk_flutter.ble.sdk.Config;
 
 import org.jetbrains.annotations.Nullable;
 

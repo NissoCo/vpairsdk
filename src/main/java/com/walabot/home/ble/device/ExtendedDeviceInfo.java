@@ -1,7 +1,7 @@
-package com.walabot.home.ble.device;
+package com.example.vpairsdk_flutter.ble.device;
 
 
-import com.walabot.home.ble.config.DeviceConfig;
+import com.example.vpairsdk_flutter.ble.config.DeviceConfig;
 
 public class ExtendedDeviceInfo
 {

@@ -1,12 +1,12 @@
-package com.walabot.home.ble
+package com.example.vpairsdk_flutter.ble
 
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic
 import android.content.Context
 import android.util.Log
-import com.walabot.home.ble.BleService.BleServiceDataCallback
-import com.walabot.home.ble.BleService.BleServiceDeviceCallback
+import com.example.vpairsdk_flutter.ble.BleService.BleServiceDataCallback
+import com.example.vpairsdk_flutter.ble.BleService.BleServiceDeviceCallback
 import java.util.*
 
 /**

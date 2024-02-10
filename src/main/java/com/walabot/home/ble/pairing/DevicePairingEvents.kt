@@ -1,11 +1,11 @@
-package com.walabot.home.ble.pairing
+package com.example.vpairsdk_flutter.ble.pairing
 
-import com.walabot.home.ble.config.DeviceConfig
-import com.walabot.home.ble.config.DeviceConfigList
-import com.walabot.home.ble.device.DeviceInfo
-import com.walabot.home.ble.device.PairedDevice
-import com.walabot.home.ble.device.PairedDevicesList
-import com.walabot.home.ble.device.UpdatedPairedDevice
+import com.example.vpairsdk_flutter.ble.config.DeviceConfig
+import com.example.vpairsdk_flutter.ble.config.DeviceConfigList
+import com.example.vpairsdk_flutter.ble.device.DeviceInfo
+import com.example.vpairsdk_flutter.ble.device.PairedDevice
+import com.example.vpairsdk_flutter.ble.device.PairedDevicesList
+import com.example.vpairsdk_flutter.ble.device.UpdatedPairedDevice
 
 data class PairingParams(var idToken: String? = null, var code: String? = null, var uid: String? = null, var deviceId: String? = null)
 

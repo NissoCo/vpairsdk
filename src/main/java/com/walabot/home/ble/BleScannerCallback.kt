@@ -1,4 +1,4 @@
-package com.walabot.home.ble
+package com.example.vpairsdk_flutter.ble
 
 /**
  * Created by Arbel on 12/08/2019.

@@ -1,4 +1,4 @@
-package com.walabot.home.ble.pairing.esp
+package com.example.vpairsdk_flutter.ble.pairing.esp
 
 import com.google.gson.annotations.SerializedName
 

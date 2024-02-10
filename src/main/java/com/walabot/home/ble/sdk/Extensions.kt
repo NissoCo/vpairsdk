@@ -1,10 +1,7 @@
-package com.walabot.home.ble.sdk
+package com.example.vpairsdk_flutter.ble.sdk
 
-import android.bluetooth.le.ScanCallback
-import com.walabot.home.ble.Message.DevInfo
-import com.walabot.home.ble.pairing.esp.EspApi
-import com.walabot.home.ble.pairing.esp.EspBleApi
-import com.walabot.home.ble.pairing.esp.ProtocolMediator
+import com.example.vpairsdk_flutter.ble.Message.DevInfo
+import com.example.vpairsdk_flutter.ble.pairing.esp.ProtocolMediator
 import java.io.UnsupportedEncodingException
 
 fun String.convert(): ByteArray {

@@ -1,4 +1,4 @@
-package com.walabot.home.ble.config;
+package com.example.vpairsdk_flutter.ble.config;
 
 import com.google.gson.annotations.SerializedName;
 

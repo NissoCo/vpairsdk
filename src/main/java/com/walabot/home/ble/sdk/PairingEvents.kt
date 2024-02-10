@@ -1,8 +1,8 @@
-package com.walabot.home.ble.sdk
+package com.example.vpairsdk_flutter.ble.sdk
 
-import com.walabot.home.ble.Message.DevInfo
-import com.walabot.home.ble.Result
-import com.walabot.home.ble.device.DeviceInfo
+import com.example.vpairsdk_flutter.ble.Message.DevInfo
+import com.example.vpairsdk_flutter.ble.Result
+import com.example.vpairsdk_flutter.ble.device.DeviceInfo
 
 enum class EspPairingEvent(val value: Int) {
     Connecting(1),

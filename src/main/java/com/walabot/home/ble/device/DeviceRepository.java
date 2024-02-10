@@ -1,14 +1,14 @@
-package com.walabot.home.ble.device;
+package com.example.vpairsdk_flutter.ble.device;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.walabot.home.ble.Result;
-import com.walabot.home.ble.config.DeviceConfig;
-import com.walabot.home.ble.config.DeviceConfigList;
-import com.walabot.home.ble.pairing.DevicePairingEvents;
-import com.walabot.home.ble.pairing.PairingResponse;
+import com.example.vpairsdk_flutter.ble.Result;
+import com.example.vpairsdk_flutter.ble.config.DeviceConfig;
+import com.example.vpairsdk_flutter.ble.config.DeviceConfigList;
+import com.example.vpairsdk_flutter.ble.pairing.DevicePairingEvents;
+import com.example.vpairsdk_flutter.ble.pairing.PairingResponse;
 
 import java.util.ArrayList;
 

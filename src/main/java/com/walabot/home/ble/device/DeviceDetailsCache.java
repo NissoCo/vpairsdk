@@ -1,4 +1,4 @@
-package com.walabot.home.ble.device;
+package com.example.vpairsdk_flutter.ble.device;
 
 import androidx.lifecycle.MutableLiveData;
 

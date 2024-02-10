@@ -4,10 +4,13 @@ import com.google.protobuf.ByteString
 import com.google.protobuf.GeneratedMessageV3
 import com.google.protobuf.InvalidProtocolBufferException
 import com.google.protobuf.Parser
-import com.walabot.home.ble.BleDevice
-import com.walabot.home.ble.Message
-import com.walabot.home.ble.sdk.Config
-import com.walabot.home.ble.sdk.EspPairingEvent
+import com.example.vpairsdk_flutter.ble.BleDevice
+import com.example.vpairsdk_flutter.ble.Message
+import com.example.vpairsdk_flutter.ble.pairing.esp.EspPairingResponse
+import com.example.vpairsdk_flutter.ble.pairing.esp.WalabotDeviceDesc
+import com.example.vpairsdk_flutter.ble.sdk.Config
+import com.example.vpairsdk_flutter.ble.sdk.EspPairingEvent
+import com.example.vpairsdk_flutter.ble.sdk.EspWifiItem
 
 interface EspApi {
     //	void connect(byte[] apSsid, byte[] apBssid, byte[] apPassword, EspAPICallback<WalabotDeviceDesc> cb);
@@ -16,7 +19,7 @@ interface EspApi {
     val deviceDescriptor: WalabotDeviceDesc?
     fun connect(cb: EspAPICallback<WalabotDeviceDesc?>?)
     fun connect(bleDevice: BleDevice, cb: EspAPICallback<WalabotDeviceDesc?>?)
-    fun sendWiFiScanRequest(cb: EspAPICallback<ProtocolMediator.WifiScanResult?>?)
+    fun sendWiFiScanRequest(cb: EspAPICallback<List<EspWifiItem>>?)
     fun sendWifiCredentials(
         ssid: ByteArray?,
         bssid: ByteArray?,

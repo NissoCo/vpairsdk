@@ -1,11 +1,11 @@
-package com.walabot.home.ble.pairing;
+package com.example.vpairsdk_flutter.ble.pairing;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
-import com.walabot.home.ble.Result;
-import com.walabot.home.ble.device.DeviceRepository;
+import com.example.vpairsdk_flutter.ble.Result;
+import com.example.vpairsdk_flutter.ble.device.DeviceRepository;
 
 
 import java.util.HashMap;

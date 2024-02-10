@@ -1,8 +1,8 @@
-package com.walabot.home.ble.pairing.esp
+package com.example.vpairsdk_flutter.ble.pairing.esp
 
 import com.google.protobuf.GeneratedMessageV3
-import com.walabot.home.ble.Message.AccessPoint
-import com.walabot.home.ble.sdk.Config
+import com.example.vpairsdk_flutter.ble.Message.AccessPoint
+import com.example.vpairsdk_flutter.ble.sdk.Config
 
 interface ProtocolMediator {
     fun wifiCredentials(

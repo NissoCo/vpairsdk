@@ -1,9 +1,9 @@
-package com.walabot.home.ble.config;
+package com.example.vpairsdk_flutter.ble.config;
 
 import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
-import com.walabot.home.ble.LearningModeModel;
+import com.example.vpairsdk_flutter.ble.LearningModeModel;
 
 import java.io.Serializable;
 

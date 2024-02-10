@@ -1,4 +1,4 @@
-package com.walabot.home.ble.pairing
+package com.example.vpairsdk_flutter.ble.pairing
 
 import android.content.BroadcastReceiver
 import android.content.Context

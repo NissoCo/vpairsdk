@@ -1,4 +1,4 @@
-package com.walabot.home.ble.sdk
+package com.example.vpairsdk_flutter.ble.sdk
 
 import android.util.Log
 import com.google.gson.Gson

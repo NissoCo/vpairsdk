@@ -1,7 +1,7 @@
-package com.walabot.home.ble.device;
+package com.example.vpairsdk_flutter.ble.device;
 
 
-import com.walabot.home.ble.Result;
+import com.example.vpairsdk_flutter.ble.Result;
 
 public class PairedDevicesResult extends Result<PairedDevicesList>
 {

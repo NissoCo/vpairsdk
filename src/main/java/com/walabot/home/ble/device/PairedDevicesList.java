@@ -1,10 +1,10 @@
-package com.walabot.home.ble.device;
+package com.example.vpairsdk_flutter.ble.device;
 
 import java.util.ArrayList;
 
-import static com.walabot.home.ble.device.PairedDevice.TYPE_GEN_1;
+import static com.example.vpairsdk_flutter.ble.device.PairedDevice.TYPE_GEN_1;
 
-import com.walabot.home.ble.device.PairedDevice;
+import com.example.vpairsdk_flutter.ble.device.PairedDevice;
 
 public class PairedDevicesList extends ArrayList<PairedDevice>
 {

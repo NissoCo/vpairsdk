@@ -2,12 +2,12 @@ package com.walabot.home.ble.pairing.esp
 
 import com.google.protobuf.GeneratedMessageV3
 import com.google.protobuf.InvalidProtocolBufferException
-import com.walabot.home.ble.Message
-import com.walabot.home.ble.Message.DevInfo
-import com.walabot.home.ble.Message.ToAppMessage2
-import com.walabot.home.ble.Message.WifiCredResult3
-import com.walabot.home.ble.sdk.Config
-import com.walabot.home.ble.sdk.toJson
+import com.example.vpairsdk_flutter.ble.Message
+import com.example.vpairsdk_flutter.ble.Message.ToAppMessage2
+import com.example.vpairsdk_flutter.ble.Message.WifiCredResult3
+import com.example.vpairsdk_flutter.ble.pairing.esp.ProtocolMediator
+import com.example.vpairsdk_flutter.ble.sdk.Config
+import com.example.vpairsdk_flutter.ble.sdk.toJson
 
 class ProtobufMessagesV3 : ProtocolMediator {
     override fun wifiCredentials(

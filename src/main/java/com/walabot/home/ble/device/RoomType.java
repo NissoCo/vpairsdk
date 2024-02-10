@@ -1,7 +1,7 @@
-package com.walabot.home.ble.device;
+package com.example.vpairsdk_flutter.ble.device;
 
 
-import com.walabot.home.ble.R;
+import com.example.vpairsdk_flutter.ble.R;
 
 /**
  * Created by Arbel on 07/05/2019.
